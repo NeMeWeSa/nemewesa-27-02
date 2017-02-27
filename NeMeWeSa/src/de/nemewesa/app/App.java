@@ -86,10 +86,17 @@ public class App {
 		
 		//this.round.setNewRound();
 
+		//console.mainmenu(player);
 
+		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
+		System.out.println("Der Index: " + currPlanetIndex);
+		System.out.println(player.getCurrentPlanet().name);
+
+		player.setCurrentPlanet(player.getCurrentPlanet().parent.getPlanet(currPlanetIndex+1));
 		
-		console.mainmenu(player);
-		
+		currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
+		System.out.println("Der Index: " + currPlanetIndex);
+		System.out.println(player.getCurrentPlanet().name);		
 		
 		/*
 		 * 
