@@ -1,5 +1,6 @@
 package de.nemewesa.db;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,8 +16,10 @@ public class DB {
     private static final DB dbcontroller = new DB();
 	
     private static Connection connection;
+    
+    File DB_PATH = new File("login" + File.separator + "login.db");
 	
-    private static final String DB_PATH = "login\\login.db";
+    //private static final String DB_PATH = "login" + File.separator + "login.db";
 	
     static {
         try {

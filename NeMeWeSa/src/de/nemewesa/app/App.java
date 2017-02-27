@@ -10,7 +10,7 @@ import de.nemewesa.level.Level;
 public class App {
 	
 	public static final int PLAYER_AP = 20;
-	// Legt fest, ob Statusausgeben angezeigt werden sollen.
+	// Legt fest, ob Statusinformationen angezeigt werden sollen.
 	public static final boolean DEV_MODE = false;
 	
 	private Player player;
