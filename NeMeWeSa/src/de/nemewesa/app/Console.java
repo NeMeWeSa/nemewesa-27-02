@@ -13,18 +13,21 @@ public class Console {
 		while(true){
 
 			System.out.println("[NeMeWeSa] Treffe eine Wahl > ");
-			System.out.println("[NeMeWeSa] 1. Aktionen | 2. Hilfe > ");
+			System.out.println("[NeMeWeSa] 1. Aktionen | 2. Hilfe | 3. Logout > ");
 
 			try
 			{
 				int decision = scanner.nextInt();
-				if(decision >= 1 && decision <= 2){
+				if(decision >= 1 && decision <= 3){
 					switch(decision){
 
 					case 1:	actions(player);
 					return;
 
 					case 2:	help(player);
+					return;
+					
+					case 3:	logout(player);
 					return;
 
 					//case "q":	return;
@@ -42,9 +45,7 @@ public class Console {
 				System.out.println("BITTE NUR ZAHLEN EINGEBEN");
 				scanner.next();
 			}
-
 		}
-
 	}	
 
 	
@@ -56,11 +57,12 @@ public class Console {
 			System.out.println("[NeMeWeSa] 1. Umsehen > ");
 			System.out.println("[NeMeWeSa] 2. Bauen > ");
 			System.out.println("[NeMeWeSa] 3. Reisen > ");
-
+			System.out.println("[NeMeWeSa] 4. Hauptmenu > ");
+			
 			try
 			{
 				int decision = scanner.nextInt();
-				if(decision >= 1 && decision <= 3){
+				if(decision >= 1 && decision <= 4){
 					switch(decision){
 
 					case 1:	showEnvironment(player);
@@ -72,6 +74,8 @@ public class Console {
 					case 3:	move(player);
 					return;
 
+					case 4:	mainmenu(player);
+					return;
 					//case "q":	return;
 
 					default:
@@ -87,35 +91,30 @@ public class Console {
 				System.out.println("BITTE NUR ZAHLEN EINGEBEN");
 				scanner.next();
 			}
-
 		}
-
 	}
 	
 	public void showEnvironment(Player player){
-		
 		System.out.println("Dein aktueller Planet > " + player.getCurrentPlanet().name);
 		System.out.println("Dein aktuelles Sonnensystem > " + player.getCurrentPlanet().parent.name);
 		System.out.println("Dein aktueller Sektor > " + player.getCurrentPlanet().parent.parent.name + "\n");
 		actions(player);
-		
 	}
 	
 	public void build(Player player){
 		System.out.println("Baue...");
-		mainmenu(player);
+		actions(player);
 	}
 	
 	public void move(Player player){
 		System.out.println("Bewege mich...");
-		mainmenu(player);
+		actions(player);
 	}
 	
 	public void help(Player player){
 		System.out.println("Helfe...");
 		mainmenu(player);
 	}	
-
 
 	public Login login(){
 
@@ -129,8 +128,10 @@ public class Console {
 		return login;
 
 	}
-
-
+	
+	public void logout(Player player){
+		System.out.println("Verlasse das Spiel...");
+	}
 
 }
 
@@ -158,4 +159,3 @@ print(return String);
 readLine (return String);
 
 */
-
