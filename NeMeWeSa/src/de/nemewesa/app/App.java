@@ -86,7 +86,7 @@ public class App {
 		
 		//this.round.setNewRound();
 
-		//console.mainmenu(player);
+		console.mainmenu(player);
 
 		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
 		System.out.println("Der Index: " + currPlanetIndex);
