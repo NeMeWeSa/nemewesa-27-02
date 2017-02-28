@@ -3,17 +3,16 @@ package de.nemewesa.level;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.annotation.Resources;
-
 import de.nemewesa.app.Observer;
 import de.nemewesa.app.Round;
+import de.nemewesa.character.Enemy;
 import de.nemewesa.helper.Helper;
 import de.nemewesa.modules.Defence;
 
 public class Planet implements Generetable, Observer, Serializable{
 	
 	public static Object resourceName;
-	public Moon moonName;
+	public Moon moon;
 	public int citizen;
 	public SpaceStation stationName;
 	public Defence defenceName;
@@ -25,6 +24,7 @@ public class Planet implements Generetable, Observer, Serializable{
 	public int size;
 	public Solarsystem parent;
 	public String[] firstname = {"Ben", "Pe", "To", "Jau", "Ja", "Ter", "Masz", "Res", "Min", "Ro", "Sen", "Ta", "Bue", "Ur", "Ban", "Iak", "Dzi", "Ko", "Wi", "Cki"};
+	private ArrayList<Moon> moons = new ArrayList<>();
 
 /* 
  * wenn das raumschiff zb. 10 plaetze frei hat
@@ -84,6 +84,7 @@ public class Planet implements Generetable, Observer, Serializable{
 			this.jewel.farm = this.jewel.amount;
 			this.jewel.storage = this.citizen*4;
 		}
+		this.moon = new Moon(this.name + "s Mond", new Enemy(this.moon), this);
 	}
 	
 /*
@@ -210,7 +211,9 @@ public class Planet implements Generetable, Observer, Serializable{
 
 	@Override
 	public void printChildren() {
-		
+		for (Moon moon: moons) {
+			System.out.println(moon.moonName + " : " + moon.parent.name);
+		}
 	}
 /*
  * ZUFaeLLIGE PLANETENNAMEN ERSTELLUNG

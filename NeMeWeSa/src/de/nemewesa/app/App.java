@@ -98,6 +98,11 @@ public class App {
 		System.out.println("Der Index: " + currPlanetIndex);
 		System.out.println(player.getCurrentPlanet().name);		
 		
+		System.out.println(player.getCurrentPlanet().getName());
+		System.out.println(player.getCurrentPlanet().moon.getName());
+		System.out.println("gegner " + player.getCurrentPlanet().moon.enemy.getName());
+		System.out.println(player.getCurrentPlanet().moon.enemy.getEnemyAttack());
+		System.out.println(player.getCurrentPlanet().moon.getParent());
 		/*
 		 * 
 		 * Planet Ressourcen Test
