@@ -2,9 +2,11 @@ package de.nemewesa.app;
 
 import java.util.Timer;
 
+import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.character.Player;
 import de.nemewesa.db.DB;
 import de.nemewesa.level.Level;
+import de.nemewesa.level.Resource;
 
 
 public class App {
@@ -58,6 +60,8 @@ public class App {
 		player.setHomePlanet(player.getCurrentPlanet());
 		player.setHomeSolarsystem(level.getSector(0).getSolarsystem(0));
 		player.addOwnership(player.getHomePlanet());
+		
+		player.getHomePlanet().spacestation = new SpaceStation("SST_001");
 	
 		System.out.println(prefix + "Willkommen im NeMeWeSa " + player.getName());
 		if(DEV_MODE)		
@@ -94,10 +98,47 @@ public class App {
 
 		player.setCurrentPlanet(player.getCurrentPlanet().parent.getPlanet(currPlanetIndex+1));
 		
-		currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
-		System.out.println("Der Index: " + currPlanetIndex);
-		System.out.println(player.getCurrentPlanet().name);		
+		// ROHSTOFFE ABERNTEN UND EINLAGERN
+		player.getCurrentPlanet().mineBronze();
+		player.getCurrentPlanet().mineBronze();
+		player.getCurrentPlanet().mineBronze();
+		player.getCurrentPlanet().mineBronze();
+		player.getCurrentPlanet().mineBronze();
+		player.getCurrentPlanet().mineBronze();
 		
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+		
+		// ROHSTOFFE VOM PLANETEN ABHOLEN
+		if(player.getCurrentPlanet().pickupResource(player.getCurrentPlanet().bronze, 7)){
+			
+			System.out.println("Habe BRONZE auf " + player.getCurrentPlanet().name + " abgeholt. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
+			
+		}
+		else{
+			System.out.println("Konnte BRONZE auf " + player.getCurrentPlanet().name + " nicht abholen. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
+		}
+		
+		// LINKEN UND RECHTEN NACHBARPLANETEN ANZEIGEN
+		if(player.getLeftNeighbouringPlanet() != null)
+			System.out.println("Mein linker Nachbarplanet: " + player.getLeftNeighbouringPlanet().name);
+		if(player.getRightNeighbouringPlanet() != null)
+			System.out.println("Mein rechter Nachbarplanet: " + player.getRightNeighbouringPlanet().name);
+		
+//		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
+//		System.out.println("Der Index: " + currPlanetIndex);
+//		System.out.println(player.getCurrentPlanet().name);
+//
+//		player.setCurrentPlanet(player.getCurrentPlanet().parent.getPlanet(currPlanetIndex+1));
+//		
+//		currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
+//		System.out.println("Der Index: " + currPlanetIndex);
+//		System.out.println(player.getCurrentPlanet().name);		
+		
+//		System.out.println(player.getCurrentPlanet().getName());
+//		System.out.println(player.getCurrentPlanet().moon.getName());
+//		System.out.println("gegner " + player.getCurrentPlanet().moon.enemy.getName());
+//		System.out.println(player.getCurrentPlanet().moon.enemy.getEnemyAttack());
+//		System.out.println(player.getCurrentPlanet().moon.getParent());
 		/*
 		 * 
 		 * Planet Ressourcen Test

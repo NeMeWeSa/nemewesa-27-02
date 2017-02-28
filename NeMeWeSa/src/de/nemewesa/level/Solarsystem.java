@@ -25,6 +25,10 @@ public class Solarsystem implements Generetable, Serializable{
 	public int getPlanetIndex (Planet planet) {
 		return planets.indexOf(planet);
 	}
+	
+	public ArrayList<Planet> getPlanets() {
+		return planets;
+	}
 
 	@Override
 	public String getName() {

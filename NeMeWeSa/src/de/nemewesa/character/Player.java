@@ -41,11 +41,27 @@ public class Player implements Observer, Serializable{
 		info += "[NeMeWeSa] Du befindest dich auf dem Planeten " + this.currentPlanet.name + ".\n";
 		info += "[NeMeWeSa] " + this.homePlanet.name + " ist dein Heimatplanet.\n";
 		info += "[NeMeWeSa] Dein Heimat-Solarsystem ist der " + this.homeSolarsystem.name + ".\n";
+		if(this.currentPlanet.spacestation != null){
+			info += "[NeMeWeSa] Auf diesem Planeten befindet sich die Raumstation " 
+					+ this.currentPlanet.spacestation.name + "\n";
+		}
+		
+		// NACHBARPLANETEN
+		if(this.getLeftNeighbouringPlanet() != null)
+			info += "[NeMeWeSa] Dein linker Nachbarplanet ist der " + this.getLeftNeighbouringPlanet().name +"\n";
+		if(this.getRightNeighbouringPlanet() != null)
+			info += "[NeMeWeSa] Dein rechter Nachbarplanet ist der " + this.getRightNeighbouringPlanet().name +"\n";
+		
+		// PLANETEN IM BESITZT		
 		info += "[NeMeWeSa] Dein Besitz > \n";
 		for(Generetable ownership : ownership){
 			info += ownership.getClass().getSimpleName() + " : " + ownership.getName() +"\n";
 		}
 		return info;
+	}
+	
+	public void showEnvironment(){
+		System.out.println(this.toString());
 	}
 
 	public Generetable getOwnership(int index) {
@@ -103,6 +119,28 @@ public class Player implements Observer, Serializable{
 		catch(IOException e) {
 			System.out.println("IOException: " + e.getMessage());
 		}		
+		
+	}
+	
+	public Planet getLeftNeighbouringPlanet(){
+		
+		if(this.currentPlanet.parent.getPlanetIndex(this.currentPlanet) > 0){
+			return this.currentPlanet.parent.getPlanet(
+					this.currentPlanet.parent.getPlanetIndex(this.currentPlanet) -1);
+		}
+		return null;
+	}
+	
+	public Planet getRightNeighbouringPlanet(){
+		
+		if(this.currentPlanet.parent.getPlanetIndex(this.currentPlanet) < (this.currentPlanet.parent.getPlanets().size() - 1)){
+			return this.currentPlanet.parent.getPlanet(
+					this.currentPlanet.parent.getPlanetIndex(this.currentPlanet) +1);
+		}
+		return null;
+	}	
+	
+	public void move(Planet planet){
 		
 	}
 	
