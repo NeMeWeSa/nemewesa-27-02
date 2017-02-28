@@ -91,6 +91,8 @@ public class App {
 		//this.round.setNewRound();
 
 		//console.mainmenu(player);
+		
+		// ROHSTOFFE ABERNTEN UND EINLAGERN
 		player.getCurrentPlanet().mineBronze();
 		player.getCurrentPlanet().mineBronze();
 		player.getCurrentPlanet().mineBronze();
@@ -100,16 +102,21 @@ public class App {
 		
 		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
 		
+		// ROHSTOFFE VOM PLANETEN ABHOLEN
 		if(player.getCurrentPlanet().pickupResource(player.getCurrentPlanet().bronze, 7)){
 			
-			System.out.println("Habe BRONZE abgeholt auf " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+			System.out.println("Habe BRONZE auf " + player.getCurrentPlanet().name + " abgeholt. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
 			
 		}
 		else{
-			System.out.println("Konnte BRONZE nicht abholen " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+			System.out.println("Konnte BRONZE auf " + player.getCurrentPlanet().name + " nicht abholen. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
 		}
 		
-		
+		// LINKEN UND RECHTEN NACHBARPLANETEN ANZEIGEN
+		if(player.getLeftNeighbouringPlanet() != null)
+			System.out.println("Mein linker Nachbarplanet: " + player.getLeftNeighbouringPlanet().name);
+		if(player.getRightNeighbouringPlanet() != null)
+			System.out.println("Mein rechter Nachbarplanet: " + player.getRightNeighbouringPlanet().name);
 		
 //		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
 //		System.out.println("Der Index: " + currPlanetIndex);
