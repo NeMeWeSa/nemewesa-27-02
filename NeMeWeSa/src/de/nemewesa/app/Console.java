@@ -10,8 +10,13 @@ public class Console {
 
 	Scanner scanner = new Scanner(System.in);
 	Menu menu;
+	Player player;
 	
-	public void mainmenu(Player player){
+	public Console(Player player){
+		this.player = player;
+	}
+	
+	public void mainmenu(){
 
 		while(true){
 
@@ -24,13 +29,13 @@ public class Console {
 				if(decision >= 1 && decision <= 3){
 					switch(decision){
 
-					case 1:	actions(player);
+					case 1:	actions();
 					return;
 
-					case 2:	help(player);
+					case 2:	help();
 					return;
 					
-					case 3:	logout(player);
+					case 3:	logout();
 					return;
 
 					//case "q":	return;
@@ -52,32 +57,32 @@ public class Console {
 	}	
 
 	
-	public void actions(Player player){
+	public void actions(){
 		
 		menu = new Menu();
 		
 		menu.menuitems.add(
 				new Menuitem("Umsehen"){
 					public void execute(	){
-						showEnvironment(player);
+						showEnvironment();
 					}});	
 		
 		menu.menuitems.add(
 				new Menuitem("Bauen"){
 					public void execute(	){
-						build(player);
+						build();
 					}});			
 
 		menu.menuitems.add(
 				new Menuitem("Reisen"){
 					public void execute(	){
-						move(player);
+						move();
 					}});	
 		
 		menu.menuitems.add(
 				new Menuitem("Hauptmenu"){
 					public void execute(	){
-						mainmenu(player);
+						mainmenu();
 					}});	
 
 		System.out.println("[NeMeWeSa] Was moechtest Du tun " + player.getName() + "?");
@@ -86,19 +91,19 @@ public class Console {
 
 	}
 	
-	public void showEnvironment(Player player){
+	public void showEnvironment(){
 		player.showEnvironment();
-		actions(player);
+		actions();
 	}
 	
-	public void build(Player player){
+	public void build(){
 		System.out.println("Baue...");
-		actions(player);
+		actions();
 	}
 	
-	public void help(Player player){
+	public void help(){
 		System.out.println("Helfe...");
-		mainmenu(player);
+		mainmenu();
 	}	
 
 	public Login login(){
@@ -114,11 +119,11 @@ public class Console {
 
 	}
 	
-	public void logout(Player player){
+	public void logout(){
 		System.out.println("Verlasse das Spiel...");
 	}
 	
-	public void move(Player player){
+	public void move(){
 		
 		menu = new Menu();
 		
@@ -127,7 +132,7 @@ public class Console {
 					new Menuitem(player.getLeftNeighbouringPlanet().name){
 						public void execute(	){
 							player.move(player.getLeftNeighbouringPlanet());
-							actions(player);
+							actions();
 						}});
 		}
 		
@@ -136,14 +141,14 @@ public class Console {
 					new Menuitem(player.getRightNeighbouringPlanet().name){
 						public void execute(	){
 							player.move(player.getRightNeighbouringPlanet());
-							actions(player);
+							actions();
 						}});
 		}
 		
 		menu.menuitems.add(
 			new Menuitem("Hauptmenu"){
 				public void execute(	){
-					mainmenu(player);
+					mainmenu();
 				}});
 
 		System.out.println("[NeMeWeSa] Zu welchen Nachbarplaneten moechtest Du reisen " + player.getName() + "?");
@@ -152,7 +157,7 @@ public class Console {
 		
 	}
 	
-	public void dynmenu(Player player){
+	public void dynmenu(){
 		
 		menu = new Menu();
 		
@@ -166,7 +171,7 @@ public class Console {
 				
 				new Menuitem("Weitere Optionen"){
 					public void execute(	){
-						actions(player);
+						actions();
 					}});		
 		
 		createMenu(menu);

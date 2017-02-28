@@ -19,7 +19,7 @@ public class App {
 	private Level level;
 	private Round round = Round.getRoundInstance();
 	private DB db = DB.getInstance();
-	private Console console = new Console();
+	private Console console;
 	private Login login;
 	private String prefix = "[NeMeWeSa] ";
 
@@ -36,6 +36,7 @@ public class App {
 		createNewLevel(1);
 		//createPlayer(login.name);
 		createPlayer("Master");
+		createConsole(player);
 		runTests();
 		
 		// Timeout fuer blockierende Spieler
@@ -62,11 +63,15 @@ public class App {
 		player.addOwnership(player.getHomePlanet());
 		
 		player.getHomePlanet().spacestation = new SpaceStation("SST_001");
-	
+
 		System.out.println(prefix + "Willkommen im NeMeWeSa " + player.getName());
 		if(DEV_MODE)		
 			System.out.println(player);
 	
+	}
+	
+	public void createConsole(Player player){
+		this.console = new Console(player);
 	}
 	
 	public void loginUser(){
@@ -89,10 +94,8 @@ public class App {
 	public void runTests(){
 		
 		//this.round.setNewRound();
-
-		//console.mainmenu(player);
 		
-		console.mainmenu(player);
+		console.mainmenu();
 		
 //		// ROHSTOFFE ABERNTEN UND EINLAGERN
 //		player.getCurrentPlanet().mineBronze();
