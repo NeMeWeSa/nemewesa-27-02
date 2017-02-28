@@ -12,27 +12,31 @@ public class SpaceStation {
 	public int researchPoint;
 	public boolean avaiable = false;
 	public int bank;
+	public Module modul;
 
 	
 	public SpaceStation(String name) {
 		this.name = name;
-		this.researchPoint = 0;
+		this.researchPoint = 1;
 		this.bank = 0;
 		this.avaiable = false;
 	}
 	
-	public static void researching() {
+	public void researching() {
 		
 	}
-	
-	// Hier wird das Modul upgegradet
-	public int moduleUpgrate(Module level) {
-		System.out.println("Das Modul " + level.moduleName + " ist eine Stufe aufgestiegen! ");
-		return level.moduleLevel = level.moduleLevel + 1;
-	}
-	
+		
 	public void produce() {
-		
+		switch (researchPoint) {
+		case 1:
+			this.modul.moduleLevel +=1;
+			break;
+		case 2:
+			this.modul.moduleLevel +=1;
+			break;
+		default:
+			break;
+		}
 	}
 	
 	public void defending() {
