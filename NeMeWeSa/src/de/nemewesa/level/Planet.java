@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import de.nemewesa.app.Observer;
 import de.nemewesa.app.Round;
+import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.character.Enemy;
 import de.nemewesa.helper.Helper;
 import de.nemewesa.modules.Defence;
@@ -14,7 +15,7 @@ public class Planet implements Generetable, Observer, Serializable{
 	public static Object resourceName;
 	public Moon moon;
 	public int citizen;
-	public SpaceStation stationName;
+	public SpaceStation spaceStation;
 	public Defence defenceName;
 	public boolean captured = false;
 	public String name;
@@ -85,6 +86,7 @@ public class Planet implements Generetable, Observer, Serializable{
 			this.jewel.storage = this.citizen*4;
 		}
 		this.moon = new Moon(this.name + "s Mond", new Enemy(this.moon), this);
+		this.spaceStation = new SpaceStation("SS-" + this.name.charAt(0) + "1", this);
 	}
 	
 /*
