@@ -141,7 +141,7 @@ public class Player implements Observer, Serializable{
 	}	
 	
 	public void move(Planet planet){
-		
+		this.currentPlanet = planet;
 	}
 	
 	public void save(String filename){

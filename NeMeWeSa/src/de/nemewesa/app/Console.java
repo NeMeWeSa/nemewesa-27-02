@@ -111,8 +111,61 @@ public class Console {
 	}
 	
 	public void move(Player player){
-		System.out.println("Bewege mich...");
-		actions(player);
+		
+		while(true){
+
+			System.out.println("[NeMeWeSa] Zu welchen Nachbarplaneten moechtest Du reisen " + player.getName() + "?");
+			
+			if(player.getLeftNeighbouringPlanet() != null)
+				System.out.println("[NeMeWeSa] 1. " + player.getLeftNeighbouringPlanet().name + " > ");
+			if(player.getRightNeighbouringPlanet() != null)
+				System.out.println("[NeMeWeSa] 2. " + player.getRightNeighbouringPlanet().name + " > ");
+
+			System.out.println("[NeMeWeSa] 3. Hauptmenu > ");
+			
+			try
+			{
+				int decision = scanner.nextInt();
+				if(decision >= 1 && decision <= 3){
+					switch(decision){
+
+					case 1:	
+						if(player.getLeftNeighbouringPlanet() != null){
+							player.move(player.getLeftNeighbouringPlanet());
+							actions(player);
+						}
+						else{
+							move(player);
+						}
+					return;
+
+					case 2:	
+						if(player.getRightNeighbouringPlanet() != null){
+							player.move(player.getRightNeighbouringPlanet());
+							actions(player);
+						}
+						else{
+							move(player);
+						}
+					return;
+					
+					case 3:	mainmenu(player);
+					return;
+
+					default:
+						System.out.println("[NeMeWeSa] Ungueltige Wahl");
+					}
+				}
+				else{
+					System.out.println("UNGUELTIGE ZAHL, BITTE NOCHMAL VERSUCHEN");
+				}				
+			}
+			catch (java.util.InputMismatchException exception)
+			{
+				System.out.println("BITTE NUR ZAHLEN EINGEBEN");
+				scanner.next();
+			}
+		}
 	}
 	
 	public void help(Player player){
