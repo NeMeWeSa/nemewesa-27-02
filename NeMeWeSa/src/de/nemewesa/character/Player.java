@@ -47,6 +47,12 @@ public class Player implements Observer, Serializable{
 		}
 		return info;
 	}
+	
+	public void showEnvironment(){
+		System.out.println(this.toString());
+		
+		
+	}
 
 	public Generetable getOwnership(int index) {
 		return this.ownership.get(index);

@@ -88,15 +88,15 @@ public class App {
 
 		//console.mainmenu(player);
 
-		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
-		System.out.println("Der Index: " + currPlanetIndex);
-		System.out.println(player.getCurrentPlanet().name);
-
-		player.setCurrentPlanet(player.getCurrentPlanet().parent.getPlanet(currPlanetIndex+1));
-		
-		currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
-		System.out.println("Der Index: " + currPlanetIndex);
-		System.out.println(player.getCurrentPlanet().name);		
+//		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
+//		System.out.println("Der Index: " + currPlanetIndex);
+//		System.out.println(player.getCurrentPlanet().name);
+//
+//		player.setCurrentPlanet(player.getCurrentPlanet().parent.getPlanet(currPlanetIndex+1));
+//		
+//		currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
+//		System.out.println("Der Index: " + currPlanetIndex);
+//		System.out.println(player.getCurrentPlanet().name);		
 		
 		/*
 		 * 

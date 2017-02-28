@@ -1,4 +1,4 @@
-package de.nemewesa.level;
+package de.nemewesa.buildings;
 
 import java.util.ArrayList;
 

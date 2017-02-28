@@ -7,6 +7,7 @@ import javax.annotation.Resources;
 
 import de.nemewesa.app.Observer;
 import de.nemewesa.app.Round;
+import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.helper.Helper;
 import de.nemewesa.modules.Defence;
 
