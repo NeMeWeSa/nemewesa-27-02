@@ -90,6 +90,8 @@ public class App {
 		
 		//this.round.setNewRound();
 
+		//console.mainmenu(player);
+		
 		console.mainmenu(player);
 		
 //		// ROHSTOFFE ABERNTEN UND EINLAGERN
