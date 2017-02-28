@@ -5,13 +5,14 @@ import java.io.Serializable;
 import de.nemewesa.app.Observer;
 import de.nemewesa.app.Round;
 import de.nemewesa.buildings.SpaceStation;
+import de.nemewesa.character.Enemy;
 import de.nemewesa.helper.Helper;
 import de.nemewesa.modules.Defence;
 
 public class Planet implements Generetable, Observer, Serializable{
 	
 	public static Object resourceName;
-	public Moon moonName;
+	public Moon moon;
 	public int citizen;
 	public SpaceStation stationName;
 	public Defence defenceName;
@@ -83,6 +84,9 @@ public class Planet implements Generetable, Observer, Serializable{
 			this.jewel.farm = this.jewel.amount;
 			this.jewel.storage = this.citizen*4;
 		}
+	
+		this.moon = new Moon(this.name + "s Mond", new Enemy(this.moon), this);
+		
 	}
 	
 /*
@@ -193,6 +197,16 @@ public class Planet implements Generetable, Observer, Serializable{
 //			
 //		}
 	}
+	
+	public boolean pickupResource(Resource res, int amount){
+		
+		if(res.storagef >= amount){
+			res.storagef -= amount; 
+			return true;
+		}
+		
+		return false;
+	}
 
 	@Override
 	public String getName() {
@@ -209,7 +223,7 @@ public class Planet implements Generetable, Observer, Serializable{
 
 	@Override
 	public void printChildren() {
-		
+
 	}
 /*
  * ZUFaeLLIGE PLANETENNAMEN ERSTELLUNG

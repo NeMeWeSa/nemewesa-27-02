@@ -6,6 +6,7 @@ import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.character.Player;
 import de.nemewesa.db.DB;
 import de.nemewesa.level.Level;
+import de.nemewesa.level.Resource;
 
 
 public class App {
@@ -89,8 +90,27 @@ public class App {
 		
 		//this.round.setNewRound();
 
-		console.mainmenu(player);
-
+		//console.mainmenu(player);
+		player.getCurrentPlanet().mineBronze();
+		player.getCurrentPlanet().mineBronze();
+		player.getCurrentPlanet().mineBronze();
+		player.getCurrentPlanet().mineBronze();
+		player.getCurrentPlanet().mineBronze();
+		player.getCurrentPlanet().mineBronze();
+		
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+		
+		if(player.getCurrentPlanet().pickupResource(player.getCurrentPlanet().bronze, 7)){
+			
+			System.out.println("Habe BRONZE abgeholt auf " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+			
+		}
+		else{
+			System.out.println("Konnte BRONZE nicht abholen " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+		}
+		
+		
+		
 //		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
 //		System.out.println("Der Index: " + currPlanetIndex);
 //		System.out.println(player.getCurrentPlanet().name);
@@ -101,11 +121,11 @@ public class App {
 //		System.out.println("Der Index: " + currPlanetIndex);
 //		System.out.println(player.getCurrentPlanet().name);		
 		
-		System.out.println(player.getCurrentPlanet().getName());
-		System.out.println(player.getCurrentPlanet().moon.getName());
-		System.out.println("gegner " + player.getCurrentPlanet().moon.enemy.getName());
-		System.out.println(player.getCurrentPlanet().moon.enemy.getEnemyAttack());
-		System.out.println(player.getCurrentPlanet().moon.getParent());
+//		System.out.println(player.getCurrentPlanet().getName());
+//		System.out.println(player.getCurrentPlanet().moon.getName());
+//		System.out.println("gegner " + player.getCurrentPlanet().moon.enemy.getName());
+//		System.out.println(player.getCurrentPlanet().moon.enemy.getEnemyAttack());
+//		System.out.println(player.getCurrentPlanet().moon.getParent());
 		/*
 		 * 
 		 * Planet Ressourcen Test
