@@ -1,9 +1,9 @@
 package de.nemewesa.spaceships;
 
+import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.buildings.Storage;
 import de.nemewesa.character.Enemy;
 import de.nemewesa.level.Planet;
-import de.nemewesa.level.SpaceStation;
 
 public class Transporter extends Spaceship{
 	

@@ -2,6 +2,7 @@ package de.nemewesa.app;
 
 import java.util.Timer;
 
+import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.character.Player;
 import de.nemewesa.db.DB;
 import de.nemewesa.level.Level;
@@ -58,6 +59,8 @@ public class App {
 		player.setHomePlanet(player.getCurrentPlanet());
 		player.setHomeSolarsystem(level.getSector(0).getSolarsystem(0));
 		player.addOwnership(player.getHomePlanet());
+		
+		player.getHomePlanet().spacestation = new SpaceStation("SST_001");
 	
 		System.out.println(prefix + "Willkommen im NeMeWeSa " + player.getName());
 		if(DEV_MODE)		
@@ -86,17 +89,17 @@ public class App {
 		
 		//this.round.setNewRound();
 
-		//console.mainmenu(player);
+		console.mainmenu(player);
 
-		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
-		System.out.println("Der Index: " + currPlanetIndex);
-		System.out.println(player.getCurrentPlanet().name);
-
-		player.setCurrentPlanet(player.getCurrentPlanet().parent.getPlanet(currPlanetIndex+1));
-		
-		currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
-		System.out.println("Der Index: " + currPlanetIndex);
-		System.out.println(player.getCurrentPlanet().name);		
+//		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
+//		System.out.println("Der Index: " + currPlanetIndex);
+//		System.out.println(player.getCurrentPlanet().name);
+//
+//		player.setCurrentPlanet(player.getCurrentPlanet().parent.getPlanet(currPlanetIndex+1));
+//		
+//		currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
+//		System.out.println("Der Index: " + currPlanetIndex);
+//		System.out.println(player.getCurrentPlanet().name);		
 		
 		System.out.println(player.getCurrentPlanet().getName());
 		System.out.println(player.getCurrentPlanet().moon.getName());

@@ -41,11 +41,19 @@ public class Player implements Observer, Serializable{
 		info += "[NeMeWeSa] Du befindest dich auf dem Planeten " + this.currentPlanet.name + ".\n";
 		info += "[NeMeWeSa] " + this.homePlanet.name + " ist dein Heimatplanet.\n";
 		info += "[NeMeWeSa] Dein Heimat-Solarsystem ist der " + this.homeSolarsystem.name + ".\n";
+		if(this.currentPlanet.spacestation != null){
+			info += "[NeMeWeSa] Auf diesem Planeten befindet sich die Raumstation " 
+					+ this.currentPlanet.spacestation.name + "\n";
+		}
 		info += "[NeMeWeSa] Dein Besitz > \n";
 		for(Generetable ownership : ownership){
 			info += ownership.getClass().getSimpleName() + " : " + ownership.getName() +"\n";
 		}
 		return info;
+	}
+	
+	public void showEnvironment(){
+		System.out.println(this.toString());
 	}
 
 	public Generetable getOwnership(int index) {

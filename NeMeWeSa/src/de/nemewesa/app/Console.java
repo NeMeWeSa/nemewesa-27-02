@@ -95,10 +95,14 @@ public class Console {
 	}
 	
 	public void showEnvironment(Player player){
-		System.out.println("Dein aktueller Planet > " + player.getCurrentPlanet().name);
-		System.out.println("Dein aktuelles Sonnensystem > " + player.getCurrentPlanet().parent.name);
-		System.out.println("Dein aktueller Sektor > " + player.getCurrentPlanet().parent.parent.name + "\n");
+		
+		player.showEnvironment();
 		actions(player);
+		
+//		System.out.println("Dein aktueller Planet > " + player.getCurrentPlanet().name);
+//		System.out.println("Dein aktuelles Sonnensystem > " + player.getCurrentPlanet().parent.name);
+//		System.out.println("Dein aktueller Sektor > " + player.getCurrentPlanet().parent.parent.name + "\n");
+
 	}
 	
 	public void build(Player player){
