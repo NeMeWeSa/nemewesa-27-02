@@ -7,10 +7,14 @@ import de.nemewesa.modules.Module;
 public class SpaceStation {
 	
 	public ArrayList<String> warehouse;
-	public String stationName;
+	public String name;
 	// Hier kommt spaeter vom Objekt Human
 	public String humanName;
 	public int researchWas;
+	
+	public SpaceStation(String name){
+		this.name = name;
+	}
 	
 	public static void researching()
 	{

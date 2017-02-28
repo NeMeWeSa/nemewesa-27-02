@@ -1,9 +1,6 @@
 package de.nemewesa.level;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-
-import javax.annotation.Resources;
 
 import de.nemewesa.app.Observer;
 import de.nemewesa.app.Round;
@@ -25,6 +22,7 @@ public class Planet implements Generetable, Observer, Serializable{
 	// size des planeten zwischen
 	public int size;
 	public Solarsystem parent;
+	public SpaceStation spacestation = null;
 	public String[] firstname = {"Ben", "Pe", "To", "Jau", "Ja", "Ter", "Masz", "Res", "Min", "Ro", "Sen", "Ta", "Bue", "Ur", "Ban", "Iak", "Dzi", "Ko", "Wi", "Cki"};
 
 /* 
