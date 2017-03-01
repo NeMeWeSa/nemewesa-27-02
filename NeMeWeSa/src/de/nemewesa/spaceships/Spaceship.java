@@ -19,13 +19,16 @@ public class Spaceship {
 	public Planet currentPlanet = null;
 	
 	public static ArrayList<Resource> stock; 
+	public int maxCapacity;
 	
-	public Spaceship(String shipName, String shipType, int shipHealth, int shipStrange, int shipFuel) {
+	public Spaceship(String shipName, String shipType, int maxCapacity, int shipHealth, int shipStrange, int shipFuel, Planet currentPlanet) {
 		this.shipName = shipName;
 		this.shipType = shipType;
 		this.shipHealth = shipHealth;
 		this.shipStrange = shipStrange;
 		this.shipFuel = shipFuel;
+		this.maxCapacity = maxCapacity;
+		this.currentPlanet = currentPlanet;
 	}
 
 	public static void fly()

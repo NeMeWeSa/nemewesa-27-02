@@ -10,8 +10,8 @@ public class Transporter extends Spaceship{
 	//private static Object resourceName;
 	public Storage storage;
 
-	public Transporter(String shipName, String shipType, int shipHealth, int shipStrange, int shipFuel, Storage storage) {
-		super(shipName,shipType, shipHealth, shipStrange, shipFuel);
+	public Transporter(String shipName, String shipType, int maxCapacity, int shipHealth, int shipStrange, int shipFuel, Storage storage, Planet currentPlanet) {
+		super(shipName, shipType, shipHealth, maxCapacity, shipStrange, shipFuel, currentPlanet);
 		this.storage = storage;
 	}
 	
@@ -31,6 +31,36 @@ public class Transporter extends Spaceship{
 	{
 		return target.enemyHealth = target.enemyHealth - this.shipStrange;
 	}
+	
+	public void pickUpGold()
+	{			
+		
+		// Also erstmal resourcen gibt es nicht sondern nur die Objekze der Rohstoffe
+		// Dann muss ich im Transporter ein neues Objekt erstellen vom Rohstoff so wie in der pickup Methode und storagef dazupacken
+		
+		if(this.currentPlanet.resource.get(2).storagef > 0) // Hier will ich erst gucken ob der Planet rohstoffe zum abholen hat
+		{
+			int actualAmount = this.currentPlanet.resource.get(2).storagef;
+
+			this.currentPlanet.resource.get(2).storagef -= actualAmount;
+
+			
+			
+			if(this.maxCapacity > actualAmount)
+			{
+				this.currentPlanet.pickupResource(this.currentPlanet.resource.get(2), actualAmount);
+			}
+		//	this.storage.resources.add(actualAmount, this.currentPlanet.resource.get(2));
+
+			// Vielleicht muss ich die aktuelle Kapazität berechnen nicht nur maxCapacity
+		}
+
+
+	else 
+	{	
+		System.out.println("Hier gibt es kein " + this.currentPlanet.resource.get(2).resourceName +  "die man abholen kann! ");	
+	}
+}
 	
 	//Hier wird der Rohsrtoff vom gewählten PLANETEN AUFGENOMMEN
 //	public int pickUp(Planet start)
