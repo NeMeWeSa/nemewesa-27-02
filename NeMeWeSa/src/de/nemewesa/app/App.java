@@ -26,7 +26,7 @@ public class App {
 
 	public static void main(String[] args)  {
 		App app = new App();
-//		app.init();
+		app.init();
 		app.pathTest();
 	}
 	
@@ -95,9 +95,10 @@ public class App {
 	
 	public void runTests(){
 		
-		//this.round.setNewRound();
+//		this.round.setNewRound();
 		
 		console.mainmenu();
+		
 		
 //		// ROHSTOFFE ABERNTEN UND EINLAGERN
 //		System.out.println("BRONZE VORKOMMEN " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.amount);
@@ -243,9 +244,9 @@ public class App {
 	}
 
 	public void pathTest(){
-		Path path1 = new Path();
-		path1.addAsteroid();
-		path1.showPath();
-		path1.howToMove();
+//		Path path1 = new Path();
+//		path1.addAsteroid();
+//		path1.showPath();
+//		path1.howToMove();
 	}
 }
