@@ -152,10 +152,40 @@ public class Player implements Observer, Serializable{
 	}	
 	
 	public void move(Planet planet){
-		if(this.ap >= 1){
-			this.currentPlanet = planet;
-			this.ap--;
+		
+		// GEHE ZUM LINKEN NACHBARPLANETEN
+		if(planet == this.currentPlanet.getLeftNeighbouringPlanet()){
+			System.out.println("LINKS");
+			if(this.ap >= this.currentPlanet.pathLeft.distance){
+				this.currentPlanet.pathLeft.addAsteroid();
+				this.currentPlanet.pathLeft.showPath();
+				this.currentPlanet.pathLeft.howToMove();
+				this.ap -= this.currentPlanet.pathLeft.distance;
+				this.currentPlanet = planet;
+			}
+			else{
+				System.out.println("Fuer diese Aktion stehen nicht genuegend Aktionspunkte zur Verfuegung");
+			}
 		}
+		// GEHE ZUM RECHTEN NACHBARPLANETEN
+		else if(planet == this.currentPlanet.getRightNeighbouringPlanet()){
+			System.out.println("RECHTS");
+			if(this.ap >= this.currentPlanet.pathRight.distance){
+				this.currentPlanet.pathRight.addAsteroid();
+				this.currentPlanet.pathRight.showPath();
+				this.currentPlanet.pathRight.howToMove();
+				this.ap -= this.currentPlanet.pathRight.distance;
+				this.currentPlanet = planet;
+			}
+			else{
+				System.out.println("Fuer diese Aktion stehen nicht genuegend Aktionspunkte zur Verfuegung");
+			}
+		}
+		// PLANET AUSSER REICHWEITE
+		else{
+			System.out.println("Dieser Planet ist nicht erreichbar");
+		}
+		
 	}
 	
 	public void save(String filename){
