@@ -28,7 +28,7 @@ public class Player implements Observer, Serializable{
 	private ArrayList<Generetable> ownership = new ArrayList<>();
 	private Round round;
 	
-	private final transient int ap = App.PLAYER_AP;
+	private int ap = App.PLAYER_AP;
 	
 	public Player(String name){
 		this.name = name;
@@ -38,24 +38,25 @@ public class Player implements Observer, Serializable{
 	
 	public String toString(){
 		String info = "";
-		info += "[NeMeWeSa] Du befindest dich auf dem Planeten " + this.currentPlanet.name + ".\n";
-		info += "[NeMeWeSa] " + this.homePlanet.name + " ist dein Heimatplanet.\n";
-		info += "[NeMeWeSa] Dein Heimat-Solarsystem ist der " + this.homeSolarsystem.name + ".\n";
+		info += "[Spieler] Du hast " + this.ap + " Aktionspunkte \n";
+		info += "[Spieler] Du befindest dich auf dem Planeten " + this.currentPlanet.name + ".\n";
+		info += "[Spieler] " + this.homePlanet.name + " ist dein Heimatplanet.\n";
+		info += "[Spieler] Dein Heimat-Solarsystem ist der " + this.homeSolarsystem.name + ".\n";
 		if(this.currentPlanet.spacestation != null){
-			info += "[NeMeWeSa] Auf diesem Planeten befindet sich die Raumstation " 
+			info += "[Raumstation] Auf diesem Planeten befindet sich die Raumstation " 
 					+ this.currentPlanet.spacestation.name + "\n";
 		}
 		
 		// NACHBARPLANETEN
 		if(this.getLeftNeighbouringPlanet() != null)
-			info += "[NeMeWeSa] Dein linker Nachbarplanet ist der " + this.getLeftNeighbouringPlanet().name +"\n";
+			info += "[Planet] Dein linker Nachbarplanet ist der " + this.getLeftNeighbouringPlanet().name +"\n";
 		if(this.getRightNeighbouringPlanet() != null)
-			info += "[NeMeWeSa] Dein rechter Nachbarplanet ist der " + this.getRightNeighbouringPlanet().name +"\n";
+			info += "[Planet] Dein rechter Nachbarplanet ist der " + this.getRightNeighbouringPlanet().name +"\n";
 		
 		// PLANETEN IM BESITZT		
-		info += "[NeMeWeSa] Dein Besitz > \n";
+		info += "[Spieler] Dein Besitz >> \n";
 		for(Generetable ownership : ownership){
-			info += ownership.getClass().getSimpleName() + " : " + ownership.getName() +"\n";
+			info += "[" + ownership.getClass().getSimpleName() + "] > " + ownership.getName() +"\n";
 		}
 		return info;
 	}
