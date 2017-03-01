@@ -79,12 +79,12 @@ public void farmOre(){
 						farmOre();
 					}});
 		menu.menuitems.add(
-				new Menuitem("Zurück"){
+				new Menuitem("Zurueck"){
 					public void execute(){
 						mainmenu();
 					}});
 
-		System.out.println("[Aktionen] Was moechtest Du tun " + player.getName() + "?");		
+		System.out.println("[Erze sammeln] Welche Erze moechtest Du sammeln " + player.getName() + "?");		
 		createMenu(menu);
 
 	}

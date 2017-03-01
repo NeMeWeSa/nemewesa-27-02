@@ -2,6 +2,7 @@ package de.nemewesa.level;
 
 import java.io.Serializable;
 
+import de.nemewesa.app.App;
 import de.nemewesa.app.Observer;
 import de.nemewesa.app.Round;
 import de.nemewesa.buildings.SpaceStation;
@@ -128,29 +129,29 @@ public class Planet implements Generetable, Observer, Serializable{
  */
 	public void mineBronze() {
 		if(this.bronze.farm > 0) {
-			this.bronze.farm -= 1 * spacestation.modulePoint;
-			this.bronze.storagef += 1 * spacestation.modulePoint;	
+			this.bronze.farm -= 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+			this.bronze.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;	
 		}
 	}
 	
 	public void mineSilver() {
 		if(this.silver.farm > 0) {
-			this.silver.farm -= 1* spacestation.modulePoint;
-			this.silver.storagef += 1 * spacestation.modulePoint;
+			this.silver.farm -= 1* App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+			this.silver.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
 		}
 	}
 	
 	public void mineGold() {
 		if(this.gold.farm > 0) {
-			this.gold.farm -= 1 * spacestation.modulePoint;
-			this.gold.storagef += 1 * spacestation.modulePoint;
+			this.gold.farm -= 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+			this.gold.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
 		}
 	}
 	
 	public void mineJewel() {
 		if(this.jewel.farm > 0) {
-			this.jewel.farm -= 1 * spacestation.modulePoint;
-			this.jewel.storagef += 1 * spacestation.modulePoint;
+			this.jewel.farm -= 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+			this.jewel.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
 		}
 	}
 	
