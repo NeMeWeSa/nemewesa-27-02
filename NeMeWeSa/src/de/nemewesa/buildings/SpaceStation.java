@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import de.nemewesa.level.Planet;
 import de.nemewesa.modules.Module;
+import de.nemewesa.*;
 
 public class SpaceStation {
 	
 	public String name;
 
 	public int researchPoint;
+	public int modulePoint;
 	public int bank;
 	public Module modul;
 
@@ -18,14 +20,16 @@ public class SpaceStation {
 		this.name = name;
 		this.researchPoint = 1;
 		this.bank = 0;
+		this.modulePoint = 1;
+		
 	}
 	
 	public void researching() {
-		this.researchPoint +=1;
+		this.researchPoint +=1;		
 	}
 		
 	public void produce() {
-		this.modul.moduleLevel +=1;
+		this.modulePoint = modulePoint * researchPoint;
 	}	
 	public void defending() {
 		

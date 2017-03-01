@@ -8,6 +8,7 @@ import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.character.Enemy;
 import de.nemewesa.helper.Helper;
 import de.nemewesa.modules.Defence;
+import de.nemewesa.modules.*;
 
 public class Planet implements Generetable, Observer, Serializable{
 	
@@ -118,32 +119,35 @@ public class Planet implements Generetable, Observer, Serializable{
  * Mit den einzelnen Methoden wird ein Rohstoff abgearbeitet und dann in dem storage "storagef" eingefuegt"
  * Es wird kontrolliert ob der jeweilige Rohstoff ueberhaupt vorhanden ist durch die "farm" variable
  * Ausserdem wird sichergestellt das man nicht mehr farmen kann als vorhanden
+ * 
+ * *****01.03******
+ * der farm wird abgebaut * der aktuellen forschungstand
  */
 	public void mineBronze() {
 		if(this.bronze.farm > 0) {
-			this.bronze.farm -= 1;
-			this.bronze.storagef += 1;
+			this.bronze.farm -= 1 * spacestation.modulePoint;
+			this.bronze.storagef += 1 * spacestation.modulePoint;		
 		}
 	}
 	
 	public void mineSilver() {
 		if(this.silver.farm > 0) {
-			this.silver.farm -= 1;
-			this.silver.storagef += 1;
+			this.silver.farm -= 1* spacestation.researchPoint;
+			this.silver.storagef += 1 * spacestation.researchPoint;
 		}
 	}
 	
 	public void mineGold() {
 		if(this.gold.farm > 0) {
-			this.gold.farm -= 1;
-			this.gold.storagef += 1;
+			this.gold.farm -= 1 * spacestation.researchPoint;
+			this.gold.storagef += 1 * spacestation.researchPoint;
 		}
 	}
 	
 	public void mineJewel() {
 		if(this.jewel.farm > 0) {
-			this.jewel.farm -= 1;
-			this.jewel.storagef += 1;
+			this.jewel.farm -= 1 * spacestation.researchPoint;
+			this.jewel.storagef += 1 * spacestation.researchPoint;
 		}
 	}
 	

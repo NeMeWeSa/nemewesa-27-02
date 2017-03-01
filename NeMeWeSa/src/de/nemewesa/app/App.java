@@ -93,15 +93,29 @@ public class App {
 		//console.mainmenu(player);
 		
 		// ROHSTOFFE ABERNTEN UND EINLAGERN
-		player.getCurrentPlanet().mineBronze();
-		player.getCurrentPlanet().mineBronze();
-		player.getCurrentPlanet().mineBronze();
-		player.getCurrentPlanet().mineBronze();
-		player.getCurrentPlanet().mineBronze();
-		player.getCurrentPlanet().mineBronze();
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  Vorkommen : " + player.getCurrentPlanet().bronze.amount);
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  farm: " + player.getCurrentPlanet().bronze.farm);
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  lager: " + player.getCurrentPlanet().bronze.storagef);
 		
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+		player.getCurrentPlanet().mineBronze();
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  Vorkommen : " + player.getCurrentPlanet().bronze.amount);
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  farm: " + player.getCurrentPlanet().bronze.farm);
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  lager: " + player.getCurrentPlanet().bronze.storagef);
 		
+		System.out.println("----- UPDATE");
+		player.getCurrentPlanet().spacestation.researching();
+		player.getCurrentPlanet().spacestation.produce();
+		
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  Vorkommen : " + player.getCurrentPlanet().bronze.amount);
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  farm: " + player.getCurrentPlanet().bronze.farm);
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  lager: " + player.getCurrentPlanet().bronze.storagef);
+		
+		player.getCurrentPlanet().mineBronze();
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  Vorkommen : " + player.getCurrentPlanet().bronze.amount);
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  farm: " + player.getCurrentPlanet().bronze.farm);
+		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  lager: " + player.getCurrentPlanet().bronze.storagef);
+		
+	
 		// ROHSTOFFE VOM PLANETEN ABHOLEN
 		if(player.getCurrentPlanet().pickupResource(player.getCurrentPlanet().bronze, 7)){
 			
