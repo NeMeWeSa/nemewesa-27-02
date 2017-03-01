@@ -10,7 +10,6 @@ public class SpaceStation {
 	public String name;
 
 	public int researchPoint;
-	public boolean avaiable = false;
 	public int bank;
 	public Module modul;
 
@@ -19,26 +18,15 @@ public class SpaceStation {
 		this.name = name;
 		this.researchPoint = 1;
 		this.bank = 0;
-		this.avaiable = false;
 	}
 	
 	public void researching() {
-		
+		this.researchPoint +=1;
 	}
 		
 	public void produce() {
-		switch (researchPoint) {
-		case 1:
-			this.modul.moduleLevel +=1;
-			break;
-		case 2:
-			this.modul.moduleLevel +=1;
-			break;
-		default:
-			break;
-		}
-	}
-	
+		this.modul.moduleLevel +=1;
+	}	
 	public void defending() {
 		
 	}
