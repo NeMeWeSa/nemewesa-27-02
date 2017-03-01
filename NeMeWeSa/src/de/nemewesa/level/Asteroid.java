@@ -13,6 +13,8 @@ public class Asteroid implements Generetable{
 
 	public String name;
 	public int damage;
+	public Path path;
+	public Player player;
 	
 	public Asteroid(){
 		this.name = generateName();

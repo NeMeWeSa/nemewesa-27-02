@@ -3,6 +3,10 @@ package de.nemewesa.level;
 import java.util.*;
 import de.nemewesa.character.Player;
 import de.nemewesa.helper.Helper;
+import de.nemewesa.app.App;
+import de.nemewesa.level.Generetable;
+import de.nemewesa.level.Planet;
+import de.nemewesa.level.Solarsystem;
 //import de.nemewesa.app.App;
 import de.nemewesa.level.Generetable;
 import de.nemewesa.level.Planet;
@@ -15,6 +19,7 @@ public class Path implements Generetable{
 	public ArrayList<Asteroid>asteroids = new ArrayList<>();
 	public Asteroid asteroid;
 	public Player player;
+
 	public Planet planet;
 	public Planet planetW;
 	public Planet planetE;
@@ -32,6 +37,7 @@ public class Path implements Generetable{
 	//Konstruktor
 	public Path(){
 		this.name = generateName();
+
 		this.width = Helper.random(3, 7);
 		this.distance = Helper.random(10,15);
 		
@@ -83,8 +89,9 @@ public class Path implements Generetable{
 	}
 	
 	public void setDistance(){
-		this.distance = Helper.random(10,15);
+		this.distance = Helper.random(7,15);
 	}
+	
 	
 	public void setWidth(){
 		this.width = Helper.random(3,7);
@@ -105,6 +112,7 @@ public class Path implements Generetable{
 //		Scanner sc1 = new Scanner(System.in);
 //		char d = sc1.nextLine().charAt(0);
 		
+
 		for (int i=0; i<this.width; i++){
 			for (int j=0; j<this.distance; j++){
 				path[0][0] = 'P'; // setzt den Spieler(P) immer auf index [0][0].
@@ -117,11 +125,10 @@ public class Path implements Generetable{
 			}
 		}
 	}
-
 		System.out.println();
   }
 	public void showPath(){
-		System.out.print("-------------------------------------------------------\n");
+		System.out.println("-------------------------------------------------------\n");
 		for (int i=0; i<nblin; i++){
 			for(int j=0; j<nbcol; j++){
 			
@@ -129,6 +136,7 @@ public class Path implements Generetable{
 			}
 			System.out.println(" | ");
 		}
+
 		System.out.print("--------------------------------------------------------\n");
 	}
 	
@@ -144,6 +152,7 @@ public class Path implements Generetable{
 		
 		try{
 			while(true){
+
 			Scanner sc2 = new Scanner(System.in);
 			char m = sc2.nextLine().charAt(0);
 			switch (m){
@@ -188,18 +197,18 @@ public class Path implements Generetable{
 			for (int j=0;j<nbcol;j++){
 				if (path[i][j] =='P'){
 					if (i-1>=0 && path[i-1][j] == ' '){
-					    tmp = path[i][j]; //Spieler speichern.
-					    path[i][j] = ' '; //alte Position verlassen.
-					    path[i-1][j] = tmp; //neu Position.
-					    showPath();
-					    return 1;
+					tmp = path[i][j]; //Spieler speichern.
+					path[i][j] = ' '; //alte Position verlassen.
+					path[i-1][j] = tmp; //neu Position.
+					showPath();
+					return 1;  // ohne Kollision
 					}
 					if(i-1>=0 && path[i-1][j] == 'A'){
 						tmp = path[i][j]; 
 						path[i][j] = ' '; 
 						path[i-1][j] = tmp;
 						showPath();
-						return 2;
+						return 2;   // mit Kollision
 					}
 				}
 			}
@@ -235,12 +244,14 @@ public class Path implements Generetable{
 			}
 		}
 		return 0;
+
   }
 	//Bewegen nach links
 	public int moveLeft(){
 		for (int i=0;i<nblin;i++){
 			for (int j=0;j<nbcol;j++){
 				if (path[i][j] =='P'){
+
 					if (j-1>=0 && path[i][j-1] == ' '){
 					    tmp = path[i][j]; //Spieler speichern.
 					    path[i][j] = ' '; //alte Position verlassen.
@@ -252,6 +263,7 @@ public class Path implements Generetable{
 						tmp = path[i][j]; 
 						path[i][j] = ' '; 
 						path[i][j-1] = tmp; 
+
 						showPath();
 						return 2;
 					}
@@ -270,6 +282,7 @@ public class Path implements Generetable{
 				for (int j=0;j<nbcol;j++){
 					if (path[i][j] =='P'){
 						if (i+1<=nblin && path[i+1][j] == ' '){
+
 						   tmp = path[i][j]; //Spieler speichern.
 						   path[i][j] = ' '; //alte Position verlassen.
 						   path[i+1][j] = tmp; //neu Position.
