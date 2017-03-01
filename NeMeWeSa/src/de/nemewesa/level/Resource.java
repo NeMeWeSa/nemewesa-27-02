@@ -40,7 +40,11 @@ public class Resource implements Serializable{
 		this.storagef = storagef;
 	}
 
-
+	public Resource(String resourceName, int amount)
+	{
+		this.resourceName = resourceName;
+		this.amount = amount;
+	} 
 
 	public int getGrow() {
 		return grow;
