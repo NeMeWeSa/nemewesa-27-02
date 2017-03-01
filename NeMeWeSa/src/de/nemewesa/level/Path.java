@@ -3,13 +3,9 @@ package de.nemewesa.level;
 import java.util.*;
 import de.nemewesa.character.Player;
 import de.nemewesa.helper.Helper;
-import de.nemewesa.app.App;
 import de.nemewesa.level.Generetable;
 import de.nemewesa.level.Planet;
-import de.nemewesa.level.Solarsystem;
 //import de.nemewesa.app.App;
-import de.nemewesa.level.Generetable;
-import de.nemewesa.level.Planet;
 //import de.nemewesa.level.Solarsystem;
 import de.nemewesa.level.Asteroid;
 
@@ -98,21 +94,14 @@ public class Path implements Generetable{
 	}
 	
 	public String toString(){
-		return "Path's name: "+this.name+"\nWidth = "+this.width+"\nDistance = "+this.distance;
+		return "Pfadname: "+this.name+"\nBreite = "+this.width+"\nLaenge = "+this.distance;
 	}
 	
 	//Asteroiden aufm Weg hinzufuegen
 	public void addAsteroid(){
-		System.out.println("Welcome to the path");
+		System.out.println("Willkommen auf dem Pfad zu ");
 		System.out.println(toString()+"\n");
-//		System.out.print("You can go to ");
-//		if (planetE != null) System.out.print("East ");
-//		if (planetW != null) System.out.print("West ");
-//		System.out.println(".");
-//		Scanner sc1 = new Scanner(System.in);
-//		char d = sc1.nextLine().charAt(0);
 		
-
 		for (int i=0; i<this.width; i++){
 			for (int j=0; j<this.distance; j++){
 				path[0][0] = 'P'; // setzt den Spieler(P) immer auf index [0][0].
@@ -142,13 +131,13 @@ public class Path implements Generetable{
 	
 	public void howToMove(){
 		System.out.println();
-		System.out.println("Pay close attention! you are the 'P'and the characters A are Asteroids!!!");
-		System.out.println("To move, press:");
-		System.out.println("8 for up");
-		System.out.println("2 for down");
-		System.out.println("4 for left");
-		System.out.println("and 6 for rigth");
-		System.out.println("it's better for you to use the numeric keybord.\n");
+		System.out.println("Vorsichtig Du bist der 'P' versuch so gut wie moeglich die Asteroiden zu vermeiden!!!");
+		System.out.println("Zum bewegen:");
+		System.out.println("8 fuer oben");
+		System.out.println("2 fuer unten");
+		System.out.println("4 fuer links");
+		System.out.println("Und 6 fuer recht");
+		System.out.println("Benutz am besten die numerische Tastatur.");
 		
 		try{
 			while(true){
@@ -159,31 +148,31 @@ public class Path implements Generetable{
 			case '8' :
 				if (moveUp() == 1) break;
 			        else if(moveUp() == 2){
-				       System.out.println("ohh you collided with "+this.asteroid.toString());
-				       System.out.println("your AP is now "+(this.player.getAp() - this.asteroid.getDamage()));
+				       System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
+				       System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
 			        } break;
 			case '2' :
 				if (moveDown() == 1) break;
 			        else if (moveDown() == 2){
-				       System.out.println("ohh you collided with "+this.asteroid.toString());
-				       System.out.println("your AP is now "+(this.player.getAp() - this.asteroid.getDamage()));
+			           System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
+					   System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
 			        } break;
 			case '4' :
 				if (moveLeft() == 1) break;
 			       else if (moveLeft() == 2){
-				       System.out.println("ohh you collided with "+this.asteroid.toString());
-				       System.out.println("your AP is now "+(this.player.getAp() - this.asteroid.getDamage()));
+			    	   System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
+				       System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
 			       } break;
 			case '6' :
 				if (moveRigth() ==1) break;
 			       else if (moveRigth() == 2){
-				       System.out.println("ohh you collided with "+this.asteroid.toString());
-				       System.out.println("your AP is now "+(this.player.getAp() - this.asteroid.getDamage()));
+			    	   System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
+				       System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
 			       } break;
-			default : System.out.println("wrong button!!!");
+			default :  System.out.println("Falsche Taste!!!");
 			
 			sc2.close();
-	        }
+	        } 
 	      }
 		}catch(Exception e){}
 	}
@@ -197,15 +186,15 @@ public class Path implements Generetable{
 			for (int j=0;j<nbcol;j++){
 				if (path[i][j] =='P'){
 					if (i-1>=0 && path[i-1][j] == ' '){
-					tmp = path[i][j]; //Spieler speichern.
-					path[i][j] = ' '; //alte Position verlassen.
-					path[i-1][j] = tmp; //neu Position.
-					showPath();
-					return 1;  // ohne Kollision
+					    tmp = path[i][j]; //Spieler speichern.
+					    path[i][j] = ' '; //alte Position verlassen.
+					    path[i-1][j] = tmp; //neu Position.
+					    showPath();
+					    return 1;  // ohne Kollision
 					}
-					if(i-1>=0 && path[i-1][j] == 'A'){
+					if(path[i-1][j] == 'A'){
 						tmp = path[i][j]; 
-						path[i][j] = ' '; 
+				 		path[i][j] = ' '; 
 						path[i-1][j] = tmp;
 						showPath();
 						return 2;   // mit Kollision
@@ -229,18 +218,17 @@ public class Path implements Generetable{
 					    showPath();
 					    return 1;
 					}
-					if(j+1 <=nbcol && path[i][j+1] == 'A'){
+					if(path[i][j+1] == 'A'){
 						tmp = path[i][j]; 
 						path[i][j] = ' '; 
 						path[i][j+1] = tmp;
 						showPath();
 						return 2;
 					}
-//					break;
 				  }
-				if (j+1 == this.distance){
-					System.out.println("Welcome to the next planet!!");
-				}
+//				if (j+1 == this.distance){
+//					System.out.println("Willkommen auf dem neuen Planet!!");
+//				}
 			}
 		}
 		return 0;
@@ -259,7 +247,7 @@ public class Path implements Generetable{
 					    showPath();
 					    return 1;
 					}
-					if(j-1>=0 && path[i][j-1] == 'A'){
+					if(path[i][j-1] == 'A'){
 						tmp = path[i][j]; 
 						path[i][j] = ' '; 
 						path[i][j-1] = tmp; 
@@ -268,37 +256,37 @@ public class Path implements Generetable{
 						return 2;
 					}
 				}	
-				if (j-1 < 0){
-					System.out.println("You turned back to your last planet!!");
-				}
+//				if (j-1 < 0){
+//					System.out.println("Du bist auf deinem letzten Planet zurueckgelandet!!");
+//				}
 			}
 		}
 		return 0;
   }
 
 	//Bewegen nach unten
-		public int moveDown(){
-			for (int i=0;i<nblin;i++){
-				for (int j=0;j<nbcol;j++){
-					if (path[i][j] =='P'){
-						if (i+1<=nblin && path[i+1][j] == ' '){
-
-						   tmp = path[i][j]; //Spieler speichern.
-						   path[i][j] = ' '; //alte Position verlassen.
-						   path[i+1][j] = tmp; //neu Position.
-						   showPath();
-						   return 1;
-						}
-						if(i+1<=nblin && path[i+1][j] == 'A'){
-							tmp = path[i][j]; 
-							path[i][j] = ' '; 
-							path[i+1][j] = tmp; 
-							showPath();
-							return 2;
-						}
-//						break; 
+	 public int moveDown(){
+		 for (int i=0;i<nblin;i++){
+			 for (int j=0;j<nbcol;j++){
+				 if (path[i][j] =='P'){
+						
+					if (path[i+1][j] == ' '){
+					    tmp = path[i][j]; //Spieler speichern.
+						path[i][j] = ' '; //alte Position verlassen.
+						path[i+1][j] = tmp; //neu Position.
+						showPath();
+						return 1;
 					}
-				}
+					if(i+1<=nblin && path[i+1][j] == 'A'){
+						tmp = path[i][j]; 
+						path[i][j] = ' '; 
+						path[i+1][j] = tmp; 
+						showPath();
+						return 2;
+					}
+//						break; 
+				  }
+			   }
 			}
 			return 0;
 	  }

@@ -6,6 +6,7 @@ import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.character.Player;
 import de.nemewesa.db.DB;
 import de.nemewesa.level.Level;
+import de.nemewesa.level.Path;
 import de.nemewesa.level.Resource;
 
 
@@ -25,7 +26,8 @@ public class App {
 
 	public static void main(String[] args)  {
 		App app = new App();
-		app.init();
+//		app.init();
+		app.pathTest();
 	}
 	
 	public void init(){
@@ -236,4 +238,10 @@ public class App {
 		
 	}
 
+	public void pathTest(){
+		Path path1 = new Path();
+		path1.addAsteroid();
+		path1.showPath();
+		path1.howToMove();
+	}
 }

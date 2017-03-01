@@ -43,7 +43,7 @@ public class Asteroid implements Generetable{
 	}
 	
 	public String toString(){
-		return "Asteroid's name: "+this.name+"\nDamage = -"+this.damage+" AP";
+		return "Asteroidsname: "+this.name+"\nSchaden = -"+this.damage+" AP";
 	}
 	
 	//Schaden verursachen
