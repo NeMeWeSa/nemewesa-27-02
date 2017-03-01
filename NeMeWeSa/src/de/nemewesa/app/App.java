@@ -22,11 +22,19 @@ public class App {
 	private Console console;
 	private Login login;
 	private String prefix = "[NeMeWeSa] ";
+	private static final App app = new App();
 
+	// Singelton Pattern
+	private App(){}
+	
 	public static void main(String[] args)  {
-		App app = new App();
 		app.init();
 		//app.pathTest();
+	}
+	
+	// Die Instanz kann nur ueber getInstance geholt werden 
+	public static App getAppInstance(){
+		return app;
 	}
 	
 	public void init(){
@@ -66,6 +74,7 @@ public class App {
 		player.getHomePlanet().spacestation = new SpaceStation("SST_001", player.getHomePlanet());
 
 		System.out.println(prefix + "Willkommen im NeMeWeSa " + player.getName());
+		
 		if(DEV_MODE)		
 			System.out.println(player);
 	
@@ -91,7 +100,10 @@ public class App {
 		}
 	}
 	
-	
+	public Player getPlayer() {
+		return player;
+	}
+
 	public void runTests(){
 		
 		//this.round.setNewRound();

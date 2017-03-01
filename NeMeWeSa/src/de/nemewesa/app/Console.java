@@ -86,7 +86,6 @@ public class Console {
 	}
 	
 	public void build(){
-		System.out.println("Baue...");
 		actions();
 	}
 	
