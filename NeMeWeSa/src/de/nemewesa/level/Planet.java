@@ -8,6 +8,7 @@ import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.character.Enemy;
 import de.nemewesa.helper.Helper;
 import de.nemewesa.modules.Defence;
+import de.nemewesa.modules.*;
 
 public class Planet implements Generetable, Observer, Serializable{
 	
@@ -36,10 +37,11 @@ public class Planet implements Generetable, Observer, Serializable{
  * storage legt fest wieviel maximal geladen werden kann
  * storagef dann zum arbeiten
  */
+	//int value, int amount, int farm, int space, int grow, int dropchance, int storage, int storagef
 	public Resource bronze = new Resource("Bronze", 1, 0, 0, 2, 8, 85, 0, 0);
 	public Resource silver = new Resource("Silber", 2, 0, 0,  2, 10, 60, 0, 0);
-	public Resource gold = new Resource("Gold", 3, 0, 0, 2, 12, 45, 0, 0);
-	public Resource jewel= new Resource("Juwel", 5, 0, 0, 1, 14, 15, 0, 0);
+	public Resource gold = new Resource("Gold", 4, 0, 0, 2, 12, 45, 0, 0);
+	public Resource jewel= new Resource("Juwel", 8, 0, 0, 1, 14, 15, 0, 0);
 	
 	
 	public Planet(String name, Solarsystem parent) {
@@ -118,32 +120,35 @@ public class Planet implements Generetable, Observer, Serializable{
  * Mit den einzelnen Methoden wird ein Rohstoff abgearbeitet und dann in dem storage "storagef" eingefuegt"
  * Es wird kontrolliert ob der jeweilige Rohstoff ueberhaupt vorhanden ist durch die "farm" variable
  * Ausserdem wird sichergestellt das man nicht mehr farmen kann als vorhanden
+ * 
+ * *****01.03******
+ * der farm wird abgebaut * der aktuellen forschungstand
  */
 	public void mineBronze() {
 		if(this.bronze.farm > 0) {
-			this.bronze.farm -= 1;
-			this.bronze.storagef += 1;
+			this.bronze.farm -= 1 * spacestation.modulePoint;
+			this.bronze.storagef += 1 * spacestation.modulePoint;	
 		}
 	}
 	
 	public void mineSilver() {
 		if(this.silver.farm > 0) {
-			this.silver.farm -= 1;
-			this.silver.storagef += 1;
+			this.silver.farm -= 1* spacestation.modulePoint;
+			this.silver.storagef += 1 * spacestation.modulePoint;
 		}
 	}
 	
 	public void mineGold() {
 		if(this.gold.farm > 0) {
-			this.gold.farm -= 1;
-			this.gold.storagef += 1;
+			this.gold.farm -= 1 * spacestation.modulePoint;
+			this.gold.storagef += 1 * spacestation.modulePoint;
 		}
 	}
 	
 	public void mineJewel() {
 		if(this.jewel.farm > 0) {
-			this.jewel.farm -= 1;
-			this.jewel.storagef += 1;
+			this.jewel.farm -= 1 * spacestation.modulePoint;
+			this.jewel.storagef += 1 * spacestation.modulePoint;
 		}
 	}
 	
