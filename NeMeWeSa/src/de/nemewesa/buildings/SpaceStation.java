@@ -10,6 +10,7 @@ public class SpaceStation {
 	
 	public String name;
 
+	public ArrayList<String> warehouse;
 	public int researchPoint;
 	public int modulePoint;
 	public int bank;
