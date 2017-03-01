@@ -61,7 +61,7 @@ public class App {
 		player.setHomeSolarsystem(level.getSector(0).getSolarsystem(0));
 		player.addOwnership(player.getHomePlanet());
 		
-		player.getHomePlanet().spacestation = new SpaceStation("SST_001");
+		player.getHomePlanet().spacestation = new SpaceStation("SST_001", player.getHomePlanet());
 	
 		System.out.println(prefix + "Willkommen im NeMeWeSa " + player.getName());
 		if(DEV_MODE)		
@@ -93,44 +93,25 @@ public class App {
 		//console.mainmenu(player);
 		
 		// ROHSTOFFE ABERNTEN UND EINLAGERN
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  Vorkommen : " + player.getCurrentPlanet().bronze.amount);
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  farm: " + player.getCurrentPlanet().bronze.farm);
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  lager: " + player.getCurrentPlanet().bronze.storagef);
-		
-		player.getCurrentPlanet().mineBronze();
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  Vorkommen : " + player.getCurrentPlanet().bronze.amount);
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  farm: " + player.getCurrentPlanet().bronze.farm);
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  lager: " + player.getCurrentPlanet().bronze.storagef);
-		
-		System.out.println("----- UPDATE");
-		player.getCurrentPlanet().spacestation.researching();
-		player.getCurrentPlanet().spacestation.produce();
-		
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  Vorkommen : " + player.getCurrentPlanet().bronze.amount);
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  farm: " + player.getCurrentPlanet().bronze.farm);
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  lager: " + player.getCurrentPlanet().bronze.storagef);
-		
-		player.getCurrentPlanet().mineBronze();
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  Vorkommen : " + player.getCurrentPlanet().bronze.amount);
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  farm: " + player.getCurrentPlanet().bronze.farm);
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + "  lager: " + player.getCurrentPlanet().bronze.storagef);
+
+	
 		
 	
 		// ROHSTOFFE VOM PLANETEN ABHOLEN
-		if(player.getCurrentPlanet().pickupResource(player.getCurrentPlanet().bronze, 7)){
-			
-			System.out.println("Habe BRONZE auf " + player.getCurrentPlanet().name + " abgeholt. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
-			
-		}
-		else{
-			System.out.println("Konnte BRONZE auf " + player.getCurrentPlanet().name + " nicht abholen. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
-		}
-		
-		// LINKEN UND RECHTEN NACHBARPLANETEN ANZEIGEN
-		if(player.getLeftNeighbouringPlanet() != null)
-			System.out.println("Mein linker Nachbarplanet: " + player.getLeftNeighbouringPlanet().name);
-		if(player.getRightNeighbouringPlanet() != null)
-			System.out.println("Mein rechter Nachbarplanet: " + player.getRightNeighbouringPlanet().name);
+//		if(player.getCurrentPlanet().pickupResource(player.getCurrentPlanet().bronze, 7)){
+//			
+//			System.out.println("Habe BRONZE auf " + player.getCurrentPlanet().name + " abgeholt. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
+//			
+//		}
+//		else{
+//			System.out.println("Konnte BRONZE auf " + player.getCurrentPlanet().name + " nicht abholen. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
+//		}
+//		
+//		// LINKEN UND RECHTEN NACHBARPLANETEN ANZEIGEN
+//		if(player.getLeftNeighbouringPlanet() != null)
+//			System.out.println("Mein linker Nachbarplanet: " + player.getLeftNeighbouringPlanet().name);
+//		if(player.getRightNeighbouringPlanet() != null)
+//			System.out.println("Mein rechter Nachbarplanet: " + player.getRightNeighbouringPlanet().name);
 		
 //		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
 //		System.out.println("Der Index: " + currPlanetIndex);
