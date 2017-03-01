@@ -11,7 +11,7 @@ import de.nemewesa.level.Resource;
 
 public class App {
 	
-	public static final int PLAYER_AP = 20;
+	public static final int PLAYER_AP = 100;
 	// Legt fest, ob Statusinformationen angezeigt werden sollen.
 	public static final boolean DEV_MODE = false;
 	
@@ -98,6 +98,8 @@ public class App {
 		console.mainmenu();
 		
 //		// ROHSTOFFE ABERNTEN UND EINLAGERN
+//		System.out.println("BRONZE VORKOMMEN " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.amount);
+//		
 //		player.getCurrentPlanet().mineBronze();
 //		player.getCurrentPlanet().mineBronze();
 //		player.getCurrentPlanet().mineBronze();
@@ -105,7 +107,9 @@ public class App {
 //		player.getCurrentPlanet().mineBronze();
 //		player.getCurrentPlanet().mineBronze();
 //		
-//		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+//		System.out.println("BRONZE auf LAGER " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+//		
+		
 //		
 //		// ROHSTOFFE VOM PLANETEN ABHOLEN
 //		if(player.getCurrentPlanet().pickupResource(player.getCurrentPlanet().bronze, 7)){

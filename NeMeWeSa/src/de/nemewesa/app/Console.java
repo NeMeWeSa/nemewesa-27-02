@@ -109,7 +109,7 @@ public class Console {
 	}
 	
 	public void logout(){
-		System.out.println("Verlasse das Spiel...");
+		System.out.println("[NeMeWeSa] " + player.getName() + " hat das Spiel verlassen.");
 	}
 	
 	public void move(){
@@ -118,20 +118,20 @@ public class Console {
 		
 		if(player.getLeftNeighbouringPlanet() != null){
 			menu.menuitems.add(
-					new Menuitem(player.getLeftNeighbouringPlanet().name){
-						public void execute(){
-							player.move(player.getLeftNeighbouringPlanet());
-							actions();
-						}});
+				new Menuitem(player.getLeftNeighbouringPlanet().name){
+					public void execute(){
+						player.move(player.getLeftNeighbouringPlanet());
+						actions();
+					}});
 		}
 		
 		if(player.getRightNeighbouringPlanet() != null){
 			menu.menuitems.add(
-					new Menuitem(player.getRightNeighbouringPlanet().name){
-						public void execute(){
-							player.move(player.getRightNeighbouringPlanet());
-							actions();
-						}});
+				new Menuitem(player.getRightNeighbouringPlanet().name){
+					public void execute(){
+						player.move(player.getRightNeighbouringPlanet());
+						actions();
+					}});
 		}
 		
 		menu.menuitems.add(
@@ -197,43 +197,6 @@ public class Console {
 			}
 		}
 		
-		
-		
-		System.out.println("");
-		
 	}
 
 }
-
-// NOTIZEN
-// TODO Command Pattern ansehen
-/*
-
-// INTERFACE
-interface Movable  {
-
-	Player player;
-		
-	public void move( Player player );
-
-}
-
-// ANONYME KLASSE
-new Movable() {
-	public void move( Player player ) {
-		drive();
-	}
-	public void move( Spaceship ship) {
-		takeOff();
-		fly();
-		land();
-	}
-};
-
-
-// Console richtig implementiert 
-print(return String);
-
-readLine (return String);
-
-*/
