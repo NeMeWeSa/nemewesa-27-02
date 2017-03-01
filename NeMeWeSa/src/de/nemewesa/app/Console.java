@@ -17,43 +17,32 @@ public class Console {
 	}
 	
 	public void mainmenu(){
-
-		while(true){
-
-			System.out.println("[NeMeWeSa] Treffe eine Wahl > ");
-			System.out.println("[NeMeWeSa] 1. Aktionen | 2. Hilfe | 3. Logout > ");
-
-			try
-			{
-				int decision = scanner.nextInt();
-				if(decision >= 1 && decision <= 3){
-					switch(decision){
-
-					case 1:	actions();
-					return;
-
-					case 2:	help();
-					return;
-					
-					case 3:	logout();
-					return;
-
-					//case "q":	return;
-
-					default:
-						System.out.println("[NeMeWeSa] Ungueltige Wahl");
-					}
-				}
-				else{
-					System.out.println("UNGUELTIGE ZAHL, BITTE NOCHMAL VERSUCHEN");
-				}				
-			}
-			catch (java.util.InputMismatchException exception)
-			{
-				System.out.println("BITTE NUR ZAHLEN EINGEBEN");
-				scanner.next();
-			}
-		}
+		
+		menu = new Menu();
+		
+		menu.menuitems.add(
+				new Menuitem("Aktionen"){
+					public void execute(){
+						actions();
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Hilfe"){
+					public void execute(){
+						help();
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Logout"){
+					public void execute(){
+						logout();
+					}});
+		
+		System.out.println("[Hauptmenu] Treffe eine Wahl > ");
+		
+		createMenu(menu);
+		
+		
 	}	
 
 	
@@ -63,29 +52,29 @@ public class Console {
 		
 		menu.menuitems.add(
 				new Menuitem("Umsehen"){
-					public void execute(	){
+					public void execute(){
 						showEnvironment();
 					}});	
 		
 		menu.menuitems.add(
 				new Menuitem("Bauen"){
-					public void execute(	){
+					public void execute(){
 						build();
 					}});			
 
 		menu.menuitems.add(
 				new Menuitem("Reisen"){
-					public void execute(	){
+					public void execute(){
 						move();
 					}});	
 		
 		menu.menuitems.add(
 				new Menuitem("Hauptmenu"){
-					public void execute(	){
+					public void execute(){
 						mainmenu();
 					}});	
 
-		System.out.println("[NeMeWeSa] Was moechtest Du tun " + player.getName() + "?");
+		System.out.println("[Aktionen] Was moechtest Du tun " + player.getName() + "?");
 		
 		createMenu(menu);
 
@@ -130,7 +119,7 @@ public class Console {
 		if(player.getLeftNeighbouringPlanet() != null){
 			menu.menuitems.add(
 					new Menuitem(player.getLeftNeighbouringPlanet().name){
-						public void execute(	){
+						public void execute(){
 							player.move(player.getLeftNeighbouringPlanet());
 							actions();
 						}});
@@ -139,7 +128,7 @@ public class Console {
 		if(player.getRightNeighbouringPlanet() != null){
 			menu.menuitems.add(
 					new Menuitem(player.getRightNeighbouringPlanet().name){
-						public void execute(	){
+						public void execute(){
 							player.move(player.getRightNeighbouringPlanet());
 							actions();
 						}});
@@ -147,11 +136,11 @@ public class Console {
 		
 		menu.menuitems.add(
 			new Menuitem("Hauptmenu"){
-				public void execute(	){
+				public void execute(){
 					mainmenu();
 				}});
 
-		System.out.println("[NeMeWeSa] Zu welchen Nachbarplaneten moechtest Du reisen " + player.getName() + "?");
+		System.out.println("[Reisen] Zu welchen Nachbarplaneten moechtest Du reisen " + player.getName() + "?");
 		
 		createMenu(menu);
 		
@@ -163,14 +152,14 @@ public class Console {
 		
 		menu.menuitems.add(
 				new Menuitem("Umgebung anzeigen"){
-					public void execute(	){
+					public void execute(){
 						player.showEnvironment();
 					}});
 		
 		menu.menuitems.add(
 				
 				new Menuitem("Weitere Optionen"){
-					public void execute(	){
+					public void execute(){
 						actions();
 					}});		
 		
@@ -183,7 +172,7 @@ public class Console {
 		int i = 0;
 		
 		for(Menuitem item : menu.menuitems){
-			System.out.println("[NeMeWeSa] " + ++i + ". " + item.desc + " > ");
+			System.out.println("[Option] " + ++i + ". " + item.desc + " > ");
 		}
 		
 		while(true){
@@ -207,6 +196,10 @@ public class Console {
 				scanner.next();
 			}
 		}
+		
+		
+		
+		System.out.println("");
 		
 	}
 
