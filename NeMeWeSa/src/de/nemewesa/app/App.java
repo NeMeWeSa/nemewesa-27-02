@@ -5,6 +5,7 @@ import java.util.Timer;
 import de.nemewesa.character.Player;
 import de.nemewesa.db.DB;
 import de.nemewesa.level.Level;
+import de.nemewesa.level.Path;
 
 
 public class App {
@@ -24,6 +25,7 @@ public class App {
 	public static void main(String[] args)  {
 		App app = new App();
 		app.init();
+		app.pathTest();
 	}
 	
 	public void init(){
@@ -193,6 +195,17 @@ public class App {
 		System.out.println("RedAlien Health = "+ redAlien.enemyHealth);
 		System.out.println("Ist Luna erobert " + luna.captured);
 */
+		
+	}
+	
+	public void pathTest(){
+		Path path1 = new Path();
+		path1.addAsteroid();
+		path1.showPath();
+		path1.howToMove();
+	}
+	
+	public void asteroidTest(){
 		
 	}
 

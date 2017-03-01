@@ -1,13 +1,22 @@
 package de.nemewesa.level;
 
-public class Asteroid {
+import de.nemewesa.helper.Helper;
+import java.util.*;
+import de.nemewesa.character.Player;
+import de.nemewesa.app.App;
+import de.nemewesa.level.Generetable;
+import de.nemewesa.level.Planet;
+import de.nemewesa.level.Solarsystem;
+import de.nemewesa.level.Path;
+
+public class Asteroid implements Generetable{
 
 	public String name;
 	public int damage;
 	
-	public Asteroid(String name, int damage){
-		this.name = name;
-		this.damage = damage;
+	public Asteroid(){
+		this.name = generateName();
+		this.damage = Helper.random(1, 5);
 	}
 	
 	//Getter
@@ -20,23 +29,40 @@ public class Asteroid {
 	}
 	
 	//Setter
-	public void setName(String name){
-		String[] form1 ={"tre","tzu","dir","mi","do","re","sol","fa","man","yuh"};
+	public String generateName(){
+		String[] form1 ={"Tre","Tzu","Dir","Mi","Do","Re","Sol","Fa","Man","Yuh"};
 		String[] form2 ={"las","wus","gas","gis","nos","los","mus","bis","fios","mios"};
-		int random = (int)(Math.random()*10);
-		name = form1[random];
-		random = (int)(Math.random()*10);
-		name = name+""+form2[random];
-		System.out.println(name);
-		this.name = name;
+
+		String name1 = form1[Helper.random(0, form1.length)];
+		String name2 = form2[Helper.random(0, form2.length)];
+		String name = name1 + name2;
+
+		return name;
+	}
+	
+	public String toString(){
+		return "Asteroid's name: "+this.name+"\nDamage = -"+this.damage+" AP";
 	}
 	
 	//Schaden verursachen
-	public void collision(int damage){
+	public void causeDamage(int damage){
 		int x =0;
-	    x = 5+ (int)(Math.random()*(10-5)+1);
+	    x = Helper.random(1, 5);
 	    damage = x;
 	    this.damage = damage;
+	}
+
+	@Override
+	public void generate(int element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void printChildren() {
+		// TODO Auto-generated method stub
+		
 	}		
 }
+
    
