@@ -40,7 +40,7 @@ public class SpaceStation implements Generetable{
 	public void produce() {
 		if(this.bank >= 50) {
 			this.bank -= 50;
-			this.modulePoint = modulePoint * researchPoint;
+			this.modulePoint += 1;
 		}		
 	}	
 /*

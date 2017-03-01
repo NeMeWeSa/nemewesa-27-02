@@ -62,7 +62,7 @@ public class App {
 		player.setHomeSolarsystem(level.getSector(0).getSolarsystem(0));
 		player.addOwnership(player.getHomePlanet());
 		
-		player.getHomePlanet().spacestation = new SpaceStation("SST_001");
+		player.getHomePlanet().spacestation = new SpaceStation("SST_001", player.getHomePlanet());
 
 		System.out.println(prefix + "Willkommen im NeMeWeSa " + player.getName());
 		if(DEV_MODE)		
