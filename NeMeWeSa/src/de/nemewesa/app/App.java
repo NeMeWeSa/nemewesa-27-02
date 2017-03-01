@@ -254,9 +254,9 @@ public class App {
 	}
 
 	public void pathTest(){
-		Path path1 = new Path();
-		path1.addAsteroid();
-		path1.showPath();
-		path1.howToMove();
+//		Path path1 = new Path();
+//		path1.addAsteroid();
+//		path1.showPath();
+//		path1.howToMove();
 	}
 }
