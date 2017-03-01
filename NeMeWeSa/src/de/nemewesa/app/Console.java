@@ -3,117 +3,96 @@ package de.nemewesa.app;
 import java.util.Scanner;
 
 import de.nemewesa.character.Player;
+import de.nemewesa.menu.Menu;
+import de.nemewesa.menu.Menuitem;
 
 public class Console {
 
 	Scanner scanner = new Scanner(System.in);
+	Menu menu;
+	Player player;
 	
-	public void mainmenu(Player player){
-
-		while(true){
-
-			System.out.println("[NeMeWeSa] Treffe eine Wahl > ");
-			System.out.println("[NeMeWeSa] 1. Aktionen | 2. Hilfe | 3. Logout > ");
-
-			try
-			{
-				int decision = scanner.nextInt();
-				if(decision >= 1 && decision <= 3){
-					switch(decision){
-
-					case 1:	actions(player);
-					return;
-
-					case 2:	help(player);
-					return;
-					
-					case 3:	logout(player);
-					return;
-
-					//case "q":	return;
-
-					default:
-						System.out.println("[NeMeWeSa] Ungueltige Wahl");
-					}
-				}
-				else{
-					System.out.println("UNGUELTIGE ZAHL, BITTE NOCHMAL VERSUCHEN");
-				}				
-			}
-			catch (java.util.InputMismatchException exception)
-			{
-				System.out.println("BITTE NUR ZAHLEN EINGEBEN");
-				scanner.next();
-			}
-		}
+	public Console(Player player){
+		this.player = player;
+	}
+	
+	public void mainmenu(){
+		
+		menu = new Menu();
+		
+		menu.menuitems.add(
+				new Menuitem("Aktionen"){
+					public void execute(){
+						actions();
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Hilfe"){
+					public void execute(){
+						help();
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Logout"){
+					public void execute(){
+						logout();
+					}});
+		
+		System.out.println("[Hauptmenu] Treffe eine Wahl > ");
+		
+		createMenu(menu);
+		
+		
 	}	
 
 	
-	public void actions(Player player){
+	public void actions(){
+		
+		menu = new Menu();
+		
+		menu.menuitems.add(
+				new Menuitem("Umsehen"){
+					public void execute(){
+						showEnvironment();
+					}});	
+		
+		menu.menuitems.add(
+				new Menuitem("Bauen"){
+					public void execute(){
+						build();
+					}});			
 
-		while(true){
+		menu.menuitems.add(
+				new Menuitem("Reisen"){
+					public void execute(){
+						move();
+					}});	
+		
+		menu.menuitems.add(
+				new Menuitem("Hauptmenu"){
+					public void execute(){
+						mainmenu();
+					}});	
 
-			System.out.println("[NeMeWeSa] Was moechtest Du tun " + player.getName() + "?");
-			System.out.println("[NeMeWeSa] 1. Umsehen > ");
-			System.out.println("[NeMeWeSa] 2. Bauen > ");
-			System.out.println("[NeMeWeSa] 3. Reisen > ");
-			System.out.println("[NeMeWeSa] 4. Hauptmenu > ");
-			
-			try
-			{
-				int decision = scanner.nextInt();
-				if(decision >= 1 && decision <= 4){
-					switch(decision){
+		System.out.println("[Aktionen] Was moechtest Du tun " + player.getName() + "?");
+		
+		createMenu(menu);
 
-					case 1:	showEnvironment(player);
-					return;
-
-					case 2:	build(player);
-					return;
-
-					case 3:	move(player);
-					return;
-
-					case 4:	mainmenu(player);
-					return;
-					//case "q":	return;
-
-					default:
-						System.out.println("[NeMeWeSa] Ungueltige Wahl");
-					}
-				}
-				else{
-					System.out.println("UNGUELTIGE ZAHL, BITTE NOCHMAL VERSUCHEN");
-				}				
-			}
-			catch (java.util.InputMismatchException exception)
-			{
-				System.out.println("BITTE NUR ZAHLEN EINGEBEN");
-				scanner.next();
-			}
-		}
 	}
 	
-	public void showEnvironment(Player player){
-		System.out.println("Dein aktueller Planet > " + player.getCurrentPlanet().name);
-		System.out.println("Dein aktuelles Sonnensystem > " + player.getCurrentPlanet().parent.name);
-		System.out.println("Dein aktueller Sektor > " + player.getCurrentPlanet().parent.parent.name + "\n");
-		actions(player);
+	public void showEnvironment(){
+		player.showEnvironment();
+		actions();
 	}
 	
-	public void build(Player player){
+	public void build(){
 		System.out.println("Baue...");
-		actions(player);
+		actions();
 	}
 	
-	public void move(Player player){
-		System.out.println("Bewege mich...");
-		actions(player);
-	}
-	
-	public void help(Player player){
+	public void help(){
 		System.out.println("Helfe...");
-		mainmenu(player);
+		mainmenu();
 	}	
 
 	public Login login(){
@@ -129,31 +108,130 @@ public class Console {
 
 	}
 	
-	public void logout(Player player){
+	public void logout(){
 		System.out.println("Verlasse das Spiel...");
+	}
+	
+	public void move(){
+		
+		menu = new Menu();
+		
+		if(player.getLeftNeighbouringPlanet() != null){
+			menu.menuitems.add(
+					new Menuitem(player.getLeftNeighbouringPlanet().name){
+						public void execute(){
+							player.move(player.getLeftNeighbouringPlanet());
+							actions();
+						}});
+		}
+		
+		if(player.getRightNeighbouringPlanet() != null){
+			menu.menuitems.add(
+					new Menuitem(player.getRightNeighbouringPlanet().name){
+						public void execute(){
+							player.move(player.getRightNeighbouringPlanet());
+							actions();
+						}});
+		}
+		
+		menu.menuitems.add(
+			new Menuitem("Hauptmenu"){
+				public void execute(){
+					mainmenu();
+				}});
+
+		System.out.println("[Reisen] Zu welchen Nachbarplaneten moechtest Du reisen " + player.getName() + "?");
+		
+		createMenu(menu);
+		
+	}
+	
+	public void dynmenu(){
+		
+		menu = new Menu();
+		
+		menu.menuitems.add(
+				new Menuitem("Umgebung anzeigen"){
+					public void execute(){
+						player.showEnvironment();
+					}});
+		
+		menu.menuitems.add(
+				
+				new Menuitem("Weitere Optionen"){
+					public void execute(){
+						actions();
+					}});		
+		
+		createMenu(menu);
+		
+	}
+	
+	public void createMenu(Menu menu){
+		
+		int i = 0;
+		
+		for(Menuitem item : menu.menuitems){
+			System.out.println("[Option] " + ++i + ". " + item.desc + " > ");
+		}
+		
+		while(true){
+			
+			try
+			{
+				int decision = scanner.nextInt();
+				if(decision >= 1 && decision <= menu.menuitems.size()){
+					
+					menu.menuitems.get(decision-1).execute();
+					break;
+					
+				}
+				else{
+					System.out.println("UNGUELTIGE WAHL, BITTE NOCHMAL VERSUCHEN");
+				}				
+			}
+			catch (java.util.InputMismatchException exception)
+			{
+				System.out.println("BITTE NUR ZAHLEN EINGEBEN");
+				scanner.next();
+			}
+		}
+		
+		
+		
+		System.out.println("");
+		
 	}
 
 }
 
-// CHECK
+// NOTIZEN
+// TODO Command Pattern ansehen
 /*
 
+// INTERFACE
 interface Movable  {
 
-
 	Player player;
-	
+		
 	public void move( Player player );
+
 }
 
+// ANONYME KLASSE
 new Movable() {
-	public void move( Player player ) {}
+	public void move( Player player ) {
+		drive();
+	}
 	public void move( Spaceship ship) {
-//		egerger
-//		eggr
+		takeOff();
+		fly();
+		land();
 	}
 };
 
+
+// Console richtig implementiert 
 print(return String);
 
 readLine (return String);

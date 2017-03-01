@@ -7,6 +7,10 @@ import de.nemewesa.app.App;
 import de.nemewesa.level.Generetable;
 import de.nemewesa.level.Planet;
 import de.nemewesa.level.Solarsystem;
+//import de.nemewesa.app.App;
+import de.nemewesa.level.Generetable;
+import de.nemewesa.level.Planet;
+//import de.nemewesa.level.Solarsystem;
 import de.nemewesa.level.Asteroid;
 
 public class Path implements Generetable{
@@ -15,7 +19,8 @@ public class Path implements Generetable{
 	public ArrayList<Asteroid>asteroids = new ArrayList<>();
 	public Asteroid asteroid;
 	public Player player;
-	
+
+	public Planet planet;
 	public Planet planetW;
 	public Planet planetE;
 	
@@ -32,8 +37,9 @@ public class Path implements Generetable{
 	//Konstruktor
 	public Path(){
 		this.name = generateName();
-		this.width = Helper.random(3, 5);
-		this.distance = Helper.random(7,15);
+
+		this.width = Helper.random(3, 7);
+		this.distance = Helper.random(10,15);
 		
 		nblin = width;  //Anzahl der Reihen
 		nbcol = distance;  //Anzahl der Spalten
@@ -86,8 +92,9 @@ public class Path implements Generetable{
 		this.distance = Helper.random(7,15);
 	}
 	
+	
 	public void setWidth(){
-		this.width = Helper.random(3,5);
+		this.width = Helper.random(3,7);
 	}
 	
 	public String toString(){
@@ -96,11 +103,20 @@ public class Path implements Generetable{
 	
 	//Asteroiden aufm Weg hinzufuegen
 	public void addAsteroid(){
+		System.out.println("Welcome to the path");
+		System.out.println(toString()+"\n");
+//		System.out.print("You can go to ");
+//		if (planetE != null) System.out.print("East ");
+//		if (planetW != null) System.out.print("West ");
+//		System.out.println(".");
+//		Scanner sc1 = new Scanner(System.in);
+//		char d = sc1.nextLine().charAt(0);
 		
-		for (int i=0;i<path.length;i++){
-			for (int j=0; j<path.length;j++){
-				path[0][0] = 'P'; // P ist der Spieler(Player)
-			int random = Helper.random(0, 3);
+
+		for (int i=0; i<this.width; i++){
+			for (int j=0; j<this.distance; j++){
+				path[0][0] = 'P'; // setzt den Spieler(P) immer auf index [0][0].
+			int random = Helper.random(0, 5);
 			switch(random){
 			case 0: path[i][j] = 'A'; break;
 			case 1: path[i][j] = ' '; break;
@@ -109,12 +125,6 @@ public class Path implements Generetable{
 			}
 		}
 	}
-		System.out.println("\nWelcome to the path");
-		System.out.println(toString()+"\n");
-		System.out.print("You can go to ");
-		if (getPlanetE() != null) System.out.print("East ");
-		if (getPlanetW() != null) System.out.print("West ");
-		System.out.println(".");
 		System.out.println();
   }
 	public void showPath(){
@@ -126,7 +136,8 @@ public class Path implements Generetable{
 			}
 			System.out.println(" | ");
 		}
-		System.out.println("--------------------------------------------------------\n");
+
+		System.out.print("--------------------------------------------------------\n");
 	}
 	
 	public void howToMove(){
@@ -141,36 +152,37 @@ public class Path implements Generetable{
 		
 		try{
 			while(true){
-			Scanner sc1 = new Scanner(System.in);
-			char m = sc1.nextLine().charAt(0);
+
+			Scanner sc2 = new Scanner(System.in);
+			char m = sc2.nextLine().charAt(0);
 			switch (m){
-			case '8' : 
+			case '8' :
 				if (moveUp() == 1) break;
-			       else if(moveUp() == 2){
+			        else if(moveUp() == 2){
 				       System.out.println("ohh you collided with "+this.asteroid.toString());
 				       System.out.println("your AP is now "+(this.player.getAp() - this.asteroid.getDamage()));
-			       } break;
+			        } break;
 			case '2' :
 				if (moveDown() == 1) break;
-			       else if (moveDown() == 2){
+			        else if (moveDown() == 2){
 				       System.out.println("ohh you collided with "+this.asteroid.toString());
 				       System.out.println("your AP is now "+(this.player.getAp() - this.asteroid.getDamage()));
-			       } break;
+			        } break;
 			case '4' :
 				if (moveLeft() == 1) break;
-			       else if(moveLeft() == 2){
+			       else if (moveLeft() == 2){
 				       System.out.println("ohh you collided with "+this.asteroid.toString());
 				       System.out.println("your AP is now "+(this.player.getAp() - this.asteroid.getDamage()));
 			       } break;
 			case '6' :
-				if (moveRigth() == 1) break;
-			       else if(moveRigth() == 2){
+				if (moveRigth() ==1) break;
+			       else if (moveRigth() == 2){
 				       System.out.println("ohh you collided with "+this.asteroid.toString());
 				       System.out.println("your AP is now "+(this.player.getAp() - this.asteroid.getDamage()));
 			       } break;
 			default : System.out.println("wrong button!!!");
 			
-			sc1.close();
+			sc2.close();
 	        }
 	      }
 		}catch(Exception e){}
@@ -210,12 +222,12 @@ public class Path implements Generetable{
 		for (int i=0;i<nblin;i++){
 			for (int j=0;j<nbcol;j++){
 				if (path[i][j] =='P'){
-					if (path[i][j+1] == ' '){
-					tmp = path[i][j]; //Spieler speichern.
-					path[i][j] = ' '; //alte Position verlassen.
-					path[i][j+1] = tmp; //neu Position.
-					showPath();
-					return 1;
+					if (j+1 <=nbcol && path[i][j+1] == ' '){
+					    tmp = path[i][j]; //Spieler speichern.
+					    path[i][j] = ' '; //alte Position verlassen.
+					    path[i][j+1] = tmp; //neu Position.
+					    showPath();
+					    return 1;
 					}
 					if(j+1 <=nbcol && path[i][j+1] == 'A'){
 						tmp = path[i][j]; 
@@ -226,29 +238,32 @@ public class Path implements Generetable{
 					}
 //					break;
 				  }
-				if (j+1 > nbcol){
+				if (j+1 == this.distance){
 					System.out.println("Welcome to the next planet!!");
 				}
 			}
 		}
 		return 0;
+
   }
 	//Bewegen nach links
 	public int moveLeft(){
 		for (int i=0;i<nblin;i++){
 			for (int j=0;j<nbcol;j++){
 				if (path[i][j] =='P'){
-					if (path[i][j-1] == ' '){
-					tmp = path[i][j]; //Spieler speichern.
-					path[i][j] = ' '; //alte Position verlassen.
-					path[i][j-1] = tmp; //neu Position.
-					showPath();
-					return 1;
+
+					if (j-1>=0 && path[i][j-1] == ' '){
+					    tmp = path[i][j]; //Spieler speichern.
+					    path[i][j] = ' '; //alte Position verlassen.
+					    path[i][j-1] = tmp; //neu Position.
+					    showPath();
+					    return 1;
 					}
 					if(j-1>=0 && path[i][j-1] == 'A'){
 						tmp = path[i][j]; 
 						path[i][j] = ' '; 
-						path[i][j-1] = tmp;
+						path[i][j-1] = tmp; 
+
 						showPath();
 						return 2;
 					}
@@ -267,16 +282,17 @@ public class Path implements Generetable{
 				for (int j=0;j<nbcol;j++){
 					if (path[i][j] =='P'){
 						if (i+1<=nblin && path[i+1][j] == ' '){
-						tmp = path[i][j]; //Spieler speichern.
-						path[i][j] = ' '; //alte Position verlassen.
-						path[i+1][j] = tmp; //neu Position.
-						showPath();
-						return 1;
+
+						   tmp = path[i][j]; //Spieler speichern.
+						   path[i][j] = ' '; //alte Position verlassen.
+						   path[i+1][j] = tmp; //neu Position.
+						   showPath();
+						   return 1;
 						}
 						if(i+1<=nblin && path[i+1][j] == 'A'){
 							tmp = path[i][j]; 
 							path[i][j] = ' '; 
-							path[i+1][j] = tmp;
+							path[i+1][j] = tmp; 
 							showPath();
 							return 2;
 						}

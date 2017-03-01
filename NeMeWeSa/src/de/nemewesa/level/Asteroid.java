@@ -53,7 +53,6 @@ public class Asteroid implements Generetable{
 	    damage = x;
 	    this.damage = damage;
 	}
-	
 
 	@Override
 	public void generate(int element) {
@@ -67,4 +66,5 @@ public class Asteroid implements Generetable{
 		
 	}		
 }
+
    
