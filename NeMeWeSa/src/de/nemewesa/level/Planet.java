@@ -25,7 +25,9 @@ public class Planet implements Generetable, Observer, Serializable{
 	public Solarsystem parent;
 	public SpaceStation spacestation = null;
 	public String[] firstname = {"Ben", "Pe", "To", "Jau", "Ja", "Ter", "Masz", "Res", "Min", "Ro", "Sen", "Ta", "Bue", "Ur", "Ban", "Iak", "Dzi", "Ko", "Wi", "Cki"};
-
+	public Path pathLeft;
+	public Path pathRight;
+	
 /* 
  * wenn das raumschiff zb. 10 plaetze frei hat
  * laesst sich ueber den space festlegen wieviel man tragen kann
@@ -207,6 +209,24 @@ public class Planet implements Generetable, Observer, Serializable{
 		
 		return false;
 	}
+	
+	public Planet getLeftNeighbouringPlanet(){
+		
+		if(this.parent.getPlanetIndex(this) > 0){
+			return this.parent.getPlanet(
+					this.parent.getPlanetIndex(this) -1);
+		}
+		return null;
+	}
+	
+	public Planet getRightNeighbouringPlanet(){
+		
+		if(this.parent.getPlanetIndex(this) < (this.parent.getPlanets().size() - 1)){
+			return this.parent.getPlanet(
+					this.parent.getPlanetIndex(this) +1);
+		}
+		return null;
+	}
 
 	@Override
 	public String getName() {
@@ -219,11 +239,30 @@ public class Planet implements Generetable, Observer, Serializable{
 	@Override
 	public void generate(int element) {
 		
+		// PLANETEN MIT PFADEN VERKNUEPFEN
+		
+		// ERSTER PLANET VON LINKS ( LINKER PLANET )
+		if(this.getLeftNeighbouringPlanet() == null){
+			this.pathLeft = null;
+			this.pathRight = new Path();
+		}
+		// MITTLERE PLANETEN
+		else if(this.getLeftNeighbouringPlanet() != null && (this.parent.getPlanetIndex(this) < (this.parent.getPlanets().size() - 1))){
+			this.pathLeft = this.getLeftNeighbouringPlanet().pathRight;
+			this.pathRight = new Path();
+		}
+		// LETZER PLANET VON LINKS ( RECHTER PLANET )
+		else{
+			this.pathLeft = this.getLeftNeighbouringPlanet().pathRight;
+			this.pathRight = null;
+		}
+		
 	}
 
 	@Override
 	public void printChildren() {
-
+		System.out.println("Linker Pfad: " + this.pathLeft);
+		System.out.println("Rechter Pfad: " + this.pathRight);		
 	}
 /*
  * ZUFaeLLIGE PLANETENNAMEN ERSTELLUNG

@@ -39,7 +39,7 @@ public class Path implements Generetable{
 		this.name = generateName();
 
 		this.width = Helper.random(3, 7);
-		this.distance = Helper.random(10,15);
+		this.distance = Helper.random(1,9);
 		
 		nblin = width;  //Anzahl der Reihen
 		nbcol = distance;  //Anzahl der Spalten

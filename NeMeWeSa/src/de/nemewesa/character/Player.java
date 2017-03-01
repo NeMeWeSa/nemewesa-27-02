@@ -38,20 +38,30 @@ public class Player implements Observer, Serializable{
 	
 	public String toString(){
 		String info = "";
+		
+		// SPIELER
 		info += "[Spieler] Du hast " + this.ap + " Aktionspunkte \n";
 		info += "[Spieler] Du befindest dich auf dem Planeten " + this.currentPlanet.name + ".\n";
 		info += "[Spieler] " + this.homePlanet.name + " ist dein Heimatplanet.\n";
 		info += "[Spieler] Dein Heimat-Solarsystem ist der " + this.homeSolarsystem.name + ".\n";
+		
+		// RAUMSTATION
 		if(this.currentPlanet.spacestation != null){
 			info += "[Raumstation] Auf diesem Planeten befindet sich die Raumstation " 
 					+ this.currentPlanet.spacestation.name + "\n";
 		}
 		
-		// NACHBARPLANETEN
-		if(this.getLeftNeighbouringPlanet() != null)
+		// NACHBARPLANETEN UND PFADE
+		// LINKS
+		if(this.getLeftNeighbouringPlanet() != null){
 			info += "[Planet] Dein linker Nachbarplanet ist der " + this.getLeftNeighbouringPlanet().name +"\n";
-		if(this.getRightNeighbouringPlanet() != null)
+			info += "[Pfad] und ist ueber den Pfad " + this.currentPlanet.pathLeft.name + " (" + this.currentPlanet.pathLeft.distance + ") erreichbar \n";
+		}
+		// RECHTS
+		if(this.getRightNeighbouringPlanet() != null){
 			info += "[Planet] Dein rechter Nachbarplanet ist der " + this.getRightNeighbouringPlanet().name +"\n";
+			info += "[Pfad] und ist ueber den Pfad " + this.currentPlanet.pathRight.name + " (" + this.currentPlanet.pathRight.distance + ") erreichbar \n";
+		}
 		
 		// PLANETEN IM BESITZT		
 		info += "[Spieler] Dein Besitz >> \n";
@@ -142,7 +152,10 @@ public class Player implements Observer, Serializable{
 	}	
 	
 	public void move(Planet planet){
-		this.currentPlanet = planet;
+		if(this.ap >= 1){
+			this.currentPlanet = planet;
+			this.ap--;
+		}
 	}
 	
 	public void save(String filename){
