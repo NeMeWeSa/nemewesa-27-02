@@ -12,7 +12,6 @@ import de.nemewesa.level.Resource;
 
 public class App {
 	
-	public static final int PLAYER_AP = 100;
 	// Legt fest, ob Statusinformationen angezeigt werden sollen.
 	public static final boolean DEV_MODE = false;
 	
@@ -26,8 +25,8 @@ public class App {
 
 	public static void main(String[] args)  {
 		App app = new App();
-//		app.init();
-		app.pathTest();
+		app.init();
+		//app.pathTest();
 	}
 	
 	public void init(){

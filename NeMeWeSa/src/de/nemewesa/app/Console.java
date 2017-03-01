@@ -146,27 +146,6 @@ public class Console {
 		
 	}
 	
-	public void dynmenu(){
-		
-		menu = new Menu();
-		
-		menu.menuitems.add(
-				new Menuitem("Umgebung anzeigen"){
-					public void execute(){
-						player.showEnvironment();
-					}});
-		
-		menu.menuitems.add(
-				
-				new Menuitem("Weitere Optionen"){
-					public void execute(){
-						actions();
-					}});		
-		
-		createMenu(menu);
-		
-	}
-	
 	public void createMenu(Menu menu){
 		
 		int i = 0;

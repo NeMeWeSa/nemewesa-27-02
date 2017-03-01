@@ -28,7 +28,7 @@ public class Player implements Observer, Serializable{
 	private ArrayList<Generetable> ownership = new ArrayList<>();
 	private Round round;
 	
-	private int ap = App.PLAYER_AP;
+	private int ap = 100;
 	
 	public Player(String name){
 		this.name = name;
@@ -110,6 +110,10 @@ public class Player implements Observer, Serializable{
 	public int getAp() {
 		return ap;
 	}
+	
+	public void setAp(int ap) {
+		this.ap = ap;
+	}
 
 	@Override
 	public void update(int round) {
@@ -157,9 +161,7 @@ public class Player implements Observer, Serializable{
 		if(planet == this.currentPlanet.getLeftNeighbouringPlanet()){
 			System.out.println("LINKS");
 			if(this.ap >= this.currentPlanet.pathLeft.distance){
-				this.currentPlanet.pathLeft.addAsteroid();
-				this.currentPlanet.pathLeft.showPath();
-				this.currentPlanet.pathLeft.howToMove();
+				this.currentPlanet.pathLeft.enterPath(this);
 				this.ap -= this.currentPlanet.pathLeft.distance;
 				this.currentPlanet = planet;
 			}
@@ -171,9 +173,7 @@ public class Player implements Observer, Serializable{
 		else if(planet == this.currentPlanet.getRightNeighbouringPlanet()){
 			System.out.println("RECHTS");
 			if(this.ap >= this.currentPlanet.pathRight.distance){
-				this.currentPlanet.pathRight.addAsteroid();
-				this.currentPlanet.pathRight.showPath();
-				this.currentPlanet.pathRight.howToMove();
+				this.currentPlanet.pathRight.enterPath(this);
 				this.ap -= this.currentPlanet.pathRight.distance;
 				this.currentPlanet = planet;
 			}
