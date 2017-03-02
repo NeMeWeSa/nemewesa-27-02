@@ -7,12 +7,9 @@ import de.nemewesa.buildings.Storage;
 import de.nemewesa.character.Player;
 import de.nemewesa.db.DB;
 import de.nemewesa.level.Level;
-<<<<<<< HEAD
-=======
 import de.nemewesa.level.Path;
 import de.nemewesa.level.Planet;
 import de.nemewesa.level.Resource;
->>>>>>> abe3e64ca6339718d71469f449caf7c5ca3e25cb
 import de.nemewesa.spaceships.Transporter;
 
 
@@ -77,7 +74,7 @@ public class App {
 		player.setHomeSolarsystem(level.getSector(0).getSolarsystem(0));
 		player.addOwnership(player.getHomePlanet());
 		
-		player.getHomePlanet().spacestation = new SpaceStation("SST_001", player.getHomePlanet());
+		//player.getHomePlanet().spacestation = new SpaceStation("SST_001", player.getHomePlanet());
 
 		System.out.println(prefix + "Willkommen im NeMeWeSa " + player.getName());
 		
@@ -148,14 +145,7 @@ public class App {
 		player.getCurrentPlanet().mineGold();
 		player.getCurrentPlanet().mineGold();
 		
-<<<<<<< HEAD
-//		if(true) 
-//			while(true)
-		console.mainmenu();
-				
-		//testTransporter();
-		
-=======
+
 
 //		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
 //		
@@ -175,14 +165,7 @@ public class App {
 //		if(player.getRightNeighbouringPlanet() != null)
 //			System.out.println("Mein rechter Nachbarplanet: " + player.getRightNeighbouringPlanet().name);
 		//(String shipName, String shipType, int maxCapacity, int shipHealth, int shipStrange, int shipFuel, Storage storage, Planet currentPlanet, int currantCapacity)
-		Transporter t1 = new Transporter("donkey", "transporter", 1000, 100, 100, 100, new Storage(), player.getCurrentPlanet(), 0);
 
-
-		System.out.println("APP: " + t1.currentPlanet.gold.storagef);
-		System.out.println("alter Planet " + t1.currentPlanet.name);
-		t1.pickUpGold();
-
->>>>>>> abe3e64ca6339718d71469f449caf7c5ca3e25cb
 		
 
 		//t1.fly();
@@ -216,7 +199,7 @@ public class App {
 //		if(player.getRightNeighbouringPlanet() != null)
 //			System.out.println("Mein rechter Nachbarplanet: " + player.getRightNeighbouringPlanet().name);
 
-		t1.dropDownGold();
+
 
 		
 //		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
@@ -331,24 +314,6 @@ public class App {
 		
 	}
 	
-	public void testTransporter(){
-		
-		Transporter t1 = new Transporter("donkey", "transporter", 1000, 100, 100, 100, new Storage(), player.getCurrentPlanet(), 0);
 
-//		System.out.println("APP: " + t1.currentPlanet.gold.storagef);
-//		System.out.println("alter Planet " + t1.currentPlanet.name);
-		t1.pickUpGold();
-
-		//SpaceStation one = new SpaceStation("One",player.getCurrentPlanet());
-		
-		t1.move(t1.getRightNeighbouringPlanet());
-		System.out.println(t1.currentPlanet.name);
-		
-		t1.DropDownGoldStation(App.getAppInstance().getPlayer().getHomePlanet().spacestation);
-		System.out.println(App.getAppInstance().getPlayer().getHomePlanet().spacestation.gold.amount);
-		
-		t1.dropDownGold();
-		
-	}
 
 }
