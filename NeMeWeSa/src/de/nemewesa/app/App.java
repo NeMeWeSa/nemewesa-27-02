@@ -45,7 +45,7 @@ public class App {
 		//loginUser();
 		createNewLevel(1);
 		//createPlayer(login.name);
-		createPlayer("");
+		createPlayer("");	
 		createConsole(player);
 		loginUser();
 		
