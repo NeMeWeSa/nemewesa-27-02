@@ -23,7 +23,7 @@ public class App {
 	private Login login;
 	private String prefix = "[NeMeWeSa] ";
 	private static final App app = new App();
-	private Timer timer = new Timer();
+	private Timer timer;
 
 	// Singelton Pattern
 	private App(){}
@@ -113,12 +113,13 @@ public class App {
 	}
 	
 	private void setTimer(){
+		timer = new Timer();
 		timer.scheduleAtFixedRate(new RoundTimer(), 2000, 120000);
 	}
 	
 	public void forceNewRound(){
 		timer.cancel();
-		Timer timer = new Timer();
+		timer = new Timer();
 		timer.scheduleAtFixedRate(new RoundTimer(), 50, 120000);
 	}
 
