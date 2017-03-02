@@ -2,6 +2,7 @@ package de.nemewesa.buildings;
 
 import java.util.ArrayList;
 
+import de.nemewesa.app.App;
 import de.nemewesa.level.Generetable;
 import de.nemewesa.level.Planet;
 
@@ -30,18 +31,36 @@ public class SpaceStation implements Generetable{
  */
 	public void researching() {
 		if(this.bank >= 25) {
-			this.bank -= 25;
-			this.researchPoint +=1;	
-		}			
+			if(App.getAppInstance().getPlayer().getAp() >= 10) {
+				this.bank -= 25;
+				this.researchPoint +=1;	
+				App.getAppInstance().getPlayer().setAp(App.getAppInstance().getPlayer().getAp() -10);
+			}
+			else {
+				System.out.println("Keine Aktionspunkte mehr vorhanden");
+			}
+		}
+		else {
+			System.out.println("Zu wenig Geld vorhanden");
+		}
 	}
 /*
  * wenn die bank mehr als 50 einheiten hat, werden diese abgezogen	und man bekommt einen modul punkt
  */
 	public void produce() {
 		if(this.bank >= 50) {
-			this.bank -= 50;
-			this.modulePoint += 1;
-		}		
+			if(App.getAppInstance().getPlayer().getAp() >= 20) {
+				this.bank -= 50;
+				this.modulePoint += 1;
+				App.getAppInstance().getPlayer().setAp(App.getAppInstance().getPlayer().getAp() -20);
+			}
+			else {
+				System.out.println("Keine Aktionspunkte mehr vorhanden");
+			}
+		}	
+		else {
+			System.out.println("Zu wenig Geld vorhanden");
+		}
 	}	
 /*
  * hier werden die gesammelten Ressourcen gegen Einheiten zum einkaufen getauscht
@@ -78,19 +97,16 @@ public class SpaceStation implements Generetable{
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void generate(int element) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void printChildren() {
-		// TODO Auto-generated method stub
 		
 	}
 	
