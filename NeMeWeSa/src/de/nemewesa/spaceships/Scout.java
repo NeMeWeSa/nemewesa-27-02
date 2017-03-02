@@ -1,18 +1,20 @@
 package de.nemewesa.spaceships;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.buildings.Storage;
 import de.nemewesa.character.Enemy;
 import de.nemewesa.level.Planet;
 
 public class Scout extends Transporter{
 	
-	public Scout(String shipName, String shipType, int shipHealth, int shipStrange, int shipFuel, Storage capacity)
-	{
-		super(shipName,shipType, shipHealth, shipStrange, shipFuel, capacity);
+//	public Scout(String shipName, String shipType, int shipHealth, int shipStrange, int shipFuel, Storage capacity)
+//	{
+//		//super(shipName,shipType, shipHealth, shipStrange, shipFuel, capacity);
+//	}
+
+	public Scout(String shipName, String shipType, int maxCapacity, int shipHealth, int shipStrange, int shipFuel,
+			Storage storage, Planet currentPlanet, int currentCapacity) {
+		super(shipName, shipType, maxCapacity, shipHealth, shipStrange, shipFuel, storage, currentPlanet, currentCapacity);
+		// TODO Auto-generated constructor stub
 	}
 
 	public void die()
