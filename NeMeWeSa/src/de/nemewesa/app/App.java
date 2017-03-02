@@ -42,6 +42,21 @@ public class App {
 		if(DEV_MODE)
 			db.createUsersTable();
 		
+	
+		createNewLevel(1);
+		//createPlayer(login.name);
+		createPlayer("Spieler");
+		
+		createConsole(player);
+		loginUser();		
+		setTimer();
+		
+		console.mainmenu();	
+		
+		
+		
+		
+		/*
 		createConsole();
 		loginUser();
 		
@@ -53,9 +68,9 @@ public class App {
 		
 		// Timeout fuer blockierende Spieler
 		setTimer();
-
+	
 		console.mainmenu();	
-		
+		 */		
 		//runTests();
 		
 	}
@@ -84,8 +99,8 @@ public class App {
 	
 	}
 	
-	public void createConsole(){
-		this.console = new Console();
+	public void createConsole(Player player){
+		this.console = new Console(player);
 	}
 	
 	public void loginUser(){
