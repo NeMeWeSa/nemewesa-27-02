@@ -42,14 +42,18 @@ public class App {
 		if(DEV_MODE)
 			db.createUsersTable();
 		
+		createConsole();
+		loginUser();
+		
+		createNewLevel(1);
+		
+		createPlayer(login.name);
+		console.setPlayer(player);
+		//createPlayer("Master");
+		
 		// Timeout fuer blockierende Spieler
 		setTimer();
-		
-		//loginUser();
-		createNewLevel(1);
-		//createPlayer(login.name);
-		createPlayer("Master");
-		createConsole(player);
+
 		console.mainmenu();	
 		
 		//runTests();
@@ -80,8 +84,8 @@ public class App {
 	
 	}
 	
-	public void createConsole(Player player){
-		this.console = new Console(player);
+	public void createConsole(){
+		this.console = new Console();
 	}
 	
 	public void loginUser(){
@@ -114,7 +118,7 @@ public class App {
 	
 	private void setTimer(){
 		timer = new Timer();
-		timer.scheduleAtFixedRate(new RoundTimer(), 2000, 120000);
+		timer.scheduleAtFixedRate(new RoundTimer(), 50, 120000);
 	}
 	
 	public void forceNewRound(){

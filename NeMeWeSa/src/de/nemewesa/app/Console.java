@@ -17,7 +17,8 @@ public class Console {
 	File playerFile = new File("level" + File.separator + Level.level 
 			+ File.separator + "saves" + File.separator + "player.dat");
 	
-	public Console(Player player){
+
+	public void setPlayer(Player player){
 		this.player = player;
 	}
 	
