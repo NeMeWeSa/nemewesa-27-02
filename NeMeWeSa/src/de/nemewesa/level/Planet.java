@@ -186,9 +186,12 @@ public class Planet implements Generetable, Observer, Serializable{
  * dann wird ein viertel  der Einwohner jeweils ein Rohstoff (wenn vorhanden) abarbeiten
  * doch vorsicht ist geboten!!!!!
  * je wertvoller der rohstoff desto weniger kommt ins wirkliche lager an
+ * 
+ * 
+ * NICHT SICHER ob this. noch hier funktioniert
  */
 	public void income() {
-//		if(captured = true) {
+
 			if(this.bronze.farm>0) {
 				if(this.bronze.storage > this.bronze.storagef) {
 					this.bronze.farm -= (int)citizen/4;
@@ -225,8 +228,6 @@ public class Planet implements Generetable, Observer, Serializable{
 					}
 				}
 			}
-//			
-//		}
 	}
 	
 	public boolean pickupResource(Resource res, int amount){

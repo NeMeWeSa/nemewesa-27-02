@@ -3,6 +3,7 @@ package de.nemewesa.app;
 import java.util.Scanner;
 
 import de.nemewesa.character.Player;
+import de.nemewesa.helper.Helper;
 import de.nemewesa.menu.Menu;
 import de.nemewesa.menu.Menuitem;
 
@@ -47,7 +48,12 @@ public class Console {
 	
 	public void farmOre(){
 		
-		menu = new Menu();		
+		menu = new Menu();	
+		System.out.println("######################");
+		System.out.println("#      Erze farmen   #");
+		System.out.println("######################");
+		System.out.println("Deine aktuellen Aktionspunkte: " + App.getAppInstance().getPlayer().getAp() + "\n");
+
 		menu.menuitems.add(
 				new Menuitem("Bronze  (2 AP) \t| Vorhanden: " + player.getCurrentPlanet().bronze.farm +
 						"\t| Im Lager: " + player.getCurrentPlanet().bronze.storagef){
@@ -94,7 +100,8 @@ public class Console {
 	public void actions(){
 		
 		menu = new Menu();
-		
+
+		System.out.println("Deine aktuellen Aktionspunkte: " + App.getAppInstance().getPlayer().getAp() + "\n");
 		menu.menuitems.add(
 				new Menuitem("Umsehen"){
 					public void execute(){
@@ -120,7 +127,14 @@ public class Console {
 						exchange();
 					}});
 		}
+		if(App.getAppInstance().getPlayer().getCurrentPlanet() != App.getAppInstance().getPlayer().getHomePlanet()){
 
+		menu.menuitems.add(
+				new Menuitem("Mond angreifen"){
+					public void execute(){
+						attackMoon();
+					}});
+		}
 		menu.menuitems.add(
 				new Menuitem("Reisen"){
 					public void execute(){
@@ -140,7 +154,9 @@ public class Console {
 	}
 	
 	public void exchange() {
-		
+		System.out.println("######################");
+		System.out.println("#     Auktionshaus   #");
+		System.out.println("######################");
 		menu = new Menu();
 		
 		menu.menuitems.add(
@@ -178,7 +194,7 @@ public class Console {
 		
 		System.out.println("[Auktionshaus] Was moechtest Du eintauschen " + player.getName() + "?\n");
 		System.out.println("Aktueller Kontostand: " + App.getAppInstance().getPlayer().getHomePlanet().spacestation.bank);
-	
+		System.out.println("Deine aktuellen Aktionspunkte: " + App.getAppInstance().getPlayer().getAp() + "\n");
 		
 		createMenu(menu);
 	}
@@ -189,7 +205,9 @@ public class Console {
 	}
 	
 	public void research(){
-		
+		System.out.println("########################");
+		System.out.println("# Entwickeln und bauen #");
+		System.out.println("########################");
 		menu = new Menu();
 		
 		menu.menuitems.add(
@@ -219,6 +237,43 @@ public class Console {
 		mainmenu();
 	}	
 
+	public void attackMoon() {
+		System.out.println("######################");
+		System.out.println("#  Mond attackieren  #");
+		System.out.println("######################");
+		System.out.println("Dieser Mond heisst: " + App.getAppInstance().getPlayer().getCurrentPlanet().moon.getName());
+		System.out.println("Er wird vom Monster: " + App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getName() + " bewacht");
+		
+		System.out.println();
+		menu = new Menu();
+		
+		System.out.println("Deine aktuellen Aktionspunkte: " + App.getAppInstance().getPlayer().getAp() + "\n");
+		System.out.println("Fuer die Reise zum Mond werden dir 20 AP abgezogen.");
+		System.out.println("High Risk = High reward!!");
+		System.out.println("Solltest du " + App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getName() + " besiegen so gehoert Dir der Planet " 
+		+ App.getAppInstance().getPlayer().getCurrentPlanet().getName() + "!");
+		System.out.println("Solltest du aber scheitern " + App.getAppInstance().getPlayer().getName() + ", verlierst du diese Runde\n");
+
+		if(App.getAppInstance().getPlayer().getAp() >= 20) {
+			System.out.println("Deine restlichen " + (App.getAppInstance().getPlayer().getAp() - 20) + " AP sind deine Kampfenergie");
+			
+			menu.menuitems.add(
+			new Menuitem("Kaempfen"){
+				public void execute(){
+					fight();
+				}});
+		}
+				
+		
+		menu.menuitems.add(
+				new Menuitem("Nicht kaempfen"){
+					public void execute(){
+						actions();
+					}});
+		
+		createMenu(menu);
+		
+	}
 	public Login login(){
 
 		//scanner = new Scanner(System.in);
@@ -235,10 +290,68 @@ public class Console {
 	public void logout(){
 		System.out.println("[NeMeWeSa] " + player.getName() + " hat das Spiel verlassen.");
 	}
+	public void fight() {
+		App.getAppInstance().getPlayer().setAp(App.getAppInstance().getPlayer().getAp()-20);
+		while(App.getAppInstance().getPlayer().getAp() > 0) {
+			System.out.println("######################");
+			System.out.println("#      Kampf         #");
+			System.out.println("######################");
+			
+			System.out.println("Deine aktuellen HP: " + App.getAppInstance().getPlayer().getAp() + "");
+			System.out.println("Gegner HP: " + App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getEnemyHealth()+"\n");
+			
+			int attackEnemy = Helper.random(1, App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getEnemyAttack());
+			System.out.println(App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getName() + " trifft dich fuer " + 
+			 attackEnemy + " Schaden");
+			
+			int attackPlayer = 100;//Helper.random(1, 10);
+			
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+
+				e.printStackTrace();
+			}
+			
+			App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.setEnemyHealth(App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.enemyHealth - attackPlayer);
+			App.getAppInstance().getPlayer().setAp(App.getAppInstance().getPlayer().getAp() - attackEnemy);		
+			if(App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getEnemyHealth() <= 0) {
+				break;
+			}
+		}
+		if(App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getEnemyHealth() <= 0){
+			System.out.println("Glueckwunsch ab jetzt gehoert Dir der Planet " + App.getAppInstance().getPlayer().getCurrentPlanet().getName() + " und deren Einwohner");
+			App.getAppInstance().getPlayer().getCurrentPlanet().income();
+			App.getAppInstance().getPlayer().addOwnership(App.getAppInstance().getPlayer().getCurrentPlanet());
+			menu = new Menu();
+			menu.menuitems.add(
+					new Menuitem("Zurueck"){
+						public void execute(){
+							actions();
+						}});
+			
+			createMenu(menu);
+		}
+		else {
+			System.out.println("Dein Spiel ist leider vorbei");
+			menu = new Menu();
+
+			menu.menuitems.add(
+					new Menuitem("Zurueck"){
+						public void execute(){
+							actions();
+						}});
+			
+			createMenu(menu);
+		}
+	
+	}
 
 	public void build(){ //TODO runden zeiten
+		System.out.println("######################");
+		System.out.println("#      Werkstatt     #");
+		System.out.println("######################");
 		menu = new Menu();
-		
 		menu.menuitems.add(
 				new Menuitem("Bohrer verbessern \t| 50 Spacedollar | (10 AP)"){
 					public void execute(){		
@@ -260,10 +373,13 @@ public class Console {
 		System.out.println("[Entwicklung] Was soll gebaut werden, " + player.getName() + "?\n");
 		System.out.println("Aktueller Kontostand: " + App.getAppInstance().getPlayer().getHomePlanet().spacestation.bank);
 		System.out.println("Aktueller Bohrerlevel: " + App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint +"\n");
+		System.out.println("Deine aktuellen Aktionspunkte: " + App.getAppInstance().getPlayer().getAp() + "\n");
 		createMenu(menu);
 	}
 	public void researching() {
-		
+		System.out.println("######################");
+		System.out.println("#  Forschungszenter  #");
+		System.out.println("######################");
 		menu = new Menu();
 		
 		menu.menuitems.add(
@@ -282,6 +398,8 @@ public class Console {
 		System.out.println("[Forschung] Was soll erforscht werden, " + player.getName() + "?\n");
 		System.out.println("Aktueller Kontostand: " + App.getAppInstance().getPlayer().getHomePlanet().spacestation.bank);
 		System.out.println("Aktuller Forschungstand: " + App.getAppInstance().getPlayer().getHomePlanet().spacestation.researchPoint +"\n");
+		System.out.println("Deine aktuellen Aktionspunkte: " + App.getAppInstance().getPlayer().getAp() + "\n");
+
 		createMenu(menu);
 	}
 	public void move(){

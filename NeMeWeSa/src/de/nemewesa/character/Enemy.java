@@ -18,8 +18,11 @@ public class Enemy {
 	public Enemy(Moon parent) {
 		this.name = enemyNames[Helper.random(0, enemyNames.length)];
 		this.enemyHealth = Helper.random(25, 75);
-		this.enemyAttack = Helper.random(3, 6);
+		this.enemyAttack = Helper.random(3, 8);
 		this.parent = parent;
+	}
+	public void setEnemyHealth(int enemyHealth) {
+		this.enemyHealth = enemyHealth;
 	}
 	public int enemyAttack(Spaceship target) {
 		return target.shipHealth = target.shipHealth - this.enemyAttack;

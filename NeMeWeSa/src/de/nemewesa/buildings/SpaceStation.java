@@ -41,7 +41,7 @@ public class SpaceStation implements Generetable{
 			}
 		}
 		else {
-			System.out.println("Zu wenig Geld vorhanden");
+			System.out.println("*******Zu wenig Geld vorhanden*******");
 		}
 	}
 /*
@@ -59,7 +59,7 @@ public class SpaceStation implements Generetable{
 			}
 		}	
 		else {
-			System.out.println("Zu wenig Geld vorhanden");
+			System.out.println("*******Zu wenig Geld vorhanden*******");
 		}
 	}	
 /*

@@ -28,7 +28,7 @@ public class Player implements Observer, Serializable{
 	private ArrayList<Generetable> ownership = new ArrayList<>();
 	private Round round;
 	
-	private int ap = 100; //TODO 100 // 20
+	private int ap = 100;
 	
 	public Player(String name){
 		this.name = name;
