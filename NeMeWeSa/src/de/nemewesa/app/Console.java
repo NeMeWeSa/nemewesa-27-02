@@ -240,7 +240,7 @@ public class Console {
 		menu = new Menu();
 		
 		menu.menuitems.add(
-				new Menuitem("Bohrer verbessern \t| 50 Spacedollar \t | (10 AP)"){
+				new Menuitem("Bohrer verbessern \t| 50 Spacedollar | (10 AP)"){
 					public void execute(){		
 						if(App.getAppInstance().getPlayer().getHomePlanet().spacestation.researchPoint > App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint) {
 							App.getAppInstance().getPlayer().getHomePlanet().spacestation.produce();
@@ -267,7 +267,7 @@ public class Console {
 		menu = new Menu();
 		
 		menu.menuitems.add(
-				new Menuitem("Bohrer verbessern erlernen \t| 25 Spacedollar \t| (20 AP)"){
+				new Menuitem("Bohrer verbessern erlernen \t| 25 Spacedollar | (20 AP)"){
 					public void execute(){
 						App.getAppInstance().getPlayer().getHomePlanet().spacestation.researching();
 						researching();
