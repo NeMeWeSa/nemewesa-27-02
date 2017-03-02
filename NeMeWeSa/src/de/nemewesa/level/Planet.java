@@ -295,7 +295,12 @@ public class Planet implements Generetable, Observer, Serializable{
 
 	@Override
 	public void update(int round) {
-		System.out.println(this.name + " lautet die Runde " + round + " ein.");
+		
+		if(App.DEV_MODE)
+			System.out.println(this.name + " lautet die Runde " + round + " ein.");
+		
+		generateResource();
+		
 	}
 
 }

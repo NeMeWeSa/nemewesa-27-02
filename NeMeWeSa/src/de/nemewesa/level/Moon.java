@@ -1,9 +1,11 @@
 package de.nemewesa.level;
 
+import java.io.Serializable;
+
 import de.nemewesa.character.Enemy;
 import de.nemewesa.character.Player;
 
-public class Moon implements Generetable{
+public class Moon implements Generetable, Serializable{
 	
 	public String moonName;	
 	public Enemy enemy;

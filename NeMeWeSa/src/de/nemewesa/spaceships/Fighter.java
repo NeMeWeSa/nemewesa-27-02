@@ -1,13 +1,16 @@
 package de.nemewesa.spaceships;
 
+import de.nemewesa.buildings.Storage;
 import de.nemewesa.character.Enemy;
 //github.com/NeMeWeSa/NeMeWeSa.git
 import de.nemewesa.level.Moon;
+import de.nemewesa.level.Planet;
 
 public class Fighter extends Spaceship {
 	
-	public Fighter(){
-		super("Rambo","Fighter",100,20,200);
+	public Fighter(String shipName, String shipType, int maxCapacity, int shipHealth, int shipStrange, int shipFuel, Storage storage, Planet currentPlanet, int currantCapacity)
+	{
+		super(shipName, shipType, shipHealth, maxCapacity, shipStrange, shipFuel, currentPlanet, currantCapacity);
 	}
 	
 //	public Fighter(String shipName, String shipType, int shipHealth, int shipStrange, int shipFuel)

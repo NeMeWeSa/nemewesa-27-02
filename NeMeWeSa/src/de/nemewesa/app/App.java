@@ -3,11 +3,11 @@ package de.nemewesa.app;
 import java.util.Timer;
 
 import de.nemewesa.buildings.SpaceStation;
+import de.nemewesa.buildings.Storage;
 import de.nemewesa.character.Player;
 import de.nemewesa.db.DB;
 import de.nemewesa.level.Level;
-import de.nemewesa.level.Path;
-import de.nemewesa.level.Resource;
+import de.nemewesa.spaceships.Transporter;
 
 
 public class App {
@@ -23,6 +23,7 @@ public class App {
 	private Login login;
 	private String prefix = "[NeMeWeSa] ";
 	private static final App app = new App();
+	private Timer timer = new Timer();
 
 	// Singelton Pattern
 	private App(){}
@@ -35,25 +36,23 @@ public class App {
 	// Die Instanz kann nur ueber getInstance geholt werden 
 	public static App getAppInstance(){
 		return app;
-
 	}
 	
 	public void init(){
 		if(DEV_MODE)
 			db.createUsersTable();
 		
+		// Timeout fuer blockierende Spieler
+		setTimer();
+		
 		//loginUser();
 		createNewLevel(1);
 		//createPlayer(login.name);
 		createPlayer("Master");
 		createConsole(player);
-		runTests();
+		console.mainmenu();	
 		
-		// Timeout fuer blockierende Spieler
-		//Timer timer = new Timer();
-		//timer.scheduleAtFixedRate(new RoundTimer(), 2000, 30000);
-		
-		//loginUser();
+		//runTests();
 		
 	}
 
@@ -76,7 +75,7 @@ public class App {
 
 		System.out.println(prefix + "Willkommen im NeMeWeSa " + player.getName());
 		
-		if(DEV_MODE)		
+		if(DEV_MODE)	
 			System.out.println(player);
 	
 	}
@@ -104,14 +103,33 @@ public class App {
 	public Player getPlayer() {
 		return player;
 	}
+	
+	
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	
+	private void setTimer(){
+		timer.scheduleAtFixedRate(new RoundTimer(), 2000, 5000);
+	}
+	
+	public void forceNewRound(){
+		timer.cancel();
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new RoundTimer(), 50, 5000);
+	}
 
 	public void runTests(){
 		
 		//this.round.setNewRound();
 		
+//		if(true) 
+//			while(true)
 		console.mainmenu();
+				
+		//testTransporter();
 		
-		pathTest();
 		
 //		// ROHSTOFFE ABERNTEN UND EINLAGERN
 //		System.out.println("BRONZE VORKOMMEN " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.amount);
@@ -184,7 +202,6 @@ public class App {
 //		}
 
 
-
 //		System.out.println(" Nach Wieviel Runden soll regeneriert werden "+ player.getCurrentPlanet().resource.get(0).getGrow());
 //		System.out.println("Welche Runde ist aktuell: " +round.getRound());		
 //		player.getCurrentPlanet().mine(player.getCurrentPlanet().resource.get(0));
@@ -255,11 +272,25 @@ public class App {
 */
 		
 	}
+	
+	public void testTransporter(){
+		
+		Transporter t1 = new Transporter("donkey", "transporter", 1000, 100, 100, 100, new Storage(), player.getCurrentPlanet(), 0);
 
-	public void pathTest(){
-//		Path path1 = new Path();
-//		path1.addAsteroid();
-//		path1.showPath();
-//		path1.howToMove();
+//		System.out.println("APP: " + t1.currentPlanet.gold.storagef);
+//		System.out.println("alter Planet " + t1.currentPlanet.name);
+		t1.pickUpGold();
+
+		//SpaceStation one = new SpaceStation("One",player.getCurrentPlanet());
+		
+		t1.move(t1.getRightNeighbouringPlanet());
+		System.out.println(t1.currentPlanet.name);
+		
+		t1.DropDownGoldStation(App.getAppInstance().getPlayer().getHomePlanet().spacestation);
+		System.out.println(App.getAppInstance().getPlayer().getHomePlanet().spacestation.gold.amount);
+		
+		t1.dropDownGold();
+		
 	}
+
 }

@@ -12,12 +12,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import de.nemewesa.app.App;
 import de.nemewesa.app.Observer;
 import de.nemewesa.app.Round;
 import de.nemewesa.level.Generetable;
 import de.nemewesa.level.Planet;
 import de.nemewesa.level.Solarsystem;
+import de.nemewesa.app.App;
 
 public class Player implements Observer, Serializable{
 	
@@ -28,7 +28,7 @@ public class Player implements Observer, Serializable{
 	private ArrayList<Generetable> ownership = new ArrayList<>();
 	private Round round;
 	
-	private int ap = 100;
+	private int ap = 0;
 	
 	public Player(String name){
 		this.name = name;
@@ -117,7 +117,13 @@ public class Player implements Observer, Serializable{
 
 	@Override
 	public void update(int round) {
-		System.out.println(this.name + " lautet die Runde " + round + " ein.");
+		
+		if(App.DEV_MODE)
+			System.out.println(this.name + " lautet die Runde " + round + " ein.");
+		
+		this.ap = 100;
+		
+		System.out.println("Runde: " + round + " | " + this.name + "'s Aktionspunktestand: " + this.ap);
 	}
 	
 	public void saveAsString(String filename) {
@@ -188,7 +194,7 @@ public class Player implements Observer, Serializable{
 		
 	}
 	
-	public void save(String filename){
+	public void save(File playerFile){
 
 		//Savable h = this;
 		Runnable thread = () -> {
@@ -200,11 +206,11 @@ public class Player implements Observer, Serializable{
 				try (ObjectOutputStream out = 
 						new ObjectOutputStream(
 							new BufferedOutputStream(
-								new FileOutputStream(filename)));) {
+								new FileOutputStream(playerFile)));) {
 					
 					//out.writeObject(this);
 					out.writeObject(this);
-					out.close();
+					//out.close();
 				} 
 				catch (FileNotFoundException e) {
 					e.printStackTrace();
@@ -215,13 +221,13 @@ public class Player implements Observer, Serializable{
 		
 		};
 		new Thread(thread).start();
-				
+			
 		//}});
 		//thread.start();				
 	
 	}
 	
-	public void load(String filename){
+	public void load(File playerFile){
 		
 		
 		//Runnable thread = () -> {		
@@ -232,15 +238,16 @@ public class Player implements Observer, Serializable{
 			try (ObjectInputStream in = 
 					new ObjectInputStream(
 						new BufferedInputStream(
-							new FileInputStream(filename)));) {
+							new FileInputStream(playerFile)));) {
 				
 				//Object object = null;
 			
 				Object object = in.readObject();
-					
+				System.err.println("LADEN - AP:2 " + ((Player)object).getAp());
+
 				if(object != null) {
-					Player importedObj = (Player) object;
-					System.out.println("Der importierte Player: " + importedObj);
+					App.getAppInstance().setPlayer((Player)object);
+					//System.out.println("Der importierte Player: " + importedObj);
 				}
 				in.close();
 				

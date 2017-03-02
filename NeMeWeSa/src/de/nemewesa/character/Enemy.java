@@ -1,10 +1,12 @@
 package de.nemewesa.character;
 
+import java.io.Serializable;
+
 import de.nemewesa.helper.Helper;
 import de.nemewesa.level.Moon;
 import de.nemewesa.spaceships.Spaceship;
 
-public class Enemy {
+public class Enemy implements Serializable{
 	
 	public String[] enemyNames = {"Isiyah", "Hemtein", "Begkas", "Adajar", "Kaluru", "Begde", "Mahiani", "Zamzur", 
 								 "Kulgul", "Qishin", "Najgul", "Najxu", "Mardram", "Altein", "Gioalie", "Eystar", 

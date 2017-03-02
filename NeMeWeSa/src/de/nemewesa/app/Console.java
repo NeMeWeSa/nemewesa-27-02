@@ -1,8 +1,10 @@
 package de.nemewesa.app;
 
+import java.io.File;
 import java.util.Scanner;
 
 import de.nemewesa.character.Player;
+import de.nemewesa.level.Level;
 import de.nemewesa.menu.Menu;
 import de.nemewesa.menu.Menuitem;
 
@@ -11,6 +13,8 @@ public class Console {
 	Scanner scanner = new Scanner(System.in);
 	Menu menu;
 	Player player;
+	File playerFile = new File("level" + File.separator + Level.level 
+			+ File.separator + "saves" + File.separator + "player.dat");
 	
 	public Console(Player player){
 		this.player = player;
@@ -21,15 +25,38 @@ public class Console {
 		menu = new Menu();
 		
 		menu.menuitems.add(
+				
 				new Menuitem("Aktionen"){
 					public void execute(){
 						actions();
 					}});
 		
+//		menu.menuitems.add(
+//				new Menuitem("Hilfe"){
+//					public void execute(){
+//						help();
+//					}});
+		
 		menu.menuitems.add(
-				new Menuitem("Hilfe"){
+				new Menuitem("Spieler laden"){
 					public void execute(){
-						help();
+						player.load(playerFile);
+						player = App.getAppInstance().getPlayer();
+						System.err.println("LADEN - AP: " + App.getAppInstance().getPlayer().getAp());
+						mainmenu();
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Spieler speichern"){
+					public void execute(){
+						player.save(playerFile);
+						mainmenu();
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Debug"){
+					public void execute(){
+						debug();
 					}});
 		
 		menu.menuitems.add(
@@ -53,7 +80,7 @@ public void farmOre(){
 					public void execute(){
 						player.getCurrentPlanet().mineBronze();
 						farmOre();
-					}});	
+					}});
 		
 		menu.menuitems.add(
 				new Menuitem("Silber \t| Vorhanden: " + player.getCurrentPlanet().silver.farm +
@@ -98,7 +125,8 @@ public void farmOre(){
 				new Menuitem("Umsehen"){
 					public void execute(){
 						showEnvironment();
-					}});	
+						actions();
+					}});
 		
 		menu.menuitems.add(
 				new Menuitem("Bauen"){
@@ -116,7 +144,14 @@ public void farmOre(){
 				new Menuitem("Reisen"){
 					public void execute(){
 						move();
-					}});	
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Runde beenden"){
+					public void execute(){
+						App.getAppInstance().forceNewRound();
+						actions();
+					}});
 		
 		menu.menuitems.add(
 				new Menuitem("Hauptmenu"){
@@ -132,17 +167,63 @@ public void farmOre(){
 	
 	public void showEnvironment(){
 		player.showEnvironment();
-		actions();
 	}
 	
 	public void build(){
+		System.out.println("Baue...");
 		actions();
 	}
 	
 	public void help(){
 		System.out.println("Helfe...");
 		mainmenu();
-	}	
+	}
+	
+	public void debug(){
+		
+		menu = new Menu();
+		
+		menu.menuitems.add(
+				new Menuitem("Umsehen"){
+					public void execute(){
+						showEnvironment();
+						debug();
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Dem Spieler AK abziehen"){
+					public void execute(){
+						player.setAp(player.getAp() - 2);
+						debug();
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Spieler laden"){
+					public void execute(){
+						player.load(playerFile);
+						player = App.getAppInstance().getPlayer();
+						System.err.println("LADEN - AP: " + App.getAppInstance().getPlayer().getAp());
+						debug();
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Spieler speichern"){
+					public void execute(){
+						player.save(playerFile);
+						debug();
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Hauptmenue"){
+					public void execute(){
+						mainmenu();
+					}});
+		
+		System.out.println("[Debug] Treffe eine Wahl > ");
+		
+		createMenu(menu);
+		
+	}
 
 	public Login login(){
 

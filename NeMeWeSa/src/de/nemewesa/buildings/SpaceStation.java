@@ -1,11 +1,12 @@
 package de.nemewesa.buildings;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import de.nemewesa.level.Generetable;
 import de.nemewesa.level.Planet;
+import de.nemewesa.level.Resource;
 
-public class SpaceStation implements Generetable{
+public class SpaceStation implements Serializable{
 	
 	public String name;
 
@@ -76,22 +77,9 @@ public class SpaceStation implements Generetable{
 		}	
 	}
 
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void generate(int element) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void printChildren() {
-		// TODO Auto-generated method stub
-		
-	}
+	public Resource bronze = new Resource("Bronze",0);
+	public Resource silver = new Resource("Silber",0);
+	public Resource gold = new Resource("Gold", 0);
+	public Resource jewel= new Resource("Juwel", 0);
 	
 }

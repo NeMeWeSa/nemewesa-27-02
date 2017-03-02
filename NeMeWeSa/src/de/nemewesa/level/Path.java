@@ -1,12 +1,13 @@
 package de.nemewesa.level;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import de.nemewesa.character.Player;
 import de.nemewesa.helper.Helper;
 
-public class Path {
+public class Path implements Serializable{
 
 	//Asteroiden,die sich aufm Weg befinden
 	public ArrayList<Asteroid>asteroids = new ArrayList<>();
@@ -20,10 +21,10 @@ public class Path {
 	//Laenge,Breite und Name des Weges
 	public int distance;
 	public int width;
-	public int currPos = 1;
+	public int currPos;
 	public String name;
 
-	Scanner scan = new Scanner(System.in);
+	transient Scanner scan = new Scanner(System.in);
 
 	public char[][] path;  //Der Weg als Array
 	public int nblin, nbcol;
@@ -46,6 +47,10 @@ public class Path {
 				path[i][j] = ' ';
 			}	
 		}
+	}
+	
+	public void init(){
+		this.currPos = 1;
 	}
 
 	public String generateName(){
@@ -139,47 +144,57 @@ public class Path {
 		System.out.println("6 > nach rechts");
 		System.out.println("Benutz am besten die numerische Tastatur.");
 
-		try{
-			while(this.currPos != this.distance){
+		while(this.currPos != this.distance){
+
+			try{
 
 				int m = scan.nextInt();
-				switch (m){
-				case 8 :
-					if(moveUp() == 2){
-						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
-						this.player.setAp(this.player.getAp() - 2);
-						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
-					} break;
-				case 2 :
-					if (moveDown() == 2){
-						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
-						this.player.setAp(this.player.getAp() - 2);
-						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
-					} break;
-				case 4 :
-					if (moveLeft() == 2){
-						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
-						this.player.setAp(this.player.getAp() - 2);
-						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
-					} break;
-				case 6 :
-					if (moveRigth() == 2){
-						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
-						this.player.setAp(this.player.getAp() - 2);
-						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
-					} break;
 
-				default :  System.out.println("Falsche Taste!!!");
+				if(m == 8 || m == 2 || m == 4 || m == 6 ){
 
-				scan.close();
+					switch (m){
+						case 8 :
+							if(moveUp() == 2){
+								System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
+								this.player.setAp(this.player.getAp() - 2);
+								System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+							} break;
+						case 2 :
+							if (moveDown() == 2){
+								System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
+								this.player.setAp(this.player.getAp() - 2);
+								System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+							} break;
+						case 4 :
+							if (moveLeft() == 2){
+								System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
+								this.player.setAp(this.player.getAp() - 2);
+								System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+							} break;
+						case 6 :
+							if (moveRigth() == 2){
+								System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
+								this.player.setAp(this.player.getAp() - 2);
+								System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+							} break;
+	
+						default :  System.out.println("Falsche Taste!!!");
 
-				} 
+					}
+
+				}
+				else{
+					System.out.println("Ungueltige Zahl!");
+				}
+
 			}
-		}catch(Exception e){}
-		
-		
-	}
+			catch(java.util.InputMismatchException exception){
+				System.out.println("BITTE NUR ZAHLEN EINGEBEN");
+				scan.next();
+			}
+		}
 
+	}
 
 	//sich auf dem Weg bewegen
 
@@ -294,6 +309,7 @@ public class Path {
 
 	public void enterPath(Player player){
 		this.player = player;
+		init();
 		addAsteroid();
 		showPath();
 		howToMove();
