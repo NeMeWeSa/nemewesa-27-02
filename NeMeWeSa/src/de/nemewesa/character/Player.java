@@ -161,7 +161,7 @@ public class Player implements Observer, Serializable{
 		if(planet == this.currentPlanet.getLeftNeighbouringPlanet()){
 			System.out.println("LINKS");
 			if(this.ap >= this.currentPlanet.pathLeft.distance){
-				this.currentPlanet.pathLeft.enterPath(this);
+				this.currentPlanet.pathLeft.enterPath(this, planet);
 				this.ap -= this.currentPlanet.pathLeft.distance;
 				this.currentPlanet = planet;
 			}
@@ -173,7 +173,7 @@ public class Player implements Observer, Serializable{
 		else if(planet == this.currentPlanet.getRightNeighbouringPlanet()){
 			System.out.println("RECHTS");
 			if(this.ap >= this.currentPlanet.pathRight.distance){
-				this.currentPlanet.pathRight.enterPath(this);
+				this.currentPlanet.pathRight.enterPath(this, planet);
 				this.ap -= this.currentPlanet.pathRight.distance;
 				this.currentPlanet = planet;
 			}

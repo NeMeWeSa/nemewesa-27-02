@@ -1,12 +1,7 @@
 package de.nemewesa.level;
 
 import de.nemewesa.helper.Helper;
-import java.util.*;
-import de.nemewesa.character.Player;
-import de.nemewesa.app.App;
 import de.nemewesa.level.Generetable;
-import de.nemewesa.level.Planet;
-import de.nemewesa.level.Solarsystem;
 import de.nemewesa.level.Path;
 
 public class Asteroid implements Generetable{
@@ -14,7 +9,7 @@ public class Asteroid implements Generetable{
 	public String name;
 	public int damage;
 	public Path path;
-	public Player player;
+	
 	
 	public Asteroid(){
 		this.name = generateName();
@@ -42,17 +37,18 @@ public class Asteroid implements Generetable{
 		return name;
 	}
 	
+	//Schaden verursachen
+		public void setDamage(int damage){
+			int x =0;
+		    x = Helper.random(5, 10);
+		    damage = x;
+		    this.damage = damage;
+		}
+	
 	public String toString(){
 		return "Asteroidsname: "+this.name+"\nSchaden = -"+this.damage+" AP";
 	}
 	
-	//Schaden verursachen
-	public void causeDamage(int damage){
-		int x =0;
-	    x = Helper.random(1, 5);
-	    damage = x;
-	    this.damage = damage;
-	}
 
 	@Override
 	public void generate(int element) {

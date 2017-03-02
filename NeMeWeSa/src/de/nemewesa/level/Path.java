@@ -2,7 +2,6 @@ package de.nemewesa.level;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import de.nemewesa.character.Player;
 import de.nemewesa.helper.Helper;
 
@@ -12,10 +11,8 @@ public class Path {
 	public ArrayList<Asteroid>asteroids = new ArrayList<>();
 	public Asteroid asteroid;
 	public Player player;
+	public Planet destination;
 
-	public Planet planet;
-	public Planet planetW;
-	public Planet planetE;
 
 	//Laenge,Breite und Name des Weges
 	public int distance;
@@ -33,9 +30,8 @@ public class Path {
 	//Konstruktor
 	public Path(){
 		this.name = generateName();
-
 		this.width = Helper.random(3, 7);
-		this.distance = Helper.random(1,9);
+		this.distance = Helper.random(3,10);
 
 		nblin = width;  //Anzahl der Reihen
 		nbcol = distance;  //Anzahl der Spalten
@@ -68,24 +64,8 @@ public class Path {
 		return this.width;
 	}
 
-	public Planet getPlanetW(){
-		return this.planetW;
-	}
-
-	public Planet getPlanetE(){
-		return this.planetE;
-	}
-
-	public void setPlanetW(Planet planetW){
-		this.planetW = planetW;
-	}
-
-	public void setPlanetE(Planet planetE){
-		this.planetE = planetW;
-	}
-
 	public void setDistance(){
-		this.distance = Helper.random(7,15);
+		this.distance = Helper.random(3,10);
 	}
 
 
@@ -99,7 +79,7 @@ public class Path {
 
 	//Asteroiden aufm Weg hinzufuegen
 	public void addAsteroid(){
-		System.out.println("Willkommen auf dem Pfad zu ");
+		System.out.println("Willkommen auf dem Pfad zum Planet " + this.destination.name);
 		System.out.println(toString()+"\n");
 
 		for (int i=0; i<this.width; i++){
@@ -146,27 +126,27 @@ public class Path {
 				switch (m){
 				case 8 :
 					if(moveUp() == 2){
-						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
-						this.player.setAp(this.player.getAp() - 2);
-						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+						System.out.println("Ohh Du bist mit dem Asteroid "+new Asteroid().name+" zusammengestossen!!!");
+						this.player.setAp(this.player.getAp() - (new Asteroid().getDamage()));
+						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp()+".");
 					} break;
 				case 2 :
 					if (moveDown() == 2){
-						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
-						this.player.setAp(this.player.getAp() - 2);
-						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+						System.out.println("Ohh Du bist mit dem Asteroid "+new Asteroid().name+" zusammengestossen!!!");
+						this.player.setAp(this.player.getAp() - (new Asteroid().getDamage()));
+						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp()+".");
 					} break;
 				case 4 :
 					if (moveLeft() == 2){
-						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
-						this.player.setAp(this.player.getAp() - 2);
-						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+						System.out.println("Ohh Du bist mit dem Asteroid "+new Asteroid().name+" zusammengestossen!!!");
+						this.player.setAp(this.player.getAp() - (new Asteroid().getDamage()));
+						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp()+".");
 					} break;
 				case 6 :
 					if (moveRigth() == 2){
-						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
-						this.player.setAp(this.player.getAp() - 2);
-						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+						System.out.println("Ohh Du bist mit dem Asteroid "+new Asteroid().name+" zusammengestossen!!!");
+						this.player.setAp(this.player.getAp() - (new Asteroid().getDamage()));
+						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp()+".");
 					} break;
 
 				default :  System.out.println("Falsche Taste!!!");
@@ -174,7 +154,8 @@ public class Path {
 				scan.close();
 
 				} 
-			}
+			} if (this.currPos == this.distance) System.out.println("Willkommen auf dem Planet "+ this.destination.name+"!!\n");
+			
 		}catch(Exception e){}
 		
 		
@@ -254,7 +235,6 @@ public class Path {
 						tmp = path[i][j]; 
 						path[i][j] = ' '; 
 						path[i][j-1] = tmp; 
-
 						showPath();
 						return 2;
 					}
@@ -292,11 +272,13 @@ public class Path {
 
 	}
 
-	public void enterPath(Player player){
+	public void enterPath(Player player, Planet destination){
 		this.player = player;
+		this.destination = destination;
 		addAsteroid();
 		showPath();
 		howToMove();
+		
 	}
 
 }
