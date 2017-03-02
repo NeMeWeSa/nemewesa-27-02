@@ -147,25 +147,26 @@ public class Path implements Generetable{
 			switch (m){
 			case '8' :
 				if (moveUp() == 1) break;
-			        else if(moveUp() == 2){
+			        if(moveUp() == 2){
 				       System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
 				       System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
 			        } break;
+			         
 			case '2' :
 				if (moveDown() == 1) break;
-			        else if (moveDown() == 2){
+			        if (moveDown() == 2){
 			           System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
 					   System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
 			        } break;
 			case '4' :
 				if (moveLeft() == 1) break;
-			       else if (moveLeft() == 2){
+			        if (moveLeft() == 2){
 			    	   System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
 				       System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
 			       } break;
 			case '6' :
 				if (moveRigth() ==1) break;
-			       else if (moveRigth() == 2){
+			        if (moveRigth() == 2){
 			    	   System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
 				       System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
 			       } break;
