@@ -107,6 +107,10 @@ public class Player implements Observer, Serializable{
 		return this.name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getAp() {
 		return ap;
 	}

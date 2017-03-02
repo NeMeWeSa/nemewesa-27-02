@@ -23,7 +23,7 @@ public class App {
 	private Login login;
 	private String prefix = "[NeMeWeSa] ";
 	private static final App app = new App();
-	private Timer timer = new Timer();
+	private Timer timer;
 
 	// Singelton Pattern
 	private App(){}
@@ -42,14 +42,18 @@ public class App {
 		if(DEV_MODE)
 			db.createUsersTable();
 		
-		// Timeout fuer blockierende Spieler
-		setTimer();
-		
 		//loginUser();
 		createNewLevel(1);
 		//createPlayer(login.name);
-		createPlayer("Master");
+		createPlayer("");
 		createConsole(player);
+		loginUser();
+		
+		player.setName(login.name);
+		
+		// Timeout fuer blockierende Spieler
+		setTimer();
+		
 		console.mainmenu();	
 		
 		//runTests();
@@ -108,20 +112,19 @@ public class App {
 		return player;
 	}
 	
-	
-
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
 	
 	private void setTimer(){
-		timer.scheduleAtFixedRate(new RoundTimer(), 2000, 5000);
+		timer = new Timer();
+		timer.scheduleAtFixedRate(new RoundTimer(), 500, 120000);
 	}
 	
 	public void forceNewRound(){
 		timer.cancel();
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new RoundTimer(), 50, 5000);
+		timer = new Timer();
+		timer.scheduleAtFixedRate(new RoundTimer(), 50, 120000);
 	}
 
 	public void runTests(){
@@ -277,24 +280,4 @@ public class App {
 		
 	}
 	
-	public void testTransporter(){
-		
-		Transporter t1 = new Transporter("donkey", "transporter", 1000, 100, 100, 100, new Storage(), player.getCurrentPlanet(), 0);
-
-//		System.out.println("APP: " + t1.currentPlanet.gold.storagef);
-//		System.out.println("alter Planet " + t1.currentPlanet.name);
-		t1.pickUpGold();
-
-		//SpaceStation one = new SpaceStation("One",player.getCurrentPlanet());
-		
-		t1.move(t1.getRightNeighbouringPlanet());
-		System.out.println(t1.currentPlanet.name);
-		
-		t1.DropDownGoldStation(App.getAppInstance().getPlayer().getHomePlanet().spacestation);
-		System.out.println(App.getAppInstance().getPlayer().getHomePlanet().spacestation.gold.amount);
-		
-		t1.dropDownGold();
-		
-	}
-
 }
