@@ -26,8 +26,8 @@ public class App {
 
 	public static void main(String[] args)  {
 		App app = new App();
-//		app.init();
-		app.pathTest();
+		app.init();
+
 	}
 	
 	public void init(){
@@ -98,6 +98,8 @@ public class App {
 		//this.round.setNewRound();
 		
 		console.mainmenu();
+		
+		pathTest();
 		
 //		// ROHSTOFFE ABERNTEN UND EINLAGERN
 //		System.out.println("BRONZE VORKOMMEN " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.amount);
