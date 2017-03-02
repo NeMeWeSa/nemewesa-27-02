@@ -9,7 +9,6 @@ import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.character.Enemy;
 import de.nemewesa.helper.Helper;
 import de.nemewesa.modules.Defence;
-import de.nemewesa.modules.*;
 
 public class Planet implements Generetable, Observer, Serializable{
 	
@@ -128,30 +127,54 @@ public class Planet implements Generetable, Observer, Serializable{
  * der farm wird abgebaut * der aktuellen forschungstand
  */
 	public void mineBronze() {
-		if(this.bronze.farm > 0) {
-			this.bronze.farm -= 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
-			this.bronze.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;	
+		if(this.bronze.farm > 0){
+			if(App.getAppInstance().getPlayer().getAp() > 2) { 
+				this.bronze.farm -= 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+				this.bronze.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+				App.getAppInstance().getPlayer().setAp(App.getAppInstance().getPlayer().getAp() - 2);
+			 }
+			else {
+				System.out.println("Für diese Aktion stehen keine AP mehr zur verfügung");
+			}
 		}
 	}
 	
 	public void mineSilver() {
 		if(this.silver.farm > 0) {
-			this.silver.farm -= 1* App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
-			this.silver.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+			if(App.getAppInstance().getPlayer().getAp() > 3) { 
+				this.silver.farm -= 1* App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+				this.silver.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+				App.getAppInstance().getPlayer().setAp(App.getAppInstance().getPlayer().getAp() - 3);
+			}
+			else {
+				System.out.println("Für diese Aktion stehen keine AP mehr zur verfügung");
+			}
 		}
 	}
 	
 	public void mineGold() {
 		if(this.gold.farm > 0) {
-			this.gold.farm -= 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
-			this.gold.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+			if(App.getAppInstance().getPlayer().getAp() > 4) { 
+				this.gold.farm -= 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+				this.gold.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+				App.getAppInstance().getPlayer().setAp(App.getAppInstance().getPlayer().getAp() - 4);
+			}
+			else {
+				System.out.println("Für diese Aktion stehen keine AP mehr zur verfügung");
+			}
 		}
 	}
 	
 	public void mineJewel() {
 		if(this.jewel.farm > 0) {
-			this.jewel.farm -= 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
-			this.jewel.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+			if(App.getAppInstance().getPlayer().getAp() > 5) { 
+				this.jewel.farm -= 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+				this.jewel.storagef += 1 * App.getAppInstance().getPlayer().getHomePlanet().spacestation.modulePoint;
+				App.getAppInstance().getPlayer().setAp(App.getAppInstance().getPlayer().getAp() - 5);
+			}
+			else {
+				System.out.println("Für diese Aktion stehen keine AP mehr zur verfügung");
+			}
 		}
 	}
 	
@@ -163,9 +186,12 @@ public class Planet implements Generetable, Observer, Serializable{
  * dann wird ein viertel  der Einwohner jeweils ein Rohstoff (wenn vorhanden) abarbeiten
  * doch vorsicht ist geboten!!!!!
  * je wertvoller der rohstoff desto weniger kommt ins wirkliche lager an
+ * 
+ * 
+ * NICHT SICHER ob this. noch hier funktioniert
  */
 	public void income() {
-//		if(captured = true) {
+
 			if(this.bronze.farm>0) {
 				if(this.bronze.storage > this.bronze.storagef) {
 					this.bronze.farm -= (int)citizen/4;
@@ -202,8 +228,6 @@ public class Planet implements Generetable, Observer, Serializable{
 					}
 				}
 			}
-//			
-//		}
 	}
 	
 	public boolean pickupResource(Resource res, int amount){
@@ -300,7 +324,7 @@ public class Planet implements Generetable, Observer, Serializable{
 			System.out.println(this.name + " lautet die Runde " + round + " ein.");
 		
 		generateResource();
-		
 	}
 
 }
+

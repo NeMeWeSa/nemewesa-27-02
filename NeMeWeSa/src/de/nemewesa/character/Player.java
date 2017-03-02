@@ -55,12 +55,12 @@ public class Player implements Observer, Serializable{
 		// LINKS
 		if(this.getLeftNeighbouringPlanet() != null){
 			info += "[Planet] Dein linker Nachbarplanet ist der " + this.getLeftNeighbouringPlanet().name +"\n";
-			info += "[Pfad] und ist ueber den Pfad " + this.currentPlanet.pathLeft.name + " (" + this.currentPlanet.pathLeft.distance + ") erreichbar \n";
+			info += "[Pfad] und ist ueber den Pfad " + this.currentPlanet.pathLeft.name + " (" + this.currentPlanet.pathLeft.distance + " AP) erreichbar \n";
 		}
 		// RECHTS
 		if(this.getRightNeighbouringPlanet() != null){
 			info += "[Planet] Dein rechter Nachbarplanet ist der " + this.getRightNeighbouringPlanet().name +"\n";
-			info += "[Pfad] und ist ueber den Pfad " + this.currentPlanet.pathRight.name + " (" + this.currentPlanet.pathRight.distance + ") erreichbar \n";
+			info += "[Pfad] und ist ueber den Pfad " + this.currentPlanet.pathRight.name + " (" + this.currentPlanet.pathRight.distance + " AP) erreichbar \n";
 		}
 		
 		// PLANETEN IM BESITZT		

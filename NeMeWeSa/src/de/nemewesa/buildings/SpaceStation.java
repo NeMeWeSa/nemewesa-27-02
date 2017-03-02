@@ -1,13 +1,10 @@
 package de.nemewesa.buildings;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-
-import de.nemewesa.level.Generetable;
+import de.nemewesa.app.App;
 import de.nemewesa.level.Planet;
 import de.nemewesa.level.Resource;
-import de.nemewesa.modules.Module;
 
 public class SpaceStation{
 
@@ -38,18 +35,36 @@ public class SpaceStation{
  */
 	public void researching() {
 		if(this.bank >= 25) {
-			this.bank -= 25;
-			this.researchPoint +=1;	
-		}			
+			if(App.getAppInstance().getPlayer().getAp() >= 10) {
+				this.bank -= 25;
+				this.researchPoint +=1;	
+				App.getAppInstance().getPlayer().setAp(App.getAppInstance().getPlayer().getAp() -10);
+			}
+			else {
+				System.out.println("Keine Aktionspunkte mehr vorhanden");
+			}
+		}
+		else {
+			System.out.println("*******Zu wenig Geld vorhanden*******");
+		}
 	}
 /*
  * wenn die bank mehr als 50 einheiten hat, werden diese abgezogen	und man bekommt einen modul punkt
  */
 	public void produce() {
 		if(this.bank >= 50) {
-			this.bank -= 50;
-			this.modulePoint += 1;
-		}		
+			if(App.getAppInstance().getPlayer().getAp() >= 20) {
+				this.bank -= 50;
+				this.modulePoint += 1;
+				App.getAppInstance().getPlayer().setAp(App.getAppInstance().getPlayer().getAp() -20);
+			}
+			else {
+				System.out.println("Keine Aktionspunkte mehr vorhanden");
+			}
+		}	
+		else {
+			System.out.println("*******Zu wenig Geld vorhanden*******");
+		}
 	}	
 /*
  * hier werden die gesammelten Ressourcen gegen Einheiten zum einkaufen getauscht
@@ -84,10 +99,12 @@ public class SpaceStation{
 		}	
 	}
 
+
 	public Resource bronze = new Resource("Bronze",0);
 	public Resource silver = new Resource("Silber",0);
 	public Resource gold = new Resource("Gold", 0);
 	public Resource jewel= new Resource("Juwel", 0);
+
 
 	
 }
