@@ -44,6 +44,50 @@ public class Console {
 		
 		
 	}	
+public void farmOre(){
+		
+		menu = new Menu();		
+		menu.menuitems.add(
+				new Menuitem("Bronze \t| Vorhanden: " + player.getCurrentPlanet().bronze.farm +
+						"\t| Im Lager: " + player.getCurrentPlanet().bronze.storagef){
+					public void execute(){
+						player.getCurrentPlanet().mineBronze();
+						farmOre();
+					}});	
+		
+		menu.menuitems.add(
+				new Menuitem("Silber \t| Vorhanden: " + player.getCurrentPlanet().silver.farm +
+						"\t| Im Lager: " + player.getCurrentPlanet().silver.storagef){
+					public void execute(){
+						player.getCurrentPlanet().mineSilver();
+						farmOre();
+					}});			
+
+		menu.menuitems.add(
+				new Menuitem("Gold \t| Vorhanden: " + player.getCurrentPlanet().gold.farm +
+						"\t| Im Lager: " + player.getCurrentPlanet().gold.storagef){
+					public void execute(){
+						player.getCurrentPlanet().mineGold();
+						farmOre();
+					}});	
+		
+		menu.menuitems.add(
+				new Menuitem("Juwelen \t| Vorhanden: " + player.getCurrentPlanet().jewel.farm +
+						"\t| Im Lager: " + player.getCurrentPlanet().jewel.storagef){
+					public void execute(){
+						player.getCurrentPlanet().mineJewel();
+						farmOre();
+					}});
+		menu.menuitems.add(
+				new Menuitem("Zurueck"){
+					public void execute(){
+						mainmenu();
+					}});
+
+		System.out.println("[Erze sammeln] Welche Erze moechtest Du sammeln " + player.getName() + "?");		
+		createMenu(menu);
+
+	}
 
 	
 	public void actions(){
@@ -60,7 +104,13 @@ public class Console {
 				new Menuitem("Bauen"){
 					public void execute(){
 						build();
-					}});			
+					}});
+		
+		menu.menuitems.add(
+				new Menuitem("Erze sammeln"){
+					public void execute(){
+						farmOre();
+					}});
 
 		menu.menuitems.add(
 				new Menuitem("Reisen"){
@@ -86,7 +136,6 @@ public class Console {
 	}
 	
 	public void build(){
-		System.out.println("Baue...");
 		actions();
 	}
 	
@@ -141,27 +190,6 @@ public class Console {
 				}});
 
 		System.out.println("[Reisen] Zu welchen Nachbarplaneten moechtest Du reisen " + player.getName() + "?");
-		
-		createMenu(menu);
-		
-	}
-	
-	public void dynmenu(){
-		
-		menu = new Menu();
-		
-		menu.menuitems.add(
-				new Menuitem("Umgebung anzeigen"){
-					public void execute(){
-						player.showEnvironment();
-					}});
-		
-		menu.menuitems.add(
-				
-				new Menuitem("Weitere Optionen"){
-					public void execute(){
-						actions();
-					}});		
 		
 		createMenu(menu);
 		

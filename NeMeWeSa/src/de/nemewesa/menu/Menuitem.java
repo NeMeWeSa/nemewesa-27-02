@@ -8,6 +8,6 @@ public class Menuitem implements Selectable{
 		this.desc = desc;
 	}
 	
-	public void execute(){};
+	public void execute(){}
 	
 }

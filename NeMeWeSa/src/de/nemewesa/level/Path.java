@@ -1,15 +1,12 @@
 package de.nemewesa.level;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import de.nemewesa.character.Player;
 import de.nemewesa.helper.Helper;
-import de.nemewesa.level.Generetable;
-import de.nemewesa.level.Planet;
-//import de.nemewesa.app.App;
-//import de.nemewesa.level.Solarsystem;
-import de.nemewesa.level.Asteroid;
 
-public class Path implements Generetable{
+public class Path {
 
 	//Asteroiden,die sich aufm Weg befinden
 	public ArrayList<Asteroid>asteroids = new ArrayList<>();
@@ -23,7 +20,10 @@ public class Path implements Generetable{
 	//Laenge,Breite und Name des Weges
 	public int distance;
 	public int width;
+	public int currPos = 1;
 	public String name;
+
+	Scanner scan = new Scanner(System.in);
 
 	public char[][] path;  //Der Weg als Array
 	public int nblin, nbcol;
@@ -117,7 +117,7 @@ public class Path implements Generetable{
 		System.out.println();
 	}
 	public void showPath(){
-		System.out.println("-------------------------------------------------------\n");
+		System.out.print("-------------------------------------------------------\n");
 		for (int i=0; i<nblin; i++){
 			for(int j=0; j<nbcol; j++){
 
@@ -133,49 +133,46 @@ public class Path implements Generetable{
 		System.out.println();
 		System.out.println("Vorsichtig Du bist der 'P' versuch so gut wie moeglich die Asteroiden zu vermeiden!!!");
 		System.out.println("Zum bewegen:");
-		System.out.println("8 fuer oben");
-		System.out.println("2 fuer unten");
-		System.out.println("4 fuer links");
-		System.out.println("Und 6 fuer recht");
+		System.out.println("8 > nach oben");
+		System.out.println("2 > nach unten");
+		System.out.println("4 > nach links");
+		System.out.println("6 > nach rechts");
 		System.out.println("Benutz am besten die numerische Tastatur.");
 
-		boolean weiter = true;
-		
-		
 		try{
-			while(weiter){
+			while(this.currPos != this.distance){
 
-				Scanner sc2 = new Scanner(System.in);
-				int m = sc2.nextInt();
+				int m = scan.nextInt();
 				switch (m){
-				case 8 :	
+				case 8 :
 					if(moveUp() == 2){
-						System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
-						//System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
-					}
-					break;
+						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
+						this.player.setAp(this.player.getAp() - 2);
+						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+					} break;
 				case 2 :
 					if (moveDown() == 2){
-						System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
-						//System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
-					}
-					break;
+						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
+						this.player.setAp(this.player.getAp() - 2);
+						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+					} break;
 				case 4 :
 					if (moveLeft() == 2){
-						System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
-						//System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
-					}
-					break;
+						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
+						this.player.setAp(this.player.getAp() - 2);
+						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+					} break;
 				case 6 :
 					if (moveRigth() == 2){
-						System.out.println("Ohh Du bist mit "+this.asteroid.toString()+" zusammengestossen!!!");
-						//System.out.println("Dein AP ist jetzt "+(this.player.getAp() - this.asteroid.getDamage()));
-					}
-					break;
-					
+						System.out.println("Ohh Du bist mit einem Asteroiden zusammengestossen!!!");
+						this.player.setAp(this.player.getAp() - 2);
+						System.out.println("Deine Aktionspunkte sinken auf " + this.player.getAp());
+					} break;
+
 				default :  System.out.println("Falsche Taste!!!");
 
-				sc2.close();
+				scan.close();
+
 				} 
 			}
 		}catch(Exception e){}
@@ -214,6 +211,7 @@ public class Path implements Generetable{
 
 	//Bewegen nach recht
 	public int moveRigth(){
+		this.currPos++;
 		for (int i=0;i<nblin;i++){
 			for (int j=0;j<nbcol;j++){
 				if (path[i][j] =='P'){
@@ -232,16 +230,15 @@ public class Path implements Generetable{
 						return 2;
 					}
 				}
-				//				if (j+1 == this.distance){
-				//					System.out.println("Willkommen auf dem neuen Planet!!");
-				//				}
 			}
 		}
 		return 0;
 
 	}
+	
 	//Bewegen nach links
 	public int moveLeft(){
+		this.currPos--;
 		for (int i=0;i<nblin;i++){
 			for (int j=0;j<nbcol;j++){
 				if (path[i][j] =='P'){
@@ -262,10 +259,8 @@ public class Path implements Generetable{
 						return 2;
 					}
 				}	
-				//				if (j-1 < 0){
-				//					System.out.println("Du bist auf deinem letzten Planet zurueckgelandet!!");
-				//				}
 			}
+
 		}
 		return 0;
 	}
@@ -290,24 +285,18 @@ public class Path implements Generetable{
 						showPath();
 						return 2;
 					}
-					//						break; 
 				}
 			}
 		}
 		return 0;
-	}
-
-	@Override
-	public void generate(int element) {
-		// TODO Auto-generated method stub
 
 	}
 
-
-	@Override
-	public void printChildren() {
-		// TODO Auto-generated method stub
-
-	}	
+	public void enterPath(Player player){
+		this.player = player;
+		addAsteroid();
+		showPath();
+		howToMove();
+	}
 
 }

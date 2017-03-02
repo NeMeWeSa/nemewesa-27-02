@@ -12,7 +12,6 @@ import de.nemewesa.level.Resource;
 
 public class App {
 	
-	public static final int PLAYER_AP = 100;
 	// Legt fest, ob Statusinformationen angezeigt werden sollen.
 	public static final boolean DEV_MODE = false;
 	
@@ -23,10 +22,19 @@ public class App {
 	private Console console;
 	private Login login;
 	private String prefix = "[NeMeWeSa] ";
+	private static final App app = new App();
 
+	// Singelton Pattern
+	private App(){}
+	
 	public static void main(String[] args)  {
-		App app = new App();
 		app.init();
+		//app.pathTest();
+	}
+	
+	// Die Instanz kann nur ueber getInstance geholt werden 
+	public static App getAppInstance(){
+		return app;
 
 	}
 	
@@ -67,6 +75,7 @@ public class App {
 		player.getHomePlanet().spacestation = new SpaceStation("SST_001", player.getHomePlanet());
 
 		System.out.println(prefix + "Willkommen im NeMeWeSa " + player.getName());
+		
 		if(DEV_MODE)		
 			System.out.println(player);
 	
@@ -92,7 +101,10 @@ public class App {
 		}
 	}
 	
-	
+	public Player getPlayer() {
+		return player;
+	}
+
 	public void runTests(){
 		
 		//this.round.setNewRound();
@@ -245,9 +257,9 @@ public class App {
 	}
 
 	public void pathTest(){
-		Path path1 = new Path();
-		path1.addAsteroid();
-		path1.showPath();
-		path1.howToMove();
+//		Path path1 = new Path();
+//		path1.addAsteroid();
+//		path1.showPath();
+//		path1.howToMove();
 	}
 }
