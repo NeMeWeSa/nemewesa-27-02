@@ -240,6 +240,7 @@ public void farmOre(){
 	
 	public void logout(){
 		System.out.println("[NeMeWeSa] " + player.getName() + " hat das Spiel verlassen.");
+		App.getAppInstance().logout();
 	}
 	
 	public void move(){

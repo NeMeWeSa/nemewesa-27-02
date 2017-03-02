@@ -100,6 +100,10 @@ public class App {
 		}
 	}
 	
+	public void logout(){
+		timer.cancel();
+	}
+	
 	public Player getPlayer() {
 		return player;
 	}
