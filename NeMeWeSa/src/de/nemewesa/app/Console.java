@@ -248,7 +248,7 @@ public class Console {
 		menu = new Menu();
 		
 		System.out.println("Deine aktuellen Aktionspunkte: " + App.getAppInstance().getPlayer().getAp() + "\n");
-		System.out.println("Fuer die Reise zum Mond werden dir 20 AP abgezogen.");
+		System.out.println("Für die Reise zum Mond werden dir 20 AP abgezogen.");
 		System.out.println("High Risk = High reward!!");
 		System.out.println("Solltest du " + App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getName() + " besiegen so gehoert Dir der Planet " 
 		+ App.getAppInstance().getPlayer().getCurrentPlanet().getName() + "!");
@@ -301,7 +301,7 @@ public class Console {
 			System.out.println("Gegner HP: " + App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getEnemyHealth()+"\n");
 			
 			int attackEnemy = Helper.random(1, App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getEnemyAttack());
-			System.out.println(App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getName() + " trifft dich fuer " + 
+			System.out.println(App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getName() + " trifft dich für " + 
 			 attackEnemy + " Schaden");
 			
 			int attackPlayer = 100;//Helper.random(1, 10);
@@ -320,12 +320,12 @@ public class Console {
 			}
 		}
 		if(App.getAppInstance().getPlayer().getCurrentPlanet().moon.enemy.getEnemyHealth() <= 0){
-			System.out.println("Glueckwunsch ab jetzt gehoert Dir der Planet " + App.getAppInstance().getPlayer().getCurrentPlanet().getName() + " und deren Einwohner");
+			System.out.println("Glückwunsch ab jetzt gehoert Dir der Planet " + App.getAppInstance().getPlayer().getCurrentPlanet().getName() + " und deren Einwohner");
 			App.getAppInstance().getPlayer().getCurrentPlanet().income();
 			App.getAppInstance().getPlayer().addOwnership(App.getAppInstance().getPlayer().getCurrentPlanet());
 			menu = new Menu();
 			menu.menuitems.add(
-					new Menuitem("Zurueck"){
+					new Menuitem("Zurück"){
 						public void execute(){
 							actions();
 						}});
@@ -337,7 +337,7 @@ public class Console {
 			menu = new Menu();
 
 			menu.menuitems.add(
-					new Menuitem("Zurueck"){
+					new Menuitem("Zurück"){
 						public void execute(){
 							actions();
 						}});

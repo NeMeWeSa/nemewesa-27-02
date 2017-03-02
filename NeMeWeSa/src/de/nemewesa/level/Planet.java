@@ -286,7 +286,7 @@ public class Planet implements Generetable, Observer, Serializable{
 			this.pathLeft = this.getLeftNeighbouringPlanet().pathRight;
 			this.pathRight = null;
 		}
-		
+		 
 	}
 
 	@Override
