@@ -56,9 +56,9 @@ public class Solarsystem implements Generetable, Serializable{
 				this.planets.add(new Planet(planetname, this));
 			}
 			
-//			for (int i = 0; i < planets.size(); i++) {
-//				planets.get(i).generate(i);
-//			}
+			for (int i = 0; i < planets.size(); i++) {
+				planets.get(i).generate(i);
+			}
 			
 		}
 		catch(Exception e){
@@ -72,7 +72,7 @@ public class Solarsystem implements Generetable, Serializable{
 		
 		for (Planet planet : planets) {
 			System.out.println(planet.name + " : " + planet.parent.name);
-			//planet.printChildren();
+			planet.printChildren();
 		}
 		
 	}

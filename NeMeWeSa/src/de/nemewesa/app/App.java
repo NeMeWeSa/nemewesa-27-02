@@ -6,12 +6,12 @@ import de.nemewesa.buildings.SpaceStation;
 import de.nemewesa.character.Player;
 import de.nemewesa.db.DB;
 import de.nemewesa.level.Level;
+import de.nemewesa.level.Path;
 import de.nemewesa.level.Resource;
 
 
 public class App {
 	
-	public static final int PLAYER_AP = 20;
 	// Legt fest, ob Statusinformationen angezeigt werden sollen.
 	public static final boolean DEV_MODE = false;
 	
@@ -19,13 +19,23 @@ public class App {
 	private Level level;
 	private Round round = Round.getRoundInstance();
 	private DB db = DB.getInstance();
-	private Console console = new Console();
+	private Console console;
 	private Login login;
 	private String prefix = "[NeMeWeSa] ";
+	private static final App app = new App();
 
+	// Singelton Pattern
+	private App(){}
+	
 	public static void main(String[] args)  {
-		App app = new App();
 		app.init();
+		//app.pathTest();
+	}
+	
+	// Die Instanz kann nur ueber getInstance geholt werden 
+	public static App getAppInstance(){
+		return app;
+
 	}
 	
 	public void init(){
@@ -36,6 +46,7 @@ public class App {
 		createNewLevel(1);
 		//createPlayer(login.name);
 		createPlayer("Master");
+		createConsole(player);
 		runTests();
 		
 		// Timeout fuer blockierende Spieler
@@ -61,12 +72,17 @@ public class App {
 		player.setHomeSolarsystem(level.getSector(0).getSolarsystem(0));
 		player.addOwnership(player.getHomePlanet());
 		
-		player.getHomePlanet().spacestation = new SpaceStation("SST_001");
-	
+		player.getHomePlanet().spacestation = new SpaceStation("SST_001", player.getHomePlanet());
+
 		System.out.println(prefix + "Willkommen im NeMeWeSa " + player.getName());
+		
 		if(DEV_MODE)		
 			System.out.println(player);
 	
+	}
+	
+	public void createConsole(Player player){
+		this.console = new Console(player);
 	}
 	
 	public void loginUser(){
@@ -85,44 +101,48 @@ public class App {
 		}
 	}
 	
-	
+	public Player getPlayer() {
+		return player;
+	}
+
 	public void runTests(){
 		
 		//this.round.setNewRound();
 
-		console.mainmenu(player);
-
-		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
-		System.out.println("Der Index: " + currPlanetIndex);
-		System.out.println(player.getCurrentPlanet().name);
-
-		player.setCurrentPlanet(player.getCurrentPlanet().parent.getPlanet(currPlanetIndex+1));
 		
-		// ROHSTOFFE ABERNTEN UND EINLAGERN
-		player.getCurrentPlanet().mineBronze();
-		player.getCurrentPlanet().mineBronze();
-		player.getCurrentPlanet().mineBronze();
-		player.getCurrentPlanet().mineBronze();
-		player.getCurrentPlanet().mineBronze();
-		player.getCurrentPlanet().mineBronze();
+		console.mainmenu();
 		
-		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+		pathTest();
 		
-		// ROHSTOFFE VOM PLANETEN ABHOLEN
-		if(player.getCurrentPlanet().pickupResource(player.getCurrentPlanet().bronze, 7)){
-			
-			System.out.println("Habe BRONZE auf " + player.getCurrentPlanet().name + " abgeholt. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
-			
-		}
-		else{
-			System.out.println("Konnte BRONZE auf " + player.getCurrentPlanet().name + " nicht abholen. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
-		}
+//		// ROHSTOFFE ABERNTEN UND EINLAGERN
+//		System.out.println("BRONZE VORKOMMEN " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.amount);
+//		
+//		player.getCurrentPlanet().mineBronze();
+//		player.getCurrentPlanet().mineBronze();
+//		player.getCurrentPlanet().mineBronze();
+//		player.getCurrentPlanet().mineBronze();
+//		player.getCurrentPlanet().mineBronze();
+//		player.getCurrentPlanet().mineBronze();
+//		
+//		System.out.println("BRONZE auf LAGER " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+//		
 		
-		// LINKEN UND RECHTEN NACHBARPLANETEN ANZEIGEN
-		if(player.getLeftNeighbouringPlanet() != null)
-			System.out.println("Mein linker Nachbarplanet: " + player.getLeftNeighbouringPlanet().name);
-		if(player.getRightNeighbouringPlanet() != null)
-			System.out.println("Mein rechter Nachbarplanet: " + player.getRightNeighbouringPlanet().name);
+//		
+//		// ROHSTOFFE VOM PLANETEN ABHOLEN
+//		if(player.getCurrentPlanet().pickupResource(player.getCurrentPlanet().bronze, 7)){
+//			
+//			System.out.println("Habe BRONZE auf " + player.getCurrentPlanet().name + " abgeholt. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
+//			
+//		}
+//		else{
+//			System.out.println("Konnte BRONZE auf " + player.getCurrentPlanet().name + " nicht abholen. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
+//		}
+//		
+//		// LINKEN UND RECHTEN NACHBARPLANETEN ANZEIGEN
+//		if(player.getLeftNeighbouringPlanet() != null)
+//			System.out.println("Mein linker Nachbarplanet: " + player.getLeftNeighbouringPlanet().name);
+//		if(player.getRightNeighbouringPlanet() != null)
+//			System.out.println("Mein rechter Nachbarplanet: " + player.getRightNeighbouringPlanet().name);
 		
 //		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
 //		System.out.println("Der Index: " + currPlanetIndex);
@@ -237,4 +257,10 @@ public class App {
 		
 	}
 
+	public void pathTest(){
+//		Path path1 = new Path();
+//		path1.addAsteroid();
+//		path1.showPath();
+//		path1.howToMove();
+	}
 }

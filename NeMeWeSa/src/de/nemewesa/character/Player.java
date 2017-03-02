@@ -28,7 +28,7 @@ public class Player implements Observer, Serializable{
 	private ArrayList<Generetable> ownership = new ArrayList<>();
 	private Round round;
 	
-	private final transient int ap = App.PLAYER_AP;
+	private int ap = 100;
 	
 	public Player(String name){
 		this.name = name;
@@ -38,24 +38,35 @@ public class Player implements Observer, Serializable{
 	
 	public String toString(){
 		String info = "";
-		info += "[NeMeWeSa] Du befindest dich auf dem Planeten " + this.currentPlanet.name + ".\n";
-		info += "[NeMeWeSa] " + this.homePlanet.name + " ist dein Heimatplanet.\n";
-		info += "[NeMeWeSa] Dein Heimat-Solarsystem ist der " + this.homeSolarsystem.name + ".\n";
+		
+		// SPIELER
+		info += "[Spieler] Du hast " + this.ap + " Aktionspunkte \n";
+		info += "[Spieler] Du befindest dich auf dem Planeten " + this.currentPlanet.name + ".\n";
+		info += "[Spieler] " + this.homePlanet.name + " ist dein Heimatplanet.\n";
+		info += "[Spieler] Dein Heimat-Solarsystem ist der " + this.homeSolarsystem.name + ".\n";
+		
+		// RAUMSTATION
 		if(this.currentPlanet.spacestation != null){
-			info += "[NeMeWeSa] Auf diesem Planeten befindet sich die Raumstation " 
+			info += "[Raumstation] Auf diesem Planeten befindet sich die Raumstation " 
 					+ this.currentPlanet.spacestation.name + "\n";
 		}
 		
-		// NACHBARPLANETEN
-		if(this.getLeftNeighbouringPlanet() != null)
-			info += "[NeMeWeSa] Dein linker Nachbarplanet ist der " + this.getLeftNeighbouringPlanet().name +"\n";
-		if(this.getRightNeighbouringPlanet() != null)
-			info += "[NeMeWeSa] Dein rechter Nachbarplanet ist der " + this.getRightNeighbouringPlanet().name +"\n";
+		// NACHBARPLANETEN UND PFADE
+		// LINKS
+		if(this.getLeftNeighbouringPlanet() != null){
+			info += "[Planet] Dein linker Nachbarplanet ist der " + this.getLeftNeighbouringPlanet().name +"\n";
+			info += "[Pfad] und ist ueber den Pfad " + this.currentPlanet.pathLeft.name + " (" + this.currentPlanet.pathLeft.distance + ") erreichbar \n";
+		}
+		// RECHTS
+		if(this.getRightNeighbouringPlanet() != null){
+			info += "[Planet] Dein rechter Nachbarplanet ist der " + this.getRightNeighbouringPlanet().name +"\n";
+			info += "[Pfad] und ist ueber den Pfad " + this.currentPlanet.pathRight.name + " (" + this.currentPlanet.pathRight.distance + ") erreichbar \n";
+		}
 		
 		// PLANETEN IM BESITZT		
-		info += "[NeMeWeSa] Dein Besitz > \n";
+		info += "[Spieler] Dein Besitz >> \n";
 		for(Generetable ownership : ownership){
-			info += ownership.getClass().getSimpleName() + " : " + ownership.getName() +"\n";
+			info += "[" + ownership.getClass().getSimpleName() + "] > " + ownership.getName() +"\n";
 		}
 		return info;
 	}
@@ -99,6 +110,10 @@ public class Player implements Observer, Serializable{
 	public int getAp() {
 		return ap;
 	}
+	
+	public void setAp(int ap) {
+		this.ap = ap;
+	}
 
 	@Override
 	public void update(int round) {
@@ -141,6 +156,35 @@ public class Player implements Observer, Serializable{
 	}	
 	
 	public void move(Planet planet){
+		
+		// GEHE ZUM LINKEN NACHBARPLANETEN
+		if(planet == this.currentPlanet.getLeftNeighbouringPlanet()){
+			System.out.println("LINKS");
+			if(this.ap >= this.currentPlanet.pathLeft.distance){
+				this.currentPlanet.pathLeft.enterPath(this);
+				this.ap -= this.currentPlanet.pathLeft.distance;
+				this.currentPlanet = planet;
+			}
+			else{
+				System.out.println("Fuer diese Aktion stehen nicht genuegend Aktionspunkte zur Verfuegung");
+			}
+		}
+		// GEHE ZUM RECHTEN NACHBARPLANETEN
+		else if(planet == this.currentPlanet.getRightNeighbouringPlanet()){
+			System.out.println("RECHTS");
+			if(this.ap >= this.currentPlanet.pathRight.distance){
+				this.currentPlanet.pathRight.enterPath(this);
+				this.ap -= this.currentPlanet.pathRight.distance;
+				this.currentPlanet = planet;
+			}
+			else{
+				System.out.println("Fuer diese Aktion stehen nicht genuegend Aktionspunkte zur Verfuegung");
+			}
+		}
+		// PLANET AUSSER REICHWEITE
+		else{
+			System.out.println("Dieser Planet ist nicht erreichbar");
+		}
 		
 	}
 	
