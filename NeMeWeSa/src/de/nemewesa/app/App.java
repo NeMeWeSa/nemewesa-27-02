@@ -7,6 +7,12 @@ import de.nemewesa.buildings.Storage;
 import de.nemewesa.character.Player;
 import de.nemewesa.db.DB;
 import de.nemewesa.level.Level;
+<<<<<<< HEAD
+=======
+import de.nemewesa.level.Path;
+import de.nemewesa.level.Planet;
+import de.nemewesa.level.Resource;
+>>>>>>> abe3e64ca6339718d71469f449caf7c5ca3e25cb
 import de.nemewesa.spaceships.Transporter;
 
 
@@ -123,27 +129,35 @@ public class App {
 	public void runTests(){
 		
 		//this.round.setNewRound();
+
+
+//		console.mainmenu(player);
+//
+//		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
+//		System.out.println("Der Index: " + currPlanetIndex);
+//		System.out.println(player.getCurrentPlanet().name);
+//
+//		player.setCurrentPlanet(player.getCurrentPlanet().parent.getPlanet(currPlanetIndex+1));
+//		
+//		// ROHSTOFFE ABERNTEN UND EINLAGERN
+
+		player.getCurrentPlanet().mineGold();
+		player.getCurrentPlanet().mineGold();
+		player.getCurrentPlanet().mineGold();
+		player.getCurrentPlanet().mineGold();
+		player.getCurrentPlanet().mineGold();
+		player.getCurrentPlanet().mineGold();
 		
+<<<<<<< HEAD
 //		if(true) 
 //			while(true)
 		console.mainmenu();
 				
 		//testTransporter();
 		
-		
-//		// ROHSTOFFE ABERNTEN UND EINLAGERN
-//		System.out.println("BRONZE VORKOMMEN " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.amount);
-//		
-//		player.getCurrentPlanet().mineBronze();
-//		player.getCurrentPlanet().mineBronze();
-//		player.getCurrentPlanet().mineBronze();
-//		player.getCurrentPlanet().mineBronze();
-//		player.getCurrentPlanet().mineBronze();
-//		player.getCurrentPlanet().mineBronze();
-//		
-//		System.out.println("BRONZE auf LAGER " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
-//		
-		
+=======
+
+//		System.out.println("BRONZE auf " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
 //		
 //		// ROHSTOFFE VOM PLANETEN ABHOLEN
 //		if(player.getCurrentPlanet().pickupResource(player.getCurrentPlanet().bronze, 7)){
@@ -160,6 +174,50 @@ public class App {
 //			System.out.println("Mein linker Nachbarplanet: " + player.getLeftNeighbouringPlanet().name);
 //		if(player.getRightNeighbouringPlanet() != null)
 //			System.out.println("Mein rechter Nachbarplanet: " + player.getRightNeighbouringPlanet().name);
+		//(String shipName, String shipType, int maxCapacity, int shipHealth, int shipStrange, int shipFuel, Storage storage, Planet currentPlanet, int currantCapacity)
+		Transporter t1 = new Transporter("donkey", "transporter", 1000, 100, 100, 100, new Storage(), player.getCurrentPlanet(), 0);
+
+
+		System.out.println("APP: " + t1.currentPlanet.gold.storagef);
+		System.out.println("alter Planet " + t1.currentPlanet.name);
+		t1.pickUpGold();
+
+>>>>>>> abe3e64ca6339718d71469f449caf7c5ca3e25cb
+		
+
+		//t1.fly();
+//		// ROHSTOFFE ABERNTEN UND EINLAGERN
+//		System.out.println("BRONZE VORKOMMEN " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.amount);
+//		
+//		player.getCurrentPlanet().mineBronze();
+//		player.getCurrentPlanet().mineBronze();
+//		player.getCurrentPlanet().mineBronze();
+//		player.getCurrentPlanet().mineBronze();
+//		player.getCurrentPlanet().mineBronze();
+//		player.getCurrentPlanet().mineBronze();
+//		
+//		System.out.println("BRONZE auf LAGER " + player.getCurrentPlanet().name + " : " + player.getCurrentPlanet().bronze.storagef);
+//		
+
+//		
+//		// ROHSTOFFE VOM PLANETEN ABHOLEN
+//		if(player.getCurrentPlanet().pickupResource(player.getCurrentPlanet().bronze, 7)){
+//			
+//			System.out.println("Habe BRONZE auf " + player.getCurrentPlanet().name + " abgeholt. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
+//			
+//		}
+//		else{
+//			System.out.println("Konnte BRONZE auf " + player.getCurrentPlanet().name + " nicht abholen. Aktueller Stand: " + player.getCurrentPlanet().bronze.storagef);
+//		}
+//		
+//		// LINKEN UND RECHTEN NACHBARPLANETEN ANZEIGEN
+//		if(player.getLeftNeighbouringPlanet() != null)
+//			System.out.println("Mein linker Nachbarplanet: " + player.getLeftNeighbouringPlanet().name);
+//		if(player.getRightNeighbouringPlanet() != null)
+//			System.out.println("Mein rechter Nachbarplanet: " + player.getRightNeighbouringPlanet().name);
+
+		t1.dropDownGold();
+
 		
 //		int currPlanetIndex = player.getCurrentPlanet().parent.getPlanetIndex(player.getCurrentPlanet());
 //		System.out.println("Der Index: " + currPlanetIndex);

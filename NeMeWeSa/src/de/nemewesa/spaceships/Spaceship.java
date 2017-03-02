@@ -22,7 +22,10 @@ public class Spaceship {
 	public static ArrayList<Resource> stock; 
 	public int maxCapacity;
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> abe3e64ca6339718d71469f449caf7c5ca3e25cb
 	public Spaceship(String shipName, String shipType, int maxCapacity, int shipHealth, int shipStrange, int shipFuel, Planet currentPlanet, int currentCapacity) {
 		this.shipName = shipName;
 		this.shipType = shipType;
@@ -53,6 +56,7 @@ public class Spaceship {
 			return null;
 		}	
 
+<<<<<<< HEAD
 		public void move(Planet planet){
 		
 		// GEHE ZUM LINKEN NACHBARPLANETEN
@@ -79,6 +83,11 @@ public class Spaceship {
 		else{
 			System.out.println("Dieser Planet ist nicht erreichbar");
 		}	
+=======
+	public void fly(Planet planet)
+	{
+		this.currentPlanet = planet;
+>>>>>>> abe3e64ca6339718d71469f449caf7c5ca3e25cb
 	}
 	
 	public int shipAttack(Enemy target)

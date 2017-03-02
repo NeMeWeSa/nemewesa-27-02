@@ -2,15 +2,26 @@ package de.nemewesa.buildings;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+<<<<<<< HEAD
 
 import de.nemewesa.level.Planet;
 import de.nemewesa.level.Resource;
 
 public class SpaceStation implements Serializable{
+=======
+import de.nemewesa.level.Generetable;
+import de.nemewesa.level.Planet;
+import de.nemewesa.level.Resource;
+import de.nemewesa.modules.Module;
+
+public class SpaceStation{
+>>>>>>> abe3e64ca6339718d71469f449caf7c5ca3e25cb
 	
+
+	public ArrayList<Storage> warehouse;
+
 	public String name;
 
-	public ArrayList<String> warehouse;
 	public int researchPoint;
 	public int modulePoint;
 	public int bank;
@@ -26,6 +37,7 @@ public class SpaceStation implements Serializable{
 		this.parent = parent;
 		
 	}
+
 /*
  * wenn die Bank mehr als 25 einheiten hat kann man diese spenden und bekommt dafuer einen Erforschen punkt
  */
@@ -77,9 +89,20 @@ public class SpaceStation implements Serializable{
 		}	
 	}
 
+<<<<<<< HEAD
 	public Resource bronze = new Resource("Bronze",0);
 	public Resource silver = new Resource("Silber",0);
 	public Resource gold = new Resource("Gold", 0);
 	public Resource jewel= new Resource("Juwel", 0);
+=======
+
+
+	public Resource bronze = new Resource("Bronze", 1, 0, 0, 2, 8, 85, 0, 0);
+	public Resource silver = new Resource("Silber", 2, 0, 0,  2, 10, 60, 0, 0);
+	public Resource gold = new Resource("Gold", 3, 0, 0, 2, 12, 45, 0, 0);
+	public Resource jewel= new Resource("Juwel", 5, 0, 0, 1, 14, 15, 0, 0);
+	
+
+>>>>>>> abe3e64ca6339718d71469f449caf7c5ca3e25cb
 	
 }

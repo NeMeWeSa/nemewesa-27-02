@@ -11,4 +11,5 @@ public class Storage {
 	public ArrayList<Resource> resources = new ArrayList<>();
 	
 	
+	
 }
