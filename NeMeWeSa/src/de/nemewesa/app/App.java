@@ -48,7 +48,9 @@ public class App {
 		createPlayer("Spieler");
 		
 		createConsole(player);
-		loginUser();		
+		loginUser();
+		
+		player.setName(login.name);
 		setTimer();
 		
 		console.mainmenu();	
