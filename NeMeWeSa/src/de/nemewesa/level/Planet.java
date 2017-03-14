@@ -1,3 +1,4 @@
+
 package de.nemewesa.level;
 
 import java.io.Serializable;
@@ -286,7 +287,7 @@ public class Planet implements Generetable, Observer, Serializable{
 			this.pathLeft = this.getLeftNeighbouringPlanet().pathRight;
 			this.pathRight = null;
 		}
-		
+		 
 	}
 
 	@Override
@@ -319,12 +320,7 @@ public class Planet implements Generetable, Observer, Serializable{
 
 	@Override
 	public void update(int round) {
-		
-		if(App.DEV_MODE)
-			System.out.println(this.name + " lautet die Runde " + round + " ein.");
-		
-		generateResource();
+		System.out.println(this.name + " lautet die Runde " + round + " ein.");
 	}
 
 }
-
